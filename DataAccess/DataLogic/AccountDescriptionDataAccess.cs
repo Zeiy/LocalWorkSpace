@@ -129,6 +129,7 @@ namespace DataAccess.DataLogic
                         infoModel.AccountInfoID = Convert.ToInt32(dataReader["AccountInfoID"]);
                         infoModel.ServerName = Convert.ToString(dataReader["ServerName"]);
                         infoModel.GameName = Convert.ToString(dataReader["GameName"]);
+                        infoModel.GameArea = Convert.ToString(dataReader["GameArea"]);
                         modelsList.Add(infoModel);
                     }
                 }

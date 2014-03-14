@@ -162,5 +162,16 @@ namespace _77Trade
             }
             return "between '"+beginTimeStr+"' and '"+endTimeStr+"'";
         }
+
+        public string GetAccountPropertyByAccountModel(AccountDescription description)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(description.GameName.Trim());
+            stringBuilder.Append("/");
+            stringBuilder.Append(description.GameArea.Trim());
+            stringBuilder.Append(description.ServerName.Trim());
+            stringBuilder.Append("/");
+            return stringBuilder.ToString();
+        }
     }
 }

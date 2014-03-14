@@ -167,7 +167,7 @@
                                                    {%>
                                                         <tr>
                                                     <td><%=infoModels.ProductTitle%> </td>
-                                                    <td><%=infoModels.ProductProperty %></td>
+                                                    <td><a title="<%=GetAccountPropertyByAccountModel(infoModels) %>"><%=GetAccountPropertyByAccountModel(infoModels) %></a></td>
                                                     <td>单号 <i></i></td>
                                                     <td><%=infoModels.Price %> <i></i></td>
                                                     <td><%=infoModels.SubmitTime %><i></i></td>
