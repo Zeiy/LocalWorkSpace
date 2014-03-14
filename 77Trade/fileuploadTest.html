@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>测试上传图片</title>
+    <script src="Js/jquery-1.11.0.min.js"></script>
+    <script src="Js/fileupload/jquery.ui.widget.js"></script>
+    <script src="Js/fileupload/jquery.iframe-transport.js"></script>
+    <!--<script src="Js/fileupload/jquery.fileupload-image.js"></script>-->
+    <!--<script src="Js/fileupload/jquery.fileupload-process.js"></script>-->
+    <script src="Js/fileupload/jquery.fileupload.js"></script>
+</head>
+<body>
+    <div>
+        <input type="file" id="fileupload"  style="width:65px"/><span id="msg">请选择文件</span>
+        <input type="button" value="上传"  id="upBegin"/>
+        <input type="button" value="取消" id="cancle" />
+        <script type="text/javascript">
+            $(function () {
+                $('#fileupload').fileupload({
+                    url: "fileserver.ashx",
+                    dataType: 'json',
+                    imageMaxWidth: 800,
+                    imageMaxHeight: 800,
+                    imageCrop: true,//强制裁剪图片
+                    add: function (e, data) {
+                        /*data.context = $('<button/>').text('Upload').appendTo($("#fileuploadCont")).click(function () {
+                            data.context = $('<p/>').text('Uploading...').replaceAll($(this));
+                            data.submit();
+                        })*/
+                        $("#msg").text(data.fileInput[0].value);
+                        data.context = $("#upBegin").click(function () {
+                            $("#msg").text("开始上传。。。");
+                            data.submit();
+                        });
+                    },
+                    done: function (e, data) {
+                        alert("成功");
+                    },
+                    error: function (xhr, txt, error) {
+                        $("#msg").text("上传出错。。。");
+                        alert(txt);
+                    }
+                });
+            });
+        </script>
+
+    </div>
+</body>
+</html>

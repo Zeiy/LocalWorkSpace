@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DataAccess.CommandInfo">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AiAAAAAAAAAAAAQAABAAAAAgAAAAAAAAAIAAAAAAIEA=</HashCode>
+      <FileName>CommandInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.DbHelperSQL" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACBACAIAQAACgAAAAAEAKEEQAAAAgAAQAAAAEAIgA=</HashCode>
+      <FileName>DbHelperSQL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.DESEncrypt" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DESEncrypt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.PubConstant" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>PubConstant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.DataLogic.AccountDescriptionDataAccess">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAEAAAA=</HashCode>
+      <FileName>DataLogic\AccountDescriptionDataAccess.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.DataLogic.AccountInfoDataAccess">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAIAAAACAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>DataLogic\AccountInfoDataAccess.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.DataLogic.GameAreaDataAccess">
+    <Position X="4" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>DataLogic\GameAreaDataAccess.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.DataLogic.GameInfoDataAccess">
+    <Position X="6.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAACAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>DataLogic\GameInfoDataAccess.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.DataLogic.GameServerDataAccess">
+    <Position X="5.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAACABAAAAAAAAAAAAAEAAAAAAAAAAAAQAAI=</HashCode>
+      <FileName>DataLogic\GameServerDataAccess.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Model.AccountDescription" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAkAAAAQAAwACAQACAAAABSAAAAAAAQAAgAEAAAAA=</HashCode>
+      <FileName>Model\AccountDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Model.AccountInfoModel" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AICAABAAAKAigAGAQYACAAgAQAABAEAAAAAgACAAAAA=</HashCode>
+      <FileName>Model\AccountInfoModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Model.GameArea" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAkAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\GameArea.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Model.GameInfo" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAgAAAAAAAEAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Model\GameInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Model.GameServer">
+    <Position X="8.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAkACAAAEAAAAAAAAAAAAAIAAgAAAAAAA=</HashCode>
+      <FileName>Model\GameServer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="DataAccess.EffentNextType" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAIAAAAAAAAAAAAEAAGA=</HashCode>
+      <FileName>CommandInfo.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DataAccess.Model.OrderStatus">
+    <Position X="2.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIABAAAAAAIAAAACAAAAAAAAAgAAQAAAAAAAAAA=</HashCode>
+      <FileName>Model\EnumUntity.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="微软雅黑" Size="9" />
+</ClassDiagram>
