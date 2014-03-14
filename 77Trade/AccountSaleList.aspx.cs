@@ -169,8 +169,8 @@ namespace _77Trade
             stringBuilder.Append(description.GameName.Trim());
             stringBuilder.Append("/");
             stringBuilder.Append(description.GameArea.Trim());
-            stringBuilder.Append(description.ServerName.Trim());
             stringBuilder.Append("/");
+            stringBuilder.Append(description.ServerName.Trim());
             return stringBuilder.ToString();
         }
     }

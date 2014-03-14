@@ -81,6 +81,7 @@ namespace _77Trade
             description.GameArea = accountinfoModel.GameArea;
             description.GameName = accountinfoModel.GameName;
             description.ServerName = accountinfoModel.ServerName;
+            //生成订单号  写入订单状态
             int res = _accountDescriptionDataAccess.Add(description);
             if (res > 0)
             { 

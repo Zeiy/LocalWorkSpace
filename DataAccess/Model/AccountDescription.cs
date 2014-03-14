@@ -59,6 +59,17 @@ namespace DataAccess.Model
         public string productImgBUrl { get; set; }
         public string ProductImgCUrl { get; set; }
         public string ProductImgDUrl { get; set; }
+        /// <summary>
+        /// 提交时间
+        /// </summary>
         public DateTime SubmitTime { get; set; }
+        /// <summary>
+        /// 订单状态
+        /// </summary>
+        public OrderStatus OrderStatus { get; set; }
+        /// <summary>
+        /// 生成的订单号
+        /// </summary>
+        public string OrderNo { get; set; }
     }
 }

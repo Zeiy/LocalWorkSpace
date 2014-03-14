@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* BASE */
 body {
 	background: #bff8ff url(images/bg.jpg) center 55px no-repeat;
@@ -364,7 +364,7 @@ footer p {
 .cntrl-bar .pop-box {
 	cursor: pointer;
 	float: left;
-	margin-left: 30px;
+	margin-left: 10px;
 	position: relative;
 }
 .cntrl-bar i {
