@@ -25,7 +25,7 @@ namespace _77Trade
                 //如果此订单不是未完成订单
                 if (infoModel==null||infoModel.OrderStatus != OrderStatus.NotComplete)
                 {
-                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "<script>alert('用户前置订单有误，请反回重试！');window.location.href='/accountInfo.aspx';</script>");
+                    ClientScript.RegisterClientScriptBlock(GetType(), "alert", "<script>alert('用户前置订单有误，请反回重试！');window.location.href='/accountInfo.aspx';</script>");
                     return;
                 }
                 //把前置订单号写入隐藏域
@@ -82,6 +82,10 @@ namespace _77Trade
             description.GameName = accountinfoModel.GameName;
             description.ServerName = accountinfoModel.ServerName;
             //生成订单号  写入订单状态
+            //检察订单号是否已存在
+            string orderNoStr = GeneralOrderNo();
+            description.OrderNo = orderNoStr;
+            description.OrderStatus = OrderStatus.ShenHe;
             int res = _accountDescriptionDataAccess.Add(description);
             if (res > 0)
             { 
@@ -94,5 +98,28 @@ namespace _77Trade
                 }
             }
         }
+        /// <summary>
+        /// 生成一个不存在的订单号，已检察过是否存在
+        /// </summary>
+        /// <returns></returns>
+        public string GeneralOrderNo()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                string timeNow = DateTime.Now.ToString("yyyyMMddhhmmssff");
+                //zhang hao
+                string orderNoStr = "ZH" + timeNow;
+                bool isExist = _accountDescriptionDataAccess.Exists(orderNoStr);
+                if (!isExist)
+                {
+                    return orderNoStr;
+                }
+                
+            }
+            return string.Empty;
+        }
+
+
+
     }
 }

@@ -24,6 +24,25 @@ namespace DataAccess.DataLogic
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
         }
 
+        /// <summary>
+        /// 检察订单是否存在
+        /// </summary>
+        /// <param name="orderNo"></param>
+        /// <returns></returns>
+        public bool Exists(string orderNo)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) from AccountDescription");
+            strSql.Append(" where ");
+            strSql.Append(" OrderNo = @OrderNo  ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@OrderNo", SqlDbType.VarChar,255)
+			};
+            parameters[0].Value = orderNo;
+
+            return DbHelperSQL.Exists(strSql.ToString(), parameters);
+        }
+
 
 
         /// <summary>
@@ -33,40 +52,46 @@ namespace DataAccess.DataLogic
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into AccountDescription(");
-            strSql.Append("ProductImgDUrl,AccountInfoID,ProductProperty,ProductTitle,ProductDescription,Price,productImgAUrl,productImgBUrl,ProductImgCUrl,SubmitTime,GameName,GameArea,ServerName");
+            strSql.Append("productImgAUrl,productImgBUrl,ProductImgCUrl,ProductImgDUrl,SubmitTime,OrderStatus,OrderNo,GameName,GameArea,ServerName,AccountInfoID,ProductProperty,ProductTitle,ProductDescription,Price");
             strSql.Append(") values (");
-            strSql.Append("@ProductImgDUrl,@AccountInfoID,@ProductProperty,@ProductTitle,@ProductDescription,@Price,@productImgAUrl,@productImgBUrl,@ProductImgCUrl,@SubmitTime,@GameName,@GameArea,@ServerName");
+            strSql.Append("@productImgAUrl,@productImgBUrl,@ProductImgCUrl,@ProductImgDUrl,@SubmitTime,@OrderStatus,@OrderNo,@GameName,@GameArea,@ServerName,@AccountInfoID,@ProductProperty,@ProductTitle,@ProductDescription,@Price");
             strSql.Append(") ");
             strSql.Append(";select @@IDENTITY");
             SqlParameter[] parameters = {
-			            new SqlParameter("@ProductImgDUrl", SqlDbType.VarChar,255) ,            
+			            new SqlParameter("@productImgAUrl", SqlDbType.VarChar,255) ,            
+                        new SqlParameter("@productImgBUrl", SqlDbType.VarChar,255) ,            
+                        new SqlParameter("@ProductImgCUrl", SqlDbType.VarChar,255) ,            
+                        new SqlParameter("@ProductImgDUrl", SqlDbType.VarChar,255) ,            
+                        new SqlParameter("@SubmitTime", SqlDbType.DateTime) ,            
+                        new SqlParameter("@OrderStatus", SqlDbType.Int,4) ,            
+                        new SqlParameter("@OrderNo", SqlDbType.VarChar,255) ,            
+                        new SqlParameter("@GameName", SqlDbType.NVarChar,50) ,            
+                        new SqlParameter("@GameArea", SqlDbType.NVarChar,50) ,            
+                        new SqlParameter("@ServerName", SqlDbType.NVarChar,50) ,            
                         new SqlParameter("@AccountInfoID", SqlDbType.Int,4) ,            
                         new SqlParameter("@ProductProperty", SqlDbType.NVarChar,255) ,            
                         new SqlParameter("@ProductTitle", SqlDbType.NChar,255) ,            
                         new SqlParameter("@ProductDescription", SqlDbType.NChar,255) ,            
-                        new SqlParameter("@Price", SqlDbType.Decimal,9) ,            
-                        new SqlParameter("@productImgAUrl", SqlDbType.VarChar,255) ,            
-                        new SqlParameter("@productImgBUrl", SqlDbType.VarChar,255) ,            
-                        new SqlParameter("@ProductImgCUrl", SqlDbType.VarChar,255)  ,           
-                        new SqlParameter("@SubmitTime",SqlDbType.DateTime),
-                        new SqlParameter("@GameName",SqlDbType.NVarChar,50), 
-                        new SqlParameter("@GameArea",SqlDbType.NVarChar,50),
-                        new SqlParameter("@ServerName",SqlDbType.NVarChar,50)
+                        new SqlParameter("@Price", SqlDbType.Decimal,9)             
+              
             };
 
-            parameters[0].Value = model.ProductImgDUrl;
-            parameters[1].Value = model.AccountInfoID;
-            parameters[2].Value = model.ProductProperty;
-            parameters[3].Value = model.ProductTitle;
-            parameters[4].Value = model.ProductDescription;
-            parameters[5].Value = model.Price;
-            parameters[6].Value = model.productImgAUrl;
-            parameters[7].Value = model.productImgBUrl;
-            parameters[8].Value = model.ProductImgCUrl;
-            parameters[9].Value = DateTime.Now;
-            parameters[10].Value = model.GameName;
-            parameters[11].Value = model.GameArea;
-            parameters[12].Value = model.ServerName;
+            parameters[0].Value = model.productImgAUrl;
+            parameters[1].Value = model.productImgBUrl;
+            parameters[2].Value = model.ProductImgCUrl;
+            parameters[3].Value = model.ProductImgDUrl;
+            parameters[4].Value = model.SubmitTime;
+            parameters[5].Value = model.OrderStatus;
+            parameters[6].Value = model.OrderNo;
+            parameters[7].Value = model.GameName;
+            parameters[8].Value = model.GameArea;
+            parameters[9].Value = model.ServerName;
+            parameters[10].Value = model.AccountInfoID;
+            parameters[11].Value = model.ProductProperty;
+            parameters[12].Value = model.ProductTitle;
+            parameters[13].Value = model.ProductDescription;
+            parameters[14].Value = model.Price;
+
             object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
             if (obj == null)
             {
@@ -130,6 +155,8 @@ namespace DataAccess.DataLogic
                         infoModel.ServerName = Convert.ToString(dataReader["ServerName"]);
                         infoModel.GameName = Convert.ToString(dataReader["GameName"]);
                         infoModel.GameArea = Convert.ToString(dataReader["GameArea"]);
+                        infoModel.OrderNo = Convert.ToString(dataReader["OrderNo"]);
+                        infoModel.OrderStatus = (OrderStatus) dataReader["OrderStatus"];
                         modelsList.Add(infoModel);
                     }
                 }

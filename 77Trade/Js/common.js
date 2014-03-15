@@ -100,5 +100,19 @@ $(document).ready(function() {
 		    //手动触发表单
 			$("#mainForm").submit();
 		}
-	});  
+	});
+
+
+    //用户选择订单状态标签时触发表单提交
+	$(".trigger>a[orderStatus]").click(function () {
+	    var orderStatus = $(this).attr("orderStatus");
+        //写入订单状态值，供筛选
+	    $("#hiddenOrderStatus").val(orderStatus);
+	    //手动触发表单
+	    $("#mainForm").submit();
+	});
+
+    //AccountSaleList.aspx 页面tab选择卡渲染
+	var currentOrderStatus = $("#hiddenOrderStatus").val();
+    $(".trigger>a[orderStatus=" + currentOrderStatus + "]").addClass("cur").siblings().removeClass("cur");
 });

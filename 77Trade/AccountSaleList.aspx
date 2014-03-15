@@ -91,16 +91,16 @@
             <div class="con-main-middle">
                 <div class="inner clearfix">
                     <div class="tab-box tab2">
+                 <form method="post" runat="server" id="mainForm">
                         <div class="trigger">
                             <a href="accountInfo.aspx">发布帐号</a>
-                            <a style="left: -70px;" class="cur">审核期</a>
-                            <a style="left: -150px;">公示期</a>
-                            <a style="left: -210px;">出售期</a>
-                            <a style="left: -290px;">出售成功</a>
+                            <a style="left: -70px; right: 157px;" orderStatus="3">审核期</a>
+                            <a style="left: -150px;" orderStatus="4">公示期</a>
+                            <a style="left: -210px;" orderStatus="5">出售期</a>
+                            <a style="left: -290px;" orderStatus="6">出售成功</a>
                         </div>
                         <div class="tab-list">
                             <ul>
-                                <form method="post" runat="server" id="mainForm">
                                     <li class="cur tabitem">
                                         <div class="cntrl-bar">
                                             <div class="pop-box">
@@ -168,7 +168,7 @@
                                                         <tr>
                                                     <td><%=infoModels.ProductTitle%> </td>
                                                     <td><a title="<%=GetAccountPropertyByAccountModel(infoModels) %>"><%=GetAccountPropertyByAccountModel(infoModels) %></a></td>
-                                                    <td>单号 <i></i></td>
+                                                    <td><%=infoModels.OrderNo %><i></i></td>
                                                     <td><%=infoModels.Price %> <i></i></td>
                                                     <td><%=infoModels.SubmitTime %><i></i></td>
                                                     <td><a href="#">修改</a><i></i></td>
@@ -185,9 +185,10 @@
                                         </div>
                                     </li>
                                     <asp:HiddenField runat="server" ID="hiddenGameName"/>
-                                </form>
                             </ul>
                         </div>
+                     <asp:HiddenField runat="server" ID="hiddenOrderStatus"/>
+                 </form>
                     </div>
                 </div>
             </div>

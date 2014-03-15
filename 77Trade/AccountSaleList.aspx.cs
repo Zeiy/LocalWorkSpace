@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using DataAccess.DataLogic;
 using DataAccess.Model;
+using Microsoft.SqlServer.Server;
 using Wuqi.Webdiyer;
 
 namespace _77Trade
@@ -57,9 +58,10 @@ namespace _77Trade
                     //:todo 区服，时间显示
                     //处理时间信息
                     string timeSpanWhere = GetTimeSpanStr(hiddenTimeSpan.Value);
-
+                    //订单状态 默认为审核期 值为3
+                    hiddenOrderStatus.Value = "3";
                     WhereStr = "where GameArea ='" + gamesArea.AreaName + "' and ServerName = '" +
-                               gameServer.ServerName.Trim() + "'";
+                               gameServer.ServerName.Trim() + "' and OrderStatus = 3";
                 }
                 //给时间添加一个默认值
                 hiddenTimeSpan.Value = "2012-11-06至2016-11-13";
@@ -90,6 +92,11 @@ namespace _77Trade
                 {
                     stringBuilder.Append(" and ServerName = '"+hiddenServerName.Value.Trim()+"'");
                 }
+                if (!string.IsNullOrEmpty(hiddenOrderStatus.Value))
+                {
+                    stringBuilder.Append(" and OrderStatus = " + hiddenOrderStatus.Value.Trim());
+                }
+                //在这里填充数据，是因为，用户选择服务器，时间等条件时是客户端触发的表单提交     想其它办法
                 //WhereStr = "where GameArea ='" + hiddenAreaName.Value.Trim() + "' and ServerName = '" + hiddenServerName.Value.Trim() + "' and SubmitTime "+timeSpanStr;
                 WhereStr = stringBuilder.ToString();
                 int rowCount, pageCount;
