@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace DataAccess.Model
+﻿namespace DataAccess.Model
 {
     public enum OrderStatus
-    { 
+    {
+        /// <summary>
+        /// 订单出售成功
+        /// </summary>
+        SaleSuccess = 0,
         /// <summary>
         /// 订单未生成完成,用户还没有上传帐号详细说明信息，只进行了第一步
         /// </summary>
@@ -27,9 +26,5 @@ namespace DataAccess.Model
         /// 订单公示期过后进入出售期
         /// </summary>
         ChuShou = 5,
-        /// <summary>
-        /// 订单出售成功
-        /// </summary>
-        SaleSuccess = 6,
     }
 }

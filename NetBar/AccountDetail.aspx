@@ -150,28 +150,28 @@
                                 <tr>
                                     <td background="images/index1_45.gif"></td>
                                     <td bgcolor="#FFFFFF" style="height: 490px; vertical-align: top;">
-                                        <table width="100%" border="0" cellspacing="10" cellpadding="0">
-                                            <tr>
-                                                <td>
-                                                    <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#C4E7FB">
-                                                        <tr>
-                                                            <td>
-                                                                <table width="100%" border="0" cellpadding="0" cellspacing="5" bgcolor="#FFFFFF">
-                                                                    <tr>
-                                                                        <td>&nbsp;<a href="#" class="font1">首页</a> &gt; <a href="#" class="font1">订单中心</a> &gt; <a href="#" class="font1"><strong>订单详情</strong></a></td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <form runat="server" method="post">
+                                        <form runat="server" method="post">
+                                            <table width="100%" border="0" cellspacing="10" cellpadding="0">
+                                                <tr>
+                                                    <td>
+                                                        <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#C4E7FB">
+                                                            <tr>
+                                                                <td>
+                                                                    <table width="100%" border="0" cellpadding="0" cellspacing="5" bgcolor="#FFFFFF">
+                                                                        <tr>
+                                                                            <td>&nbsp;<a href="#" class="font1">首页</a> &gt; <a href="#" class="font1">订单中心</a> &gt; <a href="#" class="font1"><strong>订单详情</strong></a></td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
                                                         <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#BBD3EB">
                                                             <tr>
-                                                                <td height="26" align="center"   background="images/index1_72.gif">游戏名：</td>
+                                                                <td height="26" align="center" background="images/index1_72.gif">游戏名：</td>
                                                                 <td height="26" align="left" bgcolor="#FFFFFF">
                                                                     <asp:TextBox runat="server" ID="gameName"></asp:TextBox></td>
                                                             </tr>
@@ -222,20 +222,19 @@
                                                                     <img src="#" width="200px" height="200px" />
                                                                 </td>
                                                             </tr>
-                                                                                                                        <tr>
+                                                            <tr>
                                                                 <td height="26" align="center" bgcolor="#FFFFFF" background="images/index1_72.gif">订单状态：</td>
                                                                 <td height="26" align="left" bgcolor="#FFFFFF">
-                                                                    <asp:DropDownList runat="server" ID="OrderStatus" Width="120px">
+                                                                    <asp:DropDownList runat="server" ID="DplOrderStatus" Width="120px">
                                                                         <asp:ListItem Text="完成" Value="完成"></asp:ListItem>
                                                                     </asp:DropDownList></td>
                                                             </tr>
                                                         </table>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                  <!-- <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#E1E5E8">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <!-- <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#E1E5E8">
                                                         <tr>
                                                             <td>
                                                                 <table width="100%" border="0" cellpadding="0" cellspacing="5" bgcolor="#FDFDFF">
@@ -246,13 +245,20 @@
                                                             </td>
                                                         </tr>
                                                     </table>-->
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="#">
-                                                    <img src="images/index1_86.gif" width="74" height="31" border="0" /></a>&nbsp;<a href="#"><img src="images/index1_82.gif" width="74" height="31" border="0" /></a>&nbsp;<a href="#"><img src="images/index1_84.gif" width="74" height="31" border="0" /></a></td>
-                                            </tr>
-                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:Button runat="server" Text="修改订单状态" ID="changOrderStatus" OnClick="Unnamed1_Click" />
+                                                        <asp:Button runat="server" Text="保存" ID="btnSave" OnClick="btnSave_Click"/>
+                                                        <%--<a href="#"><img src="images/index1_86.gif" width="74" height="31" border="0" /></a>&nbsp;
+                                                    <a href="#"><img src="images/index1_82.gif" width="74" height="31" border="0" /></a>&nbsp;
+                                                    <a href="#"><img src="images/index1_84.gif" width="74" height="31" border="0" /></a>--%>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <asp:HiddenField runat="server" ID="hiddenAccountInfoID"/>
+                                        </form>
                                     </td>
                                     <td background="images/index1_47.gif"></td>
                                 </tr>

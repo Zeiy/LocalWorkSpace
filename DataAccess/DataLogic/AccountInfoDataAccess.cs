@@ -315,5 +315,18 @@ namespace DataAccess.DataLogic
             return GetPagedAccountInfoModelsByProc(pageIndex, pageSize, "", out rowCount, out pageCount);
 
         }
+        public bool Exists(int ID)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) from AccountInfo");
+            strSql.Append(" where ");
+            strSql.Append(" ID = @ID  ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@ID", SqlDbType.Int,4)
+			};
+            parameters[0].Value = ID;
+
+            return DbHelperSQL.Exists(strSql.ToString(), parameters);
+        }
     }
 }

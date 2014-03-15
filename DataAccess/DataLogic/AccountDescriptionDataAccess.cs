@@ -43,7 +43,34 @@ namespace DataAccess.DataLogic
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
         }
 
+        /// <summary>
+        /// 获得数据列表
+        /// </summary>
+        public DataSet GetList(string strWhere)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select * ");
+            strSql.Append(" FROM AccountDescription ");
+            if (strWhere.Trim() != "")
+            {
+                strSql.Append(" where " + strWhere);
+            }
+            return DbHelperSQL.Query(strSql.ToString());
+        }
 
+        public List<AccountDescription> GetModelList(string where)
+        {
+            List<AccountDescription> list = new List<AccountDescription>();
+            DataSet dataSet = GetList(where);
+            DataTable dtTable = dataSet.Tables[0];
+            foreach (DataRow dataRow in dtTable.Rows)
+            {
+                AccountDescription accountdescription = new AccountDescription();
+                accountdescription.ID = Convert.ToInt32(dataRow["ID"]);
+                list.Add(accountdescription);
+            }
+            return list;
+        }
 
         /// <summary>
         /// 增加一条数据
@@ -172,6 +199,129 @@ namespace DataAccess.DataLogic
             int rowCount = 0;
             int pageCount = 0;
             return GetPagedAccountDescriptionsModelsByProc(pageIndex, pageSize, whereStr,null, out rowCount, out pageCount);
+        }
+        /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
+        public AccountDescription GetModel(int ID)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select ID, productImgAUrl, productImgBUrl, ProductImgCUrl, ProductImgDUrl, SubmitTime, OrderStatus, OrderNo, GameName, GameArea, ServerName, AccountInfoID, ProductProperty, ProductTitle, ProductDescription, Price  ");
+            strSql.Append("  from AccountDescription ");
+            strSql.Append(" where ID=@ID");
+            SqlParameter[] parameters = {
+					new SqlParameter("@ID", SqlDbType.Int,4)
+			};
+            parameters[0].Value = ID;
+
+
+             AccountDescription model = new  AccountDescription();
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0]["ID"].ToString() != "")
+                {
+                    model.ID = int.Parse(ds.Tables[0].Rows[0]["ID"].ToString());
+                }
+                model.productImgAUrl = ds.Tables[0].Rows[0]["productImgAUrl"].ToString();
+                model.productImgBUrl = ds.Tables[0].Rows[0]["productImgBUrl"].ToString();
+                model.ProductImgCUrl = ds.Tables[0].Rows[0]["ProductImgCUrl"].ToString();
+                model.ProductImgDUrl = ds.Tables[0].Rows[0]["ProductImgDUrl"].ToString();
+                if (ds.Tables[0].Rows[0]["SubmitTime"].ToString() != "")
+                {
+                    model.SubmitTime = DateTime.Parse(ds.Tables[0].Rows[0]["SubmitTime"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["OrderStatus"].ToString() != "")
+                {
+                    model.OrderStatus = (OrderStatus)Enum.Parse(typeof(OrderStatus),ds.Tables[0].Rows[0]["OrderStatus"].ToString(),true);
+                }
+                model.OrderNo = ds.Tables[0].Rows[0]["OrderNo"].ToString();
+                model.GameName = ds.Tables[0].Rows[0]["GameName"].ToString();
+                model.GameArea = ds.Tables[0].Rows[0]["GameArea"].ToString();
+                model.ServerName = ds.Tables[0].Rows[0]["ServerName"].ToString();
+                if (ds.Tables[0].Rows[0]["AccountInfoID"].ToString() != "")
+                {
+                    model.AccountInfoID = int.Parse(ds.Tables[0].Rows[0]["AccountInfoID"].ToString());
+                }
+                model.ProductProperty = ds.Tables[0].Rows[0]["ProductProperty"].ToString();
+                model.ProductTitle = ds.Tables[0].Rows[0]["ProductTitle"].ToString();
+                model.ProductDescription = ds.Tables[0].Rows[0]["ProductDescription"].ToString();
+                if (ds.Tables[0].Rows[0]["Price"].ToString() != "")
+                {
+                    model.Price = decimal.Parse(ds.Tables[0].Rows[0]["Price"].ToString());
+                }
+
+                return model;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 根据AccountInfoID 拿到 AccountDescription
+        /// </summary>
+        /// <param name="accountInfoId"></param>
+        /// <returns></returns>
+        public AccountDescription GetModelByAccountInfoId(int accountInfoId)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select ID, productImgAUrl, productImgBUrl, ProductImgCUrl, ProductImgDUrl, SubmitTime, OrderStatus, OrderNo, GameName, GameArea, ServerName, AccountInfoID, ProductProperty, ProductTitle, ProductDescription, Price  ");
+            strSql.Append("  from AccountDescription ");
+            strSql.Append(" where AccountInfoID=@ID");
+            SqlParameter[] parameters = {
+					new SqlParameter("@ID", SqlDbType.Int,4)
+			};
+            parameters[0].Value = accountInfoId;
+
+
+            AccountDescription model = new AccountDescription();
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0]["ID"].ToString() != "")
+                {
+                    model.ID = int.Parse(ds.Tables[0].Rows[0]["ID"].ToString());
+                }
+                model.productImgAUrl = ds.Tables[0].Rows[0]["productImgAUrl"].ToString();
+                model.productImgBUrl = ds.Tables[0].Rows[0]["productImgBUrl"].ToString();
+                model.ProductImgCUrl = ds.Tables[0].Rows[0]["ProductImgCUrl"].ToString();
+                model.ProductImgDUrl = ds.Tables[0].Rows[0]["ProductImgDUrl"].ToString();
+                if (ds.Tables[0].Rows[0]["SubmitTime"].ToString() != "")
+                {
+                    model.SubmitTime = DateTime.Parse(ds.Tables[0].Rows[0]["SubmitTime"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["OrderStatus"].ToString() != "")
+                {
+                    model.OrderStatus = (OrderStatus)Enum.Parse(typeof(OrderStatus), ds.Tables[0].Rows[0]["OrderStatus"].ToString(), true);
+                }
+                model.OrderNo = ds.Tables[0].Rows[0]["OrderNo"].ToString();
+                model.GameName = ds.Tables[0].Rows[0]["GameName"].ToString();
+                model.GameArea = ds.Tables[0].Rows[0]["GameArea"].ToString();
+                model.ServerName = ds.Tables[0].Rows[0]["ServerName"].ToString();
+                if (ds.Tables[0].Rows[0]["AccountInfoID"].ToString() != "")
+                {
+                    model.AccountInfoID = int.Parse(ds.Tables[0].Rows[0]["AccountInfoID"].ToString());
+                }
+                model.ProductProperty = ds.Tables[0].Rows[0]["ProductProperty"].ToString();
+                model.ProductTitle = ds.Tables[0].Rows[0]["ProductTitle"].ToString();
+                model.ProductDescription = ds.Tables[0].Rows[0]["ProductDescription"].ToString();
+                if (ds.Tables[0].Rows[0]["Price"].ToString() != "")
+                {
+                    model.Price = decimal.Parse(ds.Tables[0].Rows[0]["Price"].ToString());
+                }
+
+                return model;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
