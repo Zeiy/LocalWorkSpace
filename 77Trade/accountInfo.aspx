@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="accountInfo.aspx.cs" Inherits="_77Trade.accountInfo" %>
-
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="accountInfo.aspx.cs" Inherits="_77Trade.accountInfo"  EnableEventValidation="false"%>
 <%@ Register Src="~/UserControls/NavigateTop.ascx" TagPrefix="uc1" TagName="NavigateTop" %>
 
 
@@ -66,8 +65,8 @@
                                                                 <tr>
                                     <td width="30%" align="right"><strong>* 游戏选择：</strong></td>
                                     <td width="70%">
-                                        <asp:DropDownList runat="server" ClientIDMode="Static" ID="gameName" AutoPostBack="True" OnSelectedIndexChanged="gameName_SelectedIndexChanged"><asp:ListItem Text="请选择游戏"></asp:ListItem></asp:DropDownList>
-                                         <asp:DropDownList runat="server" ClientIDMode="Static" ID="gameArea" OnSelectedIndexChanged="gameArea_SelectedIndexChanged" AutoPostBack="True"><asp:ListItem Text="请选择区服"></asp:ListItem></asp:DropDownList>
+                                        <asp:DropDownList runat="server" ClientIDMode="Static" ID="gameName"><asp:ListItem Text="请选择游戏"></asp:ListItem></asp:DropDownList>
+                                         <asp:DropDownList runat="server" ClientIDMode="Static" ID="gameArea"><asp:ListItem Text="请选择区服"></asp:ListItem></asp:DropDownList>
                                          <asp:DropDownList runat="server" ClientIDMode="Static" ID="gameServer"><asp:ListItem Text="请选择服务器"></asp:ListItem></asp:DropDownList>
                                     </td>
                                 </tr>
@@ -553,6 +552,93 @@
                 }
             });
 
+
+            var serverSelect = $("#gameServer");
+            //页面加载时，如果游戏已选择则加载服务器列表
+            if ($("#gameName").val() != "请选择游戏") {
+                $.ajax({
+                    method: "post",
+                    url: "/services/GetGameServerList.ashx",
+                    data: { areaID: $("#gameArea").val(), gameId: $("#gameName").val() },
+                    success: function (data) {
+                        //更新服务器选择框
+                        if (data.status == 1) {
+                            $(serverSelect).html("");
+                            if (data.ServerList.length <= 0) {
+                                $(serverSelect).html("<option value=\"请选择游戏\" selected=\"selected\">服务器列表为空</option>");
+                                return;
+                            }
+                            $(data.ServerList).each(function (e, serverList) {
+                                //<option value="请选择服务器">请选择服务器</option>
+                                var option = "<option value=\"" + serverList.ID + "\">" + serverList.ServerName + "</option>";
+                                $(serverSelect).append(option);
+                            });
+                        }
+                    },
+                    error: function(data) {
+                        $(serverSelect).html("<option value=\"error\" selected=\"selected\">" + data.errorMsg + "</option>");
+                    }
+                });
+            }
+            //游戏区服自动填充
+            $("#gameName").change(function() {
+                //用户选择游戏时，根据区服值，更新服务器列表
+                $.ajax({
+                    method:"post",
+                    url: "/services/GetGameServerList.ashx",
+                    data: { areaID: $("#gameArea").val(), gameId: $(this).val() },
+                    success: function(data) {
+                        //更新服务器选择框
+                        if (data.status == 1) {
+                            $(serverSelect).html("");
+                            if (data.ServerList.length <= 0) {
+                                $(serverSelect).html("<option value=\"请选择游戏\" selected=\"selected\">服务器列表为空</option>");
+                                return;
+                            }
+                            $(data.ServerList).each(function (e, serverList) {
+                                //<option value="请选择服务器">请选择服务器</option>
+                                var option = "<option value=\"" + serverList.ID + "\">" + serverList.ServerName + "</option>";
+                                $(serverSelect).append(option);
+                            });
+                        }
+                    },
+                    error: function (data) {
+                        $(serverSelect).html("<option value=\"error\" selected=\"selected\">" + data.errorMsg + "</option>");
+                    }
+                });
+                $(serverSelect).html("<option value=\"请选择游戏\" selected=\"selected\">读取中...</option>");
+            });
+            $("#gameArea").change(function() {
+                //用户选择区服值时，根据游戏名，更新服务器列表，先检察游戏名是否已选择，如果游戏名未选择提醒用户先选择游戏名
+                if ($("#gameName").val() == "请选择游戏") {
+                    alert("请先选择游戏！");
+                    return;
+                }
+                $.ajax({
+                    method:"post",
+                    url: "/services/GetGameServerList.ashx",
+                    data: { areaID: $(this).val(), gameId: $("#gameName").val() },
+                    success: function(data) {
+                        //更新服务器选择框
+                        if (data.status == 1) {
+                            $(serverSelect).html("");
+                            if (data.ServerList.length <= 0) {
+                                $(serverSelect).html("<option value=\"请选择游戏\" selected=\"selected\">服务器列表为空</option>");
+                                return;
+                            }
+                            $(data.ServerList).each(function (e, serverList) {
+                                //<option value="请选择服务器">请选择服务器</option>
+                                var option = "<option value=\"" + serverList.ID + "\">" + serverList.ServerName + "</option>";
+                                $(serverSelect).append(option);
+                            });
+                        }
+                    },
+                    error: function (data) {
+                        $(serverSelect).html("<option value=\"error\" selected=\"selected\">" + data.errorMsg + "</option>");
+                    }
+                });
+                $(serverSelect).html("<option value=\"请选择游戏\" selected=\"selected\">读取中...</option>");
+            });
         });
         //检查email邮箱
         function isEmail(str) {

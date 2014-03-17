@@ -33,12 +33,12 @@ namespace DataAccess.DataLogic
             foreach (DataRow item in dt.Rows)
             {
                 GameServer gs = new GameServer();
-                gs.ServerName = Convert.ToString(item["ServerName"]);
+                gs.ServerName = Convert.ToString(item["ServerName"]).Trim();
                 gs.ID = Convert.ToInt32(item["ID"]);
                 gs.AreaID = Convert.ToInt32(item["AreaID"]);
                 gs.GameID = Convert.ToInt32(item["GameID"]);
-                gs.GameName = Convert.ToString(item["GameName"]);
-                gs.AreaName = Convert.ToString(item["AreaName"]);
+                gs.GameName = Convert.ToString(item["GameName"]).Trim();
+                gs.AreaName = Convert.ToString(item["AreaName"]).Trim();
                 serverList.Add(gs);
             }
             return serverList;

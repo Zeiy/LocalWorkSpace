@@ -41,6 +41,8 @@ namespace _77Trade
             }
             //todo: 查看当前用户有没有未完成的订单，如果有则拿订单渲染面页信息
         }
+
+        #region 游戏区服选择   改成异步调用
         /// <summary>
         /// 用户选择大区时，更新大区服务器列表
         /// </summary>
@@ -88,6 +90,8 @@ namespace _77Trade
                 gameServer.Items.Add(listItem);
             }
         }
+        #endregion
+
         /// <summary>
         /// 用户确认提交帐户信息
         /// </summary>
@@ -96,10 +100,9 @@ namespace _77Trade
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             //收集用户信息
-            string gameNameStr = gameName.SelectedItem.Text;
-            string gameAreaStr = gameArea.SelectedItem.Text;
-            string gameServerName = gameServer.SelectedItem.Text;
-            string gameAccountStr = gameAccount.Text;
+            string gameNameStr = gameName.SelectedItem.Text.Trim();
+            string gameAreaStr = gameArea.SelectedItem.Text.Trim();
+            string gameAccountStr = gameAccount.Text.Trim();
             //验证两次输入是否一样
             string gamePwdStr = gamePwd.Text;
             string regamePwdStr = regamePwd.Text;
@@ -122,11 +125,15 @@ namespace _77Trade
             ClientScript.RegisterClientScriptBlock(GetType(), "alert", "<script>alert('游戏所属大区选择有误，请重新选择！')</script>");
                 return;
             }
-            if (!int.TryParse(gameServer.SelectedValue, out serverId))
+            if (!int.TryParse(Request.Form.Get("gameServer"), out serverId))
             {
+                
                 ClientScript.RegisterClientScriptBlock(GetType(), "alert", "<script>alert('游戏所在属大区无服务器！')</script>");
                 return;
             }
+            //拿到服务器信息
+            GameServer gameServerModel = _gameServerDataAccess.GetModel(serverId);
+            string    gameServerName = gameServerModel.ServerName;
             if (gamePwdStr != regamePwdStr) {
                 ClientScript.RegisterClientScriptBlock(GetType(), "alert", "<script>alert('两次输入游戏密码不一致，请重新输入！')</script>");
                 return;
