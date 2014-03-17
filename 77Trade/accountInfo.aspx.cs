@@ -114,7 +114,26 @@ namespace _77Trade
             string propertyPwdStr = propertyPwd.Text;
             //如果选择图片上传 上传成功Url写入Hidden filed
             bool isBindSecretCardBool = isBindSecretCard.Checked;
+            //绑定了密保卡，如果隐藏域中密保卡Url为空则说明没有绑定
+            if (isBindSecretCardBool)
+            {
+                string url = SecretCardImg.Value;
+                if (string.IsNullOrEmpty(url)||string.IsNullOrEmpty(txtSecretNo.Text.Trim()))
+                {
+                    isBindSecretCardBool = false;
+                }
+            }
             bool bindIdentityCardBool = bindIdentityCard.Checked;
+            if (bindIdentityCardBool)
+            {
+                string shenFenUrlA = identityImgA.Value;
+                string shenFenUrlB = identityImgB.Value;
+                if (string.IsNullOrEmpty(shenFenUrlA) || string.IsNullOrEmpty(shenFenUrlB))
+                {
+                    bindIdentityCardBool = false;
+                }
+            }
+
             #region 数据验证
             int gameId, areaId, serverId;
             if(!int.TryParse(gameName.SelectedValue,out gameId)){
@@ -158,7 +177,11 @@ namespace _77Trade
             accountModel.LevelTwoPwd = secondLevelPwdStr;
             accountModel.PropertyPwd = propertyPwdStr;
             accountModel.IdentityAuth = bindIdentityCardBool;
+            accountModel.IdentityCardAUrl = identityImgA.Value;
+            accountModel.IdentityCardBUrl = identityImgB.Value;
             accountModel.SecretCardBind = isBindSecretCardBool;
+            accountModel.SecretCardImgUrl = SecretCardImg.Value;
+            accountModel.SecretCardNo = txtSecretNo.Text.Trim();
             //指定订单状态未完成
             accountModel.OrderStatus = OrderStatus.NotComplete;
             //指定用户ID为0 后续处理用户登陆问题

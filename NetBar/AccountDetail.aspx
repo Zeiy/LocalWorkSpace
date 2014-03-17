@@ -213,7 +213,8 @@
                                                             <tr>
                                                                 <td height="26" align="center" bgcolor="#FFFFFF" background="images/index1_72.gif">密保卡图片号：</td>
                                                                 <td height="26" align="left" bgcolor="#FFFFFF">
-                                                                    <img src="" width="200px" height="200px" /></td>
+                                                                    <asp:Image runat="server" ID="imgSecret" Width="200px" Height="200px"/>
+                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                 <td height="26" align="center" bgcolor="#FFFFFF" background="images/index1_72.gif">身份证图片：</td>

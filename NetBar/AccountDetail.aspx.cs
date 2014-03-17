@@ -52,7 +52,10 @@ namespace NetBar
                 secretCard.Text = infoModel.SecretCardNo;
                 secretCard.ReadOnly = true;
                 //订单状态
-                
+                if (infoModel.SecretCardBind)
+                {
+                    imgSecret.ImageUrl = infoModel.SecretCardImgUrl;
+                }
                 DplOrderStatus.SelectedItem.Text = infoModel.OrderStatus.ToString();
                 DplOrderStatus.Enabled = false;
                 hiddenAccountInfoID.Value = orderId;

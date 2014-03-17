@@ -135,7 +135,8 @@
                                             <tr id="tr1" style="display:none">
                                                 <td align="right" width="40%" style="line-height: 24px; font-size: 14px;">密保卡序列号：</td>
                                                 <td width="60%">
-                                                    <input name="TextBox1" type="text" id="TextBox1" class="form1" /></td>
+                                                    <asp:TextBox runat="server" ID="txtSecretNo" CssClass="form1"></asp:TextBox>
+                                                </td>
                                             </tr>
                                             <tr id="tr2"  style="display:none">
                                                 <td colspan="2" style="line-height: 24px; font-size: 14px;">
