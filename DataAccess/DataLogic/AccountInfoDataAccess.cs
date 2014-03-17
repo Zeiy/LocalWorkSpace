@@ -80,13 +80,13 @@ namespace DataAccess.DataLogic
                 model.PropertyPwd = ds.Tables[0].Rows[0]["PropertyPwd"].ToString();
                 if (ds.Tables[0].Rows[0]["SecretCardBind"].ToString() != "")
                 {
-                    model.SecretCardBind = ds.Tables[0].Rows[0]["SecretCardBind"]=="1"?true:false;
+                    model.SecretCardBind =Convert.ToBoolean(ds.Tables[0].Rows[0]["SecretCardBind"]);
                 }
                 model.SecretCardNo = ds.Tables[0].Rows[0]["SecretCardNo"].ToString();
                 model.SecretCardImgUrl = ds.Tables[0].Rows[0]["SecretCardImgUrl"].ToString();
                 if (ds.Tables[0].Rows[0]["IdentityAuth"].ToString() != "")
                 {
-                    model.IdentityAuth = ds.Tables[0].Rows[0]["IdentityAuth"]=="1"?true:false;
+                    model.IdentityAuth = Convert.ToBoolean(ds.Tables[0].Rows[0]["IdentityAuth"]);
                 }
                 model.IdentityCardAUrl = ds.Tables[0].Rows[0]["IdentityCardAUrl"].ToString();
                 model.IdentityCardBUrl = ds.Tables[0].Rows[0]["IdentityCardBUrl"].ToString();
