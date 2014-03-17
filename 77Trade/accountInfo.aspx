@@ -25,7 +25,6 @@
     <script src="Js/fileupload/jquery.fileupload-video.js"></script>
     <script src="Js/fileupload/jquery.fileupload-audio.js"></script>
 <%--    <script src="Js/fileupload/jquery.fileupload-ui.js"></script>--%>
-    <script src="Js/fileupload/jquery.fileupload-validate.js"></script>
     <script src="Js/dataVerify.js"></script>
 </head>
 <body>

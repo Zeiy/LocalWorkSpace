@@ -114,5 +114,19 @@ $(document).ready(function() {
 
     //AccountSaleList.aspx 页面tab选择卡渲染
 	var currentOrderStatus = $("#hiddenOrderStatus").val();
-    $(".trigger>a[orderStatus=" + currentOrderStatus + "]").addClass("cur").siblings().removeClass("cur");
+	$(".trigger>a[orderStatus=" + currentOrderStatus + "]").addClass("cur").siblings().removeClass("cur");
+    //AccountSaleList.aspx 页面单号，总价，日期排序 时更换箭头方向
+    //当用户点击箭头按键时，把排序值写入隐藏域，手动提交表单。
+	$(".table-box th span").click(function () {
+	    var orderby = $(this).attr("ID");
+	    if ($("#hiddenOrderBy").val() == orderby) {
+	        $("#hiddenOrderBy").val(orderby+" desc");
+	    } else {
+	        $("#hiddenOrderBy").val(orderby);
+	    }   
+	    //手动触发表单
+	    $("#mainForm").submit();
+	});
+    //页面加载时根据隐藏域的值，渲染
+    $("#" + $("#hiddenOrderBy").val()).toggleClass("up");
 });

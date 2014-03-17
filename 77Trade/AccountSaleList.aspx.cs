@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using DataAccess.DataLogic;
 using DataAccess.Model;
-using Microsoft.SqlServer.Server;
 using Wuqi.Webdiyer;
 
 namespace _77Trade
@@ -34,6 +29,7 @@ namespace _77Trade
                 int serverId;
                 string serverIdStr = Request.QueryString.Get("serverID");
                 //根据游戏服务器ID拿到所属区服渲染区服信息
+                //:todo 如果区服ID不存在则直接跳转，不允许独立访问此页面
                 if (!int.TryParse(serverIdStr, out serverId))
                 {
                     labelGameArea.Text = "选择区服";
@@ -47,9 +43,9 @@ namespace _77Trade
                     //根据服务器ID拿到AreaID
                     GameArea gamesArea = _gameAreaDataAccess.GetModel(gameServer.AreaID);
                     //把游戏名写入hiddenfield 用于区服查询
-                    hiddenGameName.Value = gameServer.GameName;
-                    hiddenAreaName.Value = gamesArea.AreaName;
-                    hiddenServerName.Value = gameServer.ServerName;
+                    hiddenGameName.Value = gameServer.GameName.Trim();
+                    hiddenAreaName.Value = gamesArea.AreaName.Trim();
+                    hiddenServerName.Value = gameServer.ServerName.Trim();
                     //根据AreaID拿到Area里的所有服务器名，渲染页面
                     CurrentServers = _gameServerDataAccess.GetGameServerByGameIDandAreaId(gameServer.GameID, gameServer.AreaID);
                     labelGameArea.Text = gamesArea.AreaName;
@@ -98,11 +94,17 @@ namespace _77Trade
                 }
                 //在这里填充数据，是因为，用户选择服务器，时间等条件时是客户端触发的表单提交     想其它办法
                 //WhereStr = "where GameArea ='" + hiddenAreaName.Value.Trim() + "' and ServerName = '" + hiddenServerName.Value.Trim() + "' and SubmitTime "+timeSpanStr;
+                int currentPageNo;
+                if (!int.TryParse(Request.QueryString.Get("page"),out currentPageNo))
+                {
+                    currentPageNo = 1;
+                }
                 WhereStr = stringBuilder.ToString();
-                int rowCount, pageCount;
-                _accountDescriptionsModels =
-                _accountDescriptionDataAccess.GetPagedAccountDescriptionsModelsByProc(1, 10, WhereStr,null, out rowCount, out pageCount);
-                AspNetPager1.RecordCount = rowCount;
+                AspNetPager1.GoToPage(currentPageNo);
+                //int rowCount, pageCount;
+                //_accountDescriptionsModels =
+                //_accountDescriptionDataAccess.GetPagedAccountDescriptionsModelsByProc(currentPageNo, 10, WhereStr, hiddenOrderBy.Value.Trim(), out rowCount, out pageCount);
+                //AspNetPager1.RecordCount = rowCount;
             }
             #endregion
         }
@@ -115,7 +117,7 @@ namespace _77Trade
         {
             int rowCount, pageCount;
             _accountDescriptionsModels =
-            _accountDescriptionDataAccess.GetPagedAccountDescriptionsModelsByProc(AspNetPager1.CurrentPageIndex, 10, WhereStr,null, out rowCount, out pageCount);
+            _accountDescriptionDataAccess.GetPagedAccountDescriptionsModelsByProc(AspNetPager1.CurrentPageIndex, 10, WhereStr,hiddenOrderBy.Value.Trim(), out rowCount, out pageCount);
             AspNetPager1.RecordCount = rowCount;
         }
 

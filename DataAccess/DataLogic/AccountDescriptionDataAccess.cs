@@ -145,7 +145,7 @@ namespace DataAccess.DataLogic
                 new SqlParameter("@PageIndex",pageIndex), 
                 new SqlParameter("@PageSize",pageSize),
                 new SqlParameter("@Where",string.IsNullOrEmpty(whereStr)?"":whereStr), 
-                new SqlParameter("@OrderBy",string.IsNullOrEmpty(orderStr)?"order by ID":orderStr), 
+                new SqlParameter("@OrderBy",string.IsNullOrEmpty(orderStr)?"order by ID":"order by "+orderStr), 
                 new SqlParameter("@RowCount",SqlDbType.Int,25), 
                 new SqlParameter("@PageCount",SqlDbType.Int,25), 
             };

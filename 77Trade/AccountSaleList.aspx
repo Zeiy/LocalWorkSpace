@@ -108,7 +108,6 @@
                                                 <i></i>
                                                 <asp:Label ID="labelGameArea" runat="server" CssClass="name" Text="大区"></asp:Label>
                                                 <%--<span class="name">服务区</span>--%>
-                                                <asp:HiddenField runat="server" ID="hiddenAreaName"/>
                                                 <div class="inner-pop">
                                                     <a class="cur">网通区</a>
                                                     <a>电信区</a>
@@ -120,7 +119,6 @@
                                                 <i></i>
                                                 <asp:Label ID="lableGameServer" runat="server" CssClass="name" Text="游戏区"></asp:Label>
                                             <%--    <span class="name">游戏区</span>--%>
-                                                <asp:HiddenField runat="server" ID="hiddenServerName"/>
                                                 <div class="inner-pop">
                                                     <% foreach (var serverItem in CurrentServers)
                                                        {
@@ -139,7 +137,6 @@
                                                 <!--[if lt IE 7 ]><span style="zoom: 1;"></span><![endif]-->
                                                 <i></i>
                                                 <asp:Label runat="server" CssClass="value" ID="labelTimeSpan">2013-11-06至2014-11-13</asp:Label>
-                                                <asp:HiddenField runat="server" ID="hiddenTimeSpan"/>
                                                 <div class="inner-pop">
                                                     <input type="text" class="date_input" hidden>
                                                     <input type="text" class="date_input" hidden>
@@ -151,18 +148,11 @@
                                                 <tr>
                                                     <th>标题</th>
                                                     <th>属性</th>
-                                                    <th><span class="up">单号<i></i></span></th>
-                                                    <th><span>总价（元）<i></i></span></th>
-                                                    <th><span>日期<i></i></span></th>
-                                                    <th><span>操作<i></i></span></th>
+                                                    <th><span class="up" id="OrderNo">单号<i></i></span></th>
+                                                    <th><span id="price">总价（元）<i></i></span></th>
+                                                    <th><span id="SubmitTime">日期<i></i></span></th>
+                                                    <th><span>操作</span></th>
                                                 </tr>
-                                                <script>
-                                                    $(document).ready(function () {
-                                                        $(".table-box th span").click(function () {
-                                                            $(this).toggleClass('up');
-                                                        });
-                                                    });
-                                                </script>
                                                 <% foreach (var infoModels in CurrentPageInfoModels)
                                                    {%>
                                                         <tr>
@@ -180,14 +170,18 @@
                                             <webdiyer:AspNetPager ID="AspNetPager1" runat="server"
                                                 OnPageChanging="AspNetPager1_PageChanging" OnPageChanged="AspNetPager1_PageChanged" CurrentPageButtonPosition="Center"
                                                 Width="100%" HorizontalAlign="center" AlwaysShowFirstLastPageNumber="true" PagingButtonSpacing="10" FirstPageText="首页"
-                                                LastPageText="尾页" NextPageText="下一页" PrevPageText="上一页" CustomInfoHTML="第%CurrentPageIndex%页，共%PageCount%页，每页%PageSize%条" ShowCustomInfoSection="Left" ShowPageIndexBox="Never">
+                                                LastPageText="尾页" NextPageText="下一页" PrevPageText="上一页" CustomInfoHTML="第%CurrentPageIndex%页，共%PageCount%页，每页%PageSize%条" ShowCustomInfoSection="Left" ShowPageIndexBox="Never" UrlPaging="True">
                                             </webdiyer:AspNetPager>
                                         </div>
                                     </li>
-                                    <asp:HiddenField runat="server" ID="hiddenGameName"/>
                             </ul>
                         </div>
                      <asp:HiddenField runat="server" ID="hiddenOrderStatus"/>
+                     <asp:HiddenField runat="server" ID="hiddenAreaName"/>
+                     <asp:HiddenField runat="server" ID="hiddenGameName"/>
+                     <asp:HiddenField runat="server" ID="hiddenTimeSpan"/>
+                     <asp:HiddenField runat="server" ID="hiddenServerName"/>
+                     <asp:HiddenField runat="server" ID="hiddenOrderBy"/>
                  </form>
                     </div>
                 </div>
