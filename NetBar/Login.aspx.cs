@@ -23,7 +23,7 @@ namespace NetBar
         /// <param name="e"></param>
         protected void login_Click(object sender, EventArgs e)
         {
-            string name = userName.Text.Trim();
+            string name = username.Text.Trim();
             string pwd = userPwd.Text.Trim();
             if (string.IsNullOrEmpty(name)) {
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "<script>alert('用户名不能为空，请重新输入！')</script>");
@@ -45,8 +45,10 @@ namespace NetBar
             userModel = userAccess.GetUserByName(name);
             if (userModel.Password == pwd)
             {
+                //如果有returnUrl 则反回returnUrl
+                string returnUrl = Request.QueryString.Get("returnUrl");
                 Session["UserName"] = userModel.UserName;
-                Response.Redirect("/index.aspx");
+                Response.Redirect(string.IsNullOrEmpty(returnUrl) ? "/index.aspx" : returnUrl);
             }
             else {
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "<script>alert('帐号或密码有误，请重试！')</script>");
