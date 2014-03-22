@@ -403,6 +403,7 @@
     <Content Include="images\style.css" />
     <Content Include="Index.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="OrderManager\OrderDetail.aspx" />
     <Content Include="OrderManager\OrderList.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="tab\images\11.gif" />
@@ -496,6 +497,13 @@
       <DependentUpon>Common.Master</DependentUpon>
     </Compile>
     <Compile Include="Model\UserModel.cs" />
+    <Compile Include="OrderManager\OrderDetail.aspx.cs">
+      <DependentUpon>OrderDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderManager\OrderDetail.aspx.designer.cs">
+      <DependentUpon>OrderDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="OrderManager\OrderList.aspx.cs">
       <DependentUpon>OrderList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

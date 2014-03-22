@@ -273,46 +273,65 @@ namespace DataAccess.DataLogic
             }
         }
 
-        public List<AccountInfoModel> GetPagedAccountInfoModelsByProc(int pageIndex, int pageSize,string whereStr, out int rowCount,
+        public List<AccountInfoModel> GetPagedAccountInfoModelsByProc(int pageIndex, int pageSize, string whereStr,
+            out int rowCount,
             out int pageCount)
         {
             List<AccountInfoModel> modelsList = new List<AccountInfoModel>();
-                rowCount = 0;
+            rowCount = 0;
             pageCount = 0;
             IDataParameter[] sqlParameters =
             {
-                new SqlParameter("TableName","AccountInfo"), 
-                new SqlParameter("IDName","ID"), 
-                new SqlParameter("PageIndex",pageIndex), 
-                new SqlParameter("PageSize",pageSize),
-                new SqlParameter("Where",whereStr), 
-                new SqlParameter("OrderBy",""), 
-                new SqlParameter("RowCount",rowCount), 
-                new SqlParameter("PageCount",pageCount), 
+                new SqlParameter("@TableName", "AccountInfo"),
+                new SqlParameter("@IDName", "ID"),
+                new SqlParameter("@PageIndex", pageIndex),
+                new SqlParameter("@PageSize", pageSize),
+                new SqlParameter("@Where", whereStr),
+                new SqlParameter("@OrderBy", "order by ID"),
+                new SqlParameter("@RowCount",SqlDbType.Int,25),
+                new SqlParameter("@PageCount", SqlDbType.Int,25),
             };
-            SqlDataReader dataReader = DbHelperSQL.RunProcedure("sp_GetPageDataOutRowPageCount", sqlParameters);
-            using (dataReader)
+            sqlParameters[6].Direction = ParameterDirection.Output;
+            sqlParameters[6].Value = DBNull.Value;
+            sqlParameters[7].Direction = ParameterDirection.Output;
+            sqlParameters[7].Value = DBNull.Value;
+            using (SqlConnection connection = new SqlConnection(DbHelperSQL.connectionString))
             {
-                while (dataReader.Read())
+                connection.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Connection = connection;
+                cmd.Parameters.AddRange(sqlParameters);
+                cmd.CommandText = "sp_GetPageDataOutRowPageCount";
+                SqlDataReader dataReader = cmd.ExecuteReader();
+                using (dataReader)
                 {
-                    AccountInfoModel infoModel = new AccountInfoModel();
-                    
-                    infoModel.ID = Convert.ToInt32(dataReader["ID"]);
-                    infoModel.SubmitTime = Convert.ToDateTime(Convert.IsDBNull(dataReader["SubmitTime"]) ? DateTime.MinValue : dataReader["SubmitTime"]);
-                    infoModel.GameArea = Convert.ToString(dataReader["GameArea"]);
-                    infoModel.GameName = Convert.ToString(dataReader["GameName"]);
-                    infoModel.ServerName = Convert.ToString(dataReader["ServerName"]);
-                    modelsList.Add(infoModel);
+                    while (dataReader.Read())
+                    {
+                        AccountInfoModel infoModel = new AccountInfoModel();
+
+                        infoModel.ID = Convert.ToInt32(dataReader["ID"]);
+                        infoModel.SubmitTime =
+                            Convert.ToDateTime(Convert.IsDBNull(dataReader["SubmitTime"])
+                                ? DateTime.MinValue
+                                : dataReader["SubmitTime"]);
+                        infoModel.GameArea = Convert.ToString(dataReader["GameArea"]);
+                        infoModel.GameName = Convert.ToString(dataReader["GameName"]);
+                        infoModel.ServerName = Convert.ToString(dataReader["ServerName"]);
+                        modelsList.Add(infoModel);
+                    }
                 }
+                rowCount = Convert.ToInt32(cmd.Parameters["@RowCount"].Value);
+                pageCount = Convert.ToInt32(cmd.Parameters["@PageCount"].Value);
+                return modelsList;
             }
-            return modelsList;
         }
 
         public List<AccountInfoModel> GetPagedAccountInfoModelsByProc(int pageIndex, int pageSize, string whereStr)
         {
             int rowCount = 0;
             int pageCount = 0;
-            return GetPagedAccountInfoModelsByProc(pageIndex, pageSize, "", out rowCount, out pageCount);
+            return GetPagedAccountInfoModelsByProc(pageIndex, pageSize, whereStr, out rowCount, out pageCount);
 
         }
         public bool Exists(int ID)

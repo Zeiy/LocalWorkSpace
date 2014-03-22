@@ -16,7 +16,14 @@ namespace DataAccess.Model
             productImgBUrl = "";
             ProductImgCUrl = "";
             ProductImgDUrl = "";
+            ProductTitle = "";
+            GameName = "";
+            this.GameArea = "";
+            ServerName = "";
+            ProductProperty = "";
             SubmitTime = DateTime.Now;
+            ProductDescription = "";
+            Price = 0;
         }
         public int ID { get; set; }
         /// <summary>

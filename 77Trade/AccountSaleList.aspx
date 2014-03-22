@@ -161,7 +161,7 @@
                                                     <td><%=infoModels.OrderNo %><i></i></td>
                                                     <td><%=infoModels.Price %> <i></i></td>
                                                     <td><%=infoModels.SubmitTime %><i></i></td>
-                                                    <td><a href="#">修改</a><i></i></td>
+                                                    <td><a href="#">查看详情</a><i></i></td>
                                                 </tr>
                                                   <% } %>
                                             </table>

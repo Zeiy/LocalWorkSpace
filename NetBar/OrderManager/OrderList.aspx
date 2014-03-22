@@ -22,6 +22,7 @@
                     <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
                 </div>
             </div>
+            <form runat="server" method="post">
             <div class="box-content">
                 <table class="table table-striped table-bordered bootstrap-datatable ">
                     <thead>
@@ -50,18 +51,18 @@
                                 <span class="label label-success">Active</span>
                             </td>
                             <td class="center">
-                                <a class="btn btn-success" href="#">
+                                <a class="btn btn-success" href="OrderDetail.aspx?InfoID=<%=item.ID %>">
                                     <i class="icon-zoom-in icon-white"></i>
                                     View                                            
                                 </a>
-                                <a class="btn btn-info" href="#">
+                                <a class="btn btn-info" href="OrderDetail.aspx?InfoID=<%=item.ID %>">
                                     <i class="icon-edit icon-white"></i>
                                     Edit                                            
                                 </a>
-                                <a class="btn btn-danger" href="#">
+                         <%--       <a class="btn btn-danger" href="#">
                                     <i class="icon-trash icon-white"></i>
                                     Delete
-                                </a>
+                                </a>--%>
                             </td>
                         </tr>
                         <% } %>
@@ -71,10 +72,11 @@
                    <webdiyer:AspNetPager ID="AspNetPager1" runat="server"
                                            CurrentPageButtonPosition="Center"
                                                 Width="100%" HorizontalAlign="center" AlwaysShowFirstLastPageNumber="true" PagingButtonSpacing="0px" FirstPageText="首页"
-                                                LastPageText="尾页" NextPageText="下一页" PrevPageText="上一页" CustomInfoHTML="共%PageCount%页，当前为第%CurrentPageIndex%页" ShowCustomInfoSection="Left" ShowPageIndexBox="Never" UrlPaging="True" ScrollBars="None" NavigationButtonType="Text" CurrentPageButtonClass="active" CurrentPageButtonTextFormatString="&lt;li class =&quot;active&quot;&gt;&lt;a href=&quot;#&quot;&gt;当前页&lt;/a&gt;&lt;/li&gt;" CustomInfoSectionWidth="20%" PagingButtonLayoutType="UnorderedList" Wrap="False">
+                                                LastPageText="尾页" NextPageText="下一页" PrevPageText="上一页" CustomInfoHTML="共%PageCount%页，当前为第%CurrentPageIndex%页" ShowCustomInfoSection="Left" ShowPageIndexBox="Never" ScrollBars="None" NavigationButtonType="Text" CurrentPageButtonClass="active" CurrentPageButtonTextFormatString="&lt;li class =&quot;active&quot;&gt;&lt;a href=&quot;#&quot;&gt;当前页&lt;/a&gt;&lt;/li&gt;" CustomInfoSectionWidth="20%" PagingButtonLayoutType="UnorderedList" Wrap="False" OnPageChanged="AspNetPager1_PageChanged" UrlPaging="True">
                   </webdiyer:AspNetPager>
                     </div>
             </div>
+            </form>
         </div>
         <!--/span-->
 

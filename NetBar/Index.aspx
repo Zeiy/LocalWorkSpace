@@ -2,7 +2,7 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContent">
     <div style="margin: auto">
-        <h4>Welcome!</h4>
+        <h1>Welcome!</h1>
     </div>
 
 </asp:Content>

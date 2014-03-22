@@ -14,7 +14,7 @@
             http://twitter.com/halalit_usman
             -->
         <meta charset="utf-8">
-        <title>Free HTML5 Bootstrap Admin Template</title>
+        <title>77Trade 后台管理中心</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
         <meta name="author" content="Muhammad Usman">
@@ -58,7 +58,7 @@
 
                 <div class="row-fluid">
                     <div class="span12 center login-header">
-                        <h2>Welcome to Charisma</h2>
+                        <h2>欢迎进入七七网后台管理中心</h2>
                     </div>
                     <!--/span-->
                 </div>
@@ -67,7 +67,7 @@
                 <div class="row-fluid">
                     <div class="well span5 center login-box">
                         <div class="alert alert-info">
-                            Please login with your Username and Password.
+                            请输入您的用户名跟密码登入系统！
                         </div>
                         <form class="form-horizontal" runat="server" method="post">
                             <fieldset>
@@ -82,7 +82,7 @@
                                 <div class="clearfix"></div>
                                 <div class="input-prepend">
                                     <label class="remember" for="remember">
-                                        <input type="checkbox" id="remember" />Remember me</label>
+                                        <input type="checkbox" id="remember" />记住我</label>
                                 </div>
                                 <div class="clearfix"></div>
 

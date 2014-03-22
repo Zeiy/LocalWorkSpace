@@ -17,9 +17,10 @@ namespace NetBar
         {
                 base.OnInit(e);
             //用户未登陆跳回登陆页
+            //参数处理
             var reqUrl = Request.Url;
                 if (Session["UserName"] == null) {
-                    Response.Redirect("/Login.aspx?returnUrl="+reqUrl.AbsolutePath);
+                    Response.Redirect("/Login.aspx?returnUrl="+reqUrl.AbsolutePath+reqUrl.Query);
                 }
         }
     }

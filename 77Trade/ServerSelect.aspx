@@ -91,7 +91,7 @@
                                     <div class="list">
                                         <%foreach (var wangtongserver in item.ServerList)
                                           {%>
-                                        <a href="AccountSaleList.aspx?serverID=<%=wangtongserver.ID %>">
+                                        <a href="BillList.aspx?serverID=<%=wangtongserver.ID %>">
                                             <%=wangtongserver.ServerName %>
                                         </a>
                                         <% }%>
