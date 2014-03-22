@@ -14,7 +14,7 @@ namespace _77Trade
             {
                 //拿到订单ID后校验当前用户，订单状态是否为未完成状态。如果前置订单符合要求则把值写入hiddenField
                 string infoId = Request.QueryString.Get("infoId");
-                int accountInfoId;
+                int accountInfoId = 0;
                 if (!int.TryParse(infoId, out accountInfoId))
                 {
                     //用户前置订单不存在，跳回订单生成第一步
@@ -81,6 +81,24 @@ namespace _77Trade
             description.GameArea = accountinfoModel.GameArea;
             description.GameName = accountinfoModel.GameName;
             description.ServerName = accountinfoModel.ServerName;
+            if(!string.IsNullOrEmpty(hiddenimggameImgA.Value.Trim()))
+            {
+                description.ProductImgAUrl = hiddenimggameImgA.Value.Trim();
+            }
+            if (!string.IsNullOrEmpty(hiddenimggameImgB.Value.Trim()))
+            {
+                description.ProductImgBUrl = hiddenimggameImgB.Value.Trim();
+            }
+            if (!string.IsNullOrEmpty(hiddenimggameImgC.Value.Trim()))
+            {
+                description.ProductImgCUrl = hiddenimggameImgC.Value.Trim();
+            }
+            if (!string.IsNullOrEmpty(hiddenimggameImgD.Value.Trim()))
+            {
+                description.ProductImgDUrl = hiddenimggameImgD.Value.Trim();
+            }
+        
+           
             //生成订单号  写入订单状态
             //检察订单号是否已存在
             string orderNoStr = GeneralOrderNo();

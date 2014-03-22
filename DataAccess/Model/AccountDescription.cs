@@ -12,8 +12,8 @@ namespace DataAccess.Model
     {
         public AccountDescription()
         {
-            productImgAUrl = "";
-            productImgBUrl = "";
+            ProductImgAUrl = "";
+            ProductImgBUrl = "";
             ProductImgCUrl = "";
             ProductImgDUrl = "";
             ProductTitle = "";
@@ -62,8 +62,8 @@ namespace DataAccess.Model
         /// <summary>
         /// 用户上传产品图片地址
         /// </summary>
-        public string productImgAUrl { get; set; }
-        public string productImgBUrl { get; set; }
+        public string ProductImgAUrl { get; set; }
+        public string ProductImgBUrl { get; set; }
         public string ProductImgCUrl { get; set; }
         public string ProductImgDUrl { get; set; }
         /// <summary>

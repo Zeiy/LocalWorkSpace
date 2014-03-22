@@ -1,8 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OrderDetail.aspx.cs" Inherits="_77Trade.OrderDetail" %>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="“X-UA-Compatible”" content="IE=7"/>
+    <meta http-equiv="“X-UA-Compatible”" content="IE=7" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>商品展示</title>
     <meta name="keywords" content="" />
@@ -39,7 +40,7 @@
                     <table width="875" height="300" style="border-collapse: collapse">
                         <tr>
                             <td height="300" width="210" valign="top" style="margin: 30px 15px; padding: 10px;" rowspan="9">
-                                <img src="global/images/img2.jpg" style="border: 1px solid #001627; padding: 1px;" align="right" />
+                                <img src="<%=CurrentAccountDescription.ProductImgAUrl %>" style="border: 1px solid #001627; padding: 1px;" align="right" />
                             </td>
                             <td valign="top" width="83" align="right" style="padding: 10px 0;">
                                 <p align="center">
@@ -95,16 +96,16 @@
                             <div class="main_image">
                                 <ul>
                                     <li class="img_1"><span>
-                                        <img src="global/images/img3.jpg" />
-                                        <img src="global/images/img4.jpg" /></span></li>
+                                        <img src="<%=CurrentAccountDescription.ProductImgAUrl %>" />
+                                    </span></li>
                                     <li class="img_2"><span>
-                                        <img src="global/images/img4.jpg" />
-                                        <img src="global/images/img4.jpg" /></span></li>
+                                        <img src="<%=CurrentAccountDescription.ProductImgBUrl %>" />
+                                    </span></li>
                                     <li class="img_3"><span>
-                                        <img src="global/images/img4.jpg" />
-                                        <img src="global/images/img3.jpg" /></span></li>
+                                        <img src="<%=CurrentAccountDescription.ProductImgCUrl %>" />
+                                    </span></li>
                                     <li class="img_4"><span>
-                                        <img src="global/images/img3.jpg" /></span></li>
+                                        <img src="<%=CurrentAccountDescription.ProductImgDUrl %>" /></span></li>
                                 </ul>
                                 <a href="javascript:;" id="btn_prev"></a>
                                 <a href="javascript:;" id="btn_next"></a>
@@ -125,7 +126,8 @@
     <div class="footer">
         <div class="fl">
             <img src="global/images/foot_logo1.png" width="113" height="43" />
-            <img src="global/images/foot_logo2.png" width="140" height="43" /></div>
+            <img src="global/images/foot_logo2.png" width="140" height="43" />
+        </div>
         <div class="fr">
             <p>
                 京ICP备10014751号 京ICP证100162号&nbsp; 京网文[2011]0082-031号&nbsp; 
@@ -137,9 +139,9 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
-            $(".main_visual").hover(function() {
+            $(".main_visual").hover(function () {
                 $("#btn_prev,#btn_next").fadeIn()
-            }, function() {
+            }, function () {
                 $("#btn_prev,#btn_next").fadeOut()
             });
             $dragBln = false;
@@ -153,27 +155,27 @@
                     $(".flicking_con a").removeClass("on").eq(e.current - 1).addClass("on");
                 }
             });
-            $(".main_image").bind("mousedown", function() {
+            $(".main_image").bind("mousedown", function () {
                 $dragBln = false;
             });
-            $(".main_image").bind("dragstart", function() {
+            $(".main_image").bind("dragstart", function () {
                 $dragBln = true;
             });
-            $(".main_image a").click(function() {
+            $(".main_image a").click(function () {
                 if ($dragBln) {
                     return false;
                 }
             });
             timer = setInterval(function () { $("#btn_next").click(); }, 4000);
-            $(".main_visual").hover(function() {
+            $(".main_visual").hover(function () {
                 clearInterval(timer);
-            }, function() {
-                timer = setInterval(function() { $("#btn_next").click(); }, 4000);
+            }, function () {
+                timer = setInterval(function () { $("#btn_next").click(); }, 4000);
             });
-            $(".main_image").bind("touchstart", function() {
+            $(".main_image").bind("touchstart", function () {
                 clearInterval(timer);
-            }).bind("touchend", function() {
-                timer = setInterval(function() { $("#btn_next").click(); }, 4000);
+            }).bind("touchend", function () {
+                timer = setInterval(function () { $("#btn_next").click(); }, 4000);
             });
         });
     </script>

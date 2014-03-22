@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections;
+using System.IO;
 using System.Text;
 using System.Web;
 using Newtonsoft.Json;
@@ -40,6 +41,13 @@ namespace _77Trade.services
                     uploadPath += "MiBaoKa\\";
                     break;
                 }
+                case "gameImg":
+                {
+                    file = context.Request.Files["gameImg"];
+                    uploadPath += "gameImg\\";
+                    break;
+                }
+
                 default: { return; }
             }
             //限制同一用户上传图片个数，一个用户只能上传四张图片

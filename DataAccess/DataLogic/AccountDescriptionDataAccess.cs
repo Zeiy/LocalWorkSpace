@@ -103,8 +103,8 @@ namespace DataAccess.DataLogic
               
             };
 
-            parameters[0].Value = model.productImgAUrl;
-            parameters[1].Value = model.productImgBUrl;
+            parameters[0].Value = model.ProductImgAUrl;
+            parameters[1].Value = model.ProductImgBUrl;
             parameters[2].Value = model.ProductImgCUrl;
             parameters[3].Value = model.ProductImgDUrl;
             parameters[4].Value = model.SubmitTime;
@@ -225,8 +225,8 @@ namespace DataAccess.DataLogic
                 {
                     model.ID = int.Parse(ds.Tables[0].Rows[0]["ID"].ToString());
                 }
-                model.productImgAUrl = ds.Tables[0].Rows[0]["productImgAUrl"].ToString();
-                model.productImgBUrl = ds.Tables[0].Rows[0]["productImgBUrl"].ToString();
+                model.ProductImgAUrl = ds.Tables[0].Rows[0]["productImgAUrl"].ToString();
+                model.ProductImgBUrl = ds.Tables[0].Rows[0]["productImgBUrl"].ToString();
                 model.ProductImgCUrl = ds.Tables[0].Rows[0]["ProductImgCUrl"].ToString();
                 model.ProductImgDUrl = ds.Tables[0].Rows[0]["ProductImgDUrl"].ToString();
                 if (ds.Tables[0].Rows[0]["SubmitTime"].ToString() != "")
@@ -288,8 +288,8 @@ namespace DataAccess.DataLogic
                 {
                     model.ID = int.Parse(ds.Tables[0].Rows[0]["ID"].ToString());
                 }
-                model.productImgAUrl = ds.Tables[0].Rows[0]["productImgAUrl"].ToString();
-                model.productImgBUrl = ds.Tables[0].Rows[0]["productImgBUrl"].ToString();
+                model.ProductImgAUrl = ds.Tables[0].Rows[0]["productImgAUrl"].ToString();
+                model.ProductImgBUrl = ds.Tables[0].Rows[0]["productImgBUrl"].ToString();
                 model.ProductImgCUrl = ds.Tables[0].Rows[0]["ProductImgCUrl"].ToString();
                 model.ProductImgDUrl = ds.Tables[0].Rows[0]["ProductImgDUrl"].ToString();
                 if (ds.Tables[0].Rows[0]["SubmitTime"].ToString() != "")

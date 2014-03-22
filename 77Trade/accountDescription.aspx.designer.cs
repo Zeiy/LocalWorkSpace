@@ -58,6 +58,42 @@ namespace _77Trade {
         protected global::System.Web.UI.WebControls.TextBox pdDescription;
         
         /// <summary>
+        /// hiddenimggameImgA 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hiddenimggameImgA;
+        
+        /// <summary>
+        /// hiddenimggameImgB 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hiddenimggameImgB;
+        
+        /// <summary>
+        /// hiddenimggameImgC 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hiddenimggameImgC;
+        
+        /// <summary>
+        /// hiddenimggameImgD 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hiddenimggameImgD;
+        
+        /// <summary>
         /// btnSubmit 控件。
         /// </summary>
         /// <remarks>
