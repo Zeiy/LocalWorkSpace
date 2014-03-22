@@ -89,7 +89,6 @@
     <Content Include="services\FileSave.ashx" />
     <Content Include="SQL\pagerProc.sql" />
     <Content Include="UserControls\NavigateTop.ascx" />
-    <Content Include="账号信息2.html" />
     <None Include="Properties\PublishProfiles\FTPFrontPublish.pubxml" />
     <None Include="Properties\PublishProfiles\testEnvironment.pubxml" />
     <Content Include="services\GetGameServerList.ashx" />
