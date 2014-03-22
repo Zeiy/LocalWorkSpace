@@ -63,7 +63,7 @@
                                     <div class="list">
                                         <% foreach (var server in item.ServerList)
                                            {%>
-                                        <a href="AccountSaleList.aspx?serverID=<%=server.ID %>">
+                                        <a href="BillList.aspx?serverID=<%=server.ID %>">
                                             <%=server.ServerName %>
 
                                         </a>
@@ -78,7 +78,7 @@
                                         <% foreach (var serverDianxin in item.ServerList)
                                            {%>
 
-                                        <a href="AccountSaleList.aspx?serverID=<%=serverDianxin.ID %>">
+                                        <a href="BillList.aspx?serverID=<%=serverDianxin.ID %>">
                                             <%=serverDianxin.ServerName %>
                                         </a>
                                         <% }%>
