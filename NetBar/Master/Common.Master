@@ -66,8 +66,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="index.html"> <img alt="Charisma Logo" src="/img/logo20.png" /> <span>Charisma</span></a>
-				
+				<a class="brand" href="index.html"> <img alt="Charisma Logo" src="/img/77_Logo.png" /> <span>七七网后台</span></a>
 				<!-- theme selector starts -->
 				<div class="btn-group pull-right theme-container" >
 					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -87,7 +86,6 @@
 					</ul>
 				</div>
 				<!-- theme selector ends -->
-				
 				<!-- user dropdown starts -->
 				<div class="btn-group pull-right" >
 					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
