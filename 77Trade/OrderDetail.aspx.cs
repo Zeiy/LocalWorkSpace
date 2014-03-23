@@ -25,7 +25,8 @@ namespace _77Trade
             }
             else
             {
-                CurrentAccountDescription = _accountDescriptionDataAccess.GetModel(accountDescriptionId); 
+                CurrentAccountDescription = _accountDescriptionDataAccess.GetModel(accountDescriptionId);
+                descriptionID.Value = Convert.ToString(accountDescriptionId);
             }
         }
         public string GetAccountPropertyByAccountModel(AccountDescription description)
@@ -70,5 +71,15 @@ namespace _77Trade
             }
         }
         public AccountDescription CurrentAccountDescription { get; set; }
+
+        protected void buyProduct_Click(object sender, EventArgs e)
+        {
+            //判断用户是否登陆   判断帐号状态是否可购买
+            if (Session["UserName"] == null)
+            {
+                Response.Redirect("/User/Login.aspx?returnUrl=/OrderDetail.aspx?acDes="+descriptionID.Value.Trim());
+            }
+            ClientScript.RegisterClientScriptBlock(GetType(), "alert", "<script>alert('生成订单中！！！');</script>");
+        }
     }
 }

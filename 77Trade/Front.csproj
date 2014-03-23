@@ -89,6 +89,7 @@
     <Content Include="services\FileSave.ashx" />
     <Content Include="SQL\pagerProc.sql" />
     <Content Include="UserControls\NavigateTop.ascx" />
+    <Content Include="Common.Master" />
     <None Include="Properties\PublishProfiles\FTPFrontPublish.pubxml" />
     <None Include="Properties\PublishProfiles\testEnvironment.pubxml" />
     <Content Include="services\GetGameServerList.ashx" />
@@ -201,6 +202,8 @@
     <Content Include="style\images\tab2-bg.png" />
     <Content Include="style\images\tab2cur-bg.png" />
     <Content Include="style\style.css" />
+    <Content Include="User\Login.aspx" />
+    <Content Include="User\Register.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -233,6 +236,13 @@
     </Compile>
     <Compile Include="BillList.aspx.designer.cs">
       <DependentUpon>BillList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Common.Master.cs">
+      <DependentUpon>Common.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common.Master.designer.cs">
+      <DependentUpon>Common.Master</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -271,6 +281,23 @@
     </Compile>
     <Compile Include="UserControls\NavigateTop.ascx.designer.cs">
       <DependentUpon>NavigateTop.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserPageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

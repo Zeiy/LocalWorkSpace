@@ -32,95 +32,99 @@
         <div class="clear"></div>
     </div>
     <!-- header end -->
-    <div class="main">
-        <div class="box">
-            <div class="show-product">
-                <h3>商品展示</h3>
-                <div class="info">
-                    <table width="875" height="300" style="border-collapse: collapse">
-                        <tr>
-                            <td height="300" width="210" valign="top" style="margin: 30px 15px; padding: 10px;" rowspan="9">
-                                <img src="<%=CurrentAccountDescription.ProductImgAUrl %>" style="border: 1px solid #001627; padding: 1px;" align="right" />
-                            </td>
-                            <td valign="top" width="83" align="right" style="padding: 10px 0;">
-                                <p align="center">
-                                    <font color="#FFFFFF">
+    <form runat="server">
+        <div class="main">
+            <div class="box">
+                <div class="show-product">
+                    <h3>商品展示</h3>
+                    <div class="info">
+                        <table width="875" height="300" style="border-collapse: collapse">
+                            <tr>
+                                <td height="300" width="210" valign="top" style="margin: 30px 15px; padding: 10px;" rowspan="9">
+                                    <img src="<%=CurrentAccountDescription.ProductImgAUrl %>" style="border: 1px solid #001627; padding: 1px;" align="right" width="200px" height="300px" />
+                                </td>
+                                <td valign="top" width="83" align="right" style="padding: 10px 0;">
+                                    <p align="center">
+                                        <font color="#FFFFFF">
 		<strong style="color:#ffe27e">物品名称：</strong></font>
-                            </td>
-                            <td valign="top" style="padding: 10px 0;">
-                                <strong style="color: #ffe27e;"><%=CurrentAccountDescription.ProductTitle %></strong></td>
-                        </tr>
-                        <tr>
-                            <td valign="top" width="83" align="right">订单编号：</td>
-                            <td valign="top"><%=CurrentAccountDescription.OrderNo %></td>
-                        </tr>
-                        <tr>
-                            <td valign="top" width="83" align="right">区<span class="b13">/</span>服：</td>
-                            <td valign="top"><%=GetAccountPropertyByAccountModel(CurrentAccountDescription) %></td>
-                        </tr>
-                        <tr>
-                            <td valign="top" width="83" align="right">总<span class="b14"></span>价：</td>
-                            <td valign="top"><%=CurrentAccountDescription.Price %>元 </td>
-                        </tr>
-                        <tr>
-                            <td valign="top" width="83" align="right">状<span class="b14"></span>态：</td>
-                            <td valign="top"><%=GetOrderStatusStr(CurrentAccountDescription.OrderStatus) %></td>
-                        </tr>
-                        <tr>
-                            <td valign="top" width="83" align="right">发布时间：</td>
-                            <td valign="top"><%=CurrentAccountDescription.SubmitTime %></td>
-                        </tr>
-                        <tr>
-                            <td valign="top" width="83" align="right">&nbsp;</td>
-                            <td valign="top">
-                                <a href="#" class="btn1">购买商品</a>  <a href="#" class="btn2">收藏商品</a>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="product-content">
-                    <h4>商品描述</h4>
-                    <p><%=CurrentAccountDescription.ProductDescription %></p>
-                </div>
-                <div class="product-img">
-                    <div class="focus" id="focus">
-                        <div class="main_visual">
-                            <div class="flicking_con">
-                                <div class="flicking_inner">
-                                    <a href="#"></a>
-                                    <a href="#"></a>
-                                    <a href="#"></a>
-                                    <a href="#"></a>
+                                </td>
+                                <td valign="top" style="padding: 10px 0;">
+                                    <strong style="color: #ffe27e;"><%=CurrentAccountDescription.ProductTitle %></strong></td>
+                            </tr>
+                            <tr>
+                                <td valign="top" width="83" align="right">订单编号：</td>
+                                <td valign="top"><%=CurrentAccountDescription.OrderNo %></td>
+                            </tr>
+                            <tr>
+                                <td valign="top" width="83" align="right">区<span class="b13">/</span>服：</td>
+                                <td valign="top"><%=GetAccountPropertyByAccountModel(CurrentAccountDescription) %></td>
+                            </tr>
+                            <tr>
+                                <td valign="top" width="83" align="right">总<span class="b14"></span>价：</td>
+                                <td valign="top"><%=CurrentAccountDescription.Price %>元 </td>
+                            </tr>
+                            <tr>
+                                <td valign="top" width="83" align="right">状<span class="b14"></span>态：</td>
+                                <td valign="top"><%=GetOrderStatusStr(CurrentAccountDescription.OrderStatus) %></td>
+                            </tr>
+                            <tr>
+                                <td valign="top" width="83" align="right">发布时间：</td>
+                                <td valign="top"><%=CurrentAccountDescription.SubmitTime %></td>
+                            </tr>
+                            <tr>
+                                <td valign="top" width="83" align="right">&nbsp;</td>
+                                <td valign="top">
+                                    <asp:LinkButton runat="server" Text="购买商品" CssClass="btn1" ID="buyProduct" OnClick="buyProduct_Click"></asp:LinkButton>
+                                    <asp:LinkButton runat="server" Text="收藏商品" CssClass="btn2" ID="btnShouChang"></asp:LinkButton>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="product-content">
+                        <h4>商品描述</h4>
+                        <p><%=CurrentAccountDescription.ProductDescription %></p>
+                    </div>
+                    <div class="product-img">
+                        <div class="focus" id="focus">
+                            <div class="main_visual">
+                                <div class="flicking_con">
+                                    <div class="flicking_inner">
+                                        <a href="#"></a>
+                                        <a href="#"></a>
+                                        <a href="#"></a>
+                                        <a href="#"></a>
+                                    </div>
+                                </div>
+                                <div class="main_image">
+                                    <ul>
+                                        <li class="img_1"><span>
+                                            <img src="<%=CurrentAccountDescription.ProductImgAUrl %>" />
+                                        </span></li>
+                                        <li class="img_2"><span>
+                                            <img src="<%=CurrentAccountDescription.ProductImgBUrl %>" />
+                                        </span></li>
+                                        <li class="img_3"><span>
+                                            <img src="<%=CurrentAccountDescription.ProductImgCUrl %>" />
+                                        </span></li>
+                                        <li class="img_4"><span>
+                                            <img src="<%=CurrentAccountDescription.ProductImgDUrl %>" /></span></li>
+                                    </ul>
+                                    <a href="javascript:;" id="btn_prev"></a>
+                                    <a href="javascript:;" id="btn_next"></a>
                                 </div>
                             </div>
-                            <div class="main_image">
-                                <ul>
-                                    <li class="img_1"><span>
-                                        <img src="<%=CurrentAccountDescription.ProductImgAUrl %>" />
-                                    </span></li>
-                                    <li class="img_2"><span>
-                                        <img src="<%=CurrentAccountDescription.ProductImgBUrl %>" />
-                                    </span></li>
-                                    <li class="img_3"><span>
-                                        <img src="<%=CurrentAccountDescription.ProductImgCUrl %>" />
-                                    </span></li>
-                                    <li class="img_4"><span>
-                                        <img src="<%=CurrentAccountDescription.ProductImgDUrl %>" /></span></li>
-                                </ul>
-                                <a href="javascript:;" id="btn_prev"></a>
-                                <a href="javascript:;" id="btn_next"></a>
-                            </div>
-                        </div>
 
-                        <div class="clear"></div>
+                            <div class="clear"></div>
+                        </div>
+                        <!-- bannd end -->
                     </div>
-                    <!-- bannd end -->
                 </div>
             </div>
+            <div class="clear"></div>
         </div>
+        <asp:HiddenField runat="server" ID="descriptionID"/>
+    </form>
 
-        <div class="clear"></div>
-    </div>
     <!-- main end -->
 
     <div class="footer">

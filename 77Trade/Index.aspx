@@ -1,8 +1,4 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="_77Trade.Index" %>
-
-<%@ Register Src="~/UserControls/NavigateTop.ascx" TagPrefix="uc1" TagName="NavigateTop" %>
-
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -17,7 +13,17 @@
     <div class="header bg1 center">
         <div class="logo"><h1><a href="/" title="巨人网络">巨人网络</a></h1></div>
         <div class="clear"></div>
-        <uc1:NavigateTop runat="server" ID="NavigateTop" />
+          <div class="nav">
+            <ul>
+                <li><a href="/Index.aspx">专区首页</a></li>
+                <li><a href="#">求购查询</a></li>
+                <li><a href="#">出售查询</a></li>
+                <li><a href="/accountinfo.aspx">发布帐号</a></li>
+                <li><a href="#">点卡查询</a></li>
+                <li><a href="#">我的七七交易</a></li>
+                <li style="background:none;"><a href="#">交易指南</a></li>
+            </ul>
+</div>
         <div class="clear"></div>
     </div>
     <div class="main">
@@ -30,16 +36,6 @@
 	{%>
                         <li><a href="ServerSelect.aspx?gameID=<%=item.ID %>"><img alt="<%=item.GameName %>" src="global/images/game_<%=item.ID %>.jpg" /></a></li>    
 	<%} %>
-              <%--      <li><a href="#"><img src="global/images/game_3.jpg" /></a></li>
-                    <li><a href="#"><img src="global/images/game_4.jpg" /></a></li>
-                    <li><a href="#"><img src="global/images/game_5.jpg" /></a></li>
-                    <li><a href="#"><img src="global/images/game_6.jpg" /></a></li>
-                    <li><a href="#"><img src="global/images/game_7.jpg" /></a></li>
-                    <li><a href="#"><img src="global/images/game_8.jpg" /></a></li>
-                    <li><a href="#"><img src="global/images/game_9.jpg" /></a></li>
-                    <li><a href="#"><img src="global/images/game_10.jpg" /></a></li>
-                    <li><a href="#"><img src="global/images/game_11.jpg" /></a></li>
-                    <li><a href="#"><img src="global/images/game_12.jpg" /></a></li>--%>
                 </ul>
             </div>
             <div class="clear"></div>

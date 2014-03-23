@@ -7,7 +7,7 @@ using Wuqi.Webdiyer;
 
 namespace _77Trade
 {
-    public partial class AccountSaleList : System.Web.UI.Page
+    public partial class AccountSaleList : UserPageBase
     {
         private readonly AccountInfoDataAccess _accountInfoDataAccess = new AccountInfoDataAccess();
         private readonly AccountDescriptionDataAccess _accountDescriptionDataAccess = new AccountDescriptionDataAccess();

@@ -27,4 +27,16 @@
         /// </summary>
         ChuShou = 5,
     }
+
+    public enum UserStatus
+    {
+        /// <summary>
+        /// 正常帐户
+        /// </summary>
+        Normal = 0,
+        /// <summary>
+        /// 帐户冻结
+        /// </summary>
+        Frozen =1
+    }
 }

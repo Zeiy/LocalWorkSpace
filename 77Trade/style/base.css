@@ -32,8 +32,9 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
 ol, ul {
-	list-style: none;
+    list-style: none outside none;
 }
 blockquote, q {
 	quotes: none;

@@ -6,7 +6,7 @@ using System.Web.UI.WebControls;
 
 namespace _77Trade
 {
-    public partial class accountInfo : System.Web.UI.Page
+    public partial class accountInfo :UserPageBase
     {
         readonly GameInfoDataAccess _gameInfoAccess = new GameInfoDataAccess();
         readonly GameAreaDataAccess _gameAreaDataAccess = new GameAreaDataAccess();

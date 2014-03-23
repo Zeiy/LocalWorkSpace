@@ -543,7 +543,7 @@ footer p {
 	float: left;
 	height: 358px;
 	line-height: 358px;
-	margin: 50px 0 0 100px;
+	margin: 50px 0 30px 100px;
 	text-align: center;
 	width: 258px;
 }
@@ -875,4 +875,44 @@ footer p {
 .txt-inner {
 	width: 590px;
 	margin: 20px auto;
+}
+
+.head {
+    background:none repeat scroll 0 0 #FFFFFF;
+    height: 47px;
+     padding-bottom: 10px;
+    width: 100%;
+}
+.head1 {
+    height: 47px;
+    margin: 0 auto;
+    width: 950px;
+}
+
+.head1_right {
+    float: right;
+    height: 47px;
+}
+
+.head1_left {
+    float: left;
+    height: 47px;
+    width: 500px;
+}
+
+.head1_left ul li {
+    color: #0164B9;
+    display: inline;
+    float: left;
+    font-size: 14px;
+    line-height: 47px;
+    margin-right: 20px;
+}
+.head1_right ul li {
+    color: #0164B9;
+    display: inline;
+    float: left;
+    font-size: 14px;
+    line-height: 47px;
+    margin-left: 10px;
 }

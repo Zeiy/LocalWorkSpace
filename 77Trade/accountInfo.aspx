@@ -1,7 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="accountInfo.aspx.cs" Inherits="_77Trade.accountInfo"  EnableEventValidation="false"%>
 <%@ Register Src="~/UserControls/NavigateTop.ascx" TagPrefix="uc1" TagName="NavigateTop" %>
-
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>

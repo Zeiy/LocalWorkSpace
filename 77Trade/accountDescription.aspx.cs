@@ -4,7 +4,7 @@ using System;
 
 namespace _77Trade
 {
-    public partial class accountDescription : System.Web.UI.Page
+    public partial class accountDescription : UserPageBase
     {
         readonly AccountDescriptionDataAccess _accountDescriptionDataAccess = new AccountDescriptionDataAccess();
         private readonly AccountInfoDataAccess _accountInfoDataAccess = new AccountInfoDataAccess();
@@ -136,8 +136,5 @@ namespace _77Trade
             }
             return string.Empty;
         }
-
-
-
     }
 }

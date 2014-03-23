@@ -96,6 +96,7 @@
     <Content Include="css\uniform.default.css" />
     <Content Include="css\uploadify.css" />
     <Content Include="GameManager\Test.aspx" />
+    <Content Include="img\77_Logo.png" />
     <Content Include="img\ajax-loaders\ajax-loader-1.gif" />
     <Content Include="img\ajax-loaders\ajax-loader-2.gif" />
     <Content Include="img\ajax-loaders\ajax-loader-3.gif" />
