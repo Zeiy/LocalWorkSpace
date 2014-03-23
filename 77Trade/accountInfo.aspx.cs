@@ -185,7 +185,7 @@ namespace _77Trade
             //指定订单状态未完成
             accountModel.OrderStatus = OrderStatus.NotComplete;
             //指定用户ID为0 后续处理用户登陆问题
-            accountModel.UserID = 0;
+            accountModel.UserID = CurrentUser.ID;
             int res =  _accountInfoDataAccess.Add(accountModel);
             if (res > 0)
             {

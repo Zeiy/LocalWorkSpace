@@ -22,24 +22,6 @@ namespace _77Trade {
         protected global::System.Web.UI.HtmlControls.HtmlForm mainForm;
         
         /// <summary>
-        /// labelGameArea 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label labelGameArea;
-        
-        /// <summary>
-        /// lableGameServer 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lableGameServer;
-        
-        /// <summary>
         /// labelTimeSpan 控件。
         /// </summary>
         /// <remarks>
@@ -67,24 +49,6 @@ namespace _77Trade {
         protected global::System.Web.UI.WebControls.HiddenField hiddenOrderStatus;
         
         /// <summary>
-        /// hiddenAreaName 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hiddenAreaName;
-        
-        /// <summary>
-        /// hiddenGameName 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hiddenGameName;
-        
-        /// <summary>
         /// hiddenTimeSpan 控件。
         /// </summary>
         /// <remarks>
@@ -92,15 +56,6 @@ namespace _77Trade {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hiddenTimeSpan;
-        
-        /// <summary>
-        /// hiddenServerName 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hiddenServerName;
         
         /// <summary>
         /// hiddenOrderBy 控件。

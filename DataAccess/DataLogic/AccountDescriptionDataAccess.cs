@@ -79,9 +79,9 @@ namespace DataAccess.DataLogic
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into AccountDescription(");
-            strSql.Append("productImgAUrl,productImgBUrl,ProductImgCUrl,ProductImgDUrl,SubmitTime,OrderStatus,OrderNo,GameName,GameArea,ServerName,AccountInfoID,ProductProperty,ProductTitle,ProductDescription,Price");
+            strSql.Append("productImgAUrl,productImgBUrl,ProductImgCUrl,ProductImgDUrl,SubmitTime,OrderStatus,OrderNo,GameName,GameArea,ServerName,AccountInfoID,ProductProperty,ProductTitle,ProductDescription,Price,UserID");
             strSql.Append(") values (");
-            strSql.Append("@productImgAUrl,@productImgBUrl,@ProductImgCUrl,@ProductImgDUrl,@SubmitTime,@OrderStatus,@OrderNo,@GameName,@GameArea,@ServerName,@AccountInfoID,@ProductProperty,@ProductTitle,@ProductDescription,@Price");
+            strSql.Append("@productImgAUrl,@productImgBUrl,@ProductImgCUrl,@ProductImgDUrl,@SubmitTime,@OrderStatus,@OrderNo,@GameName,@GameArea,@ServerName,@AccountInfoID,@ProductProperty,@ProductTitle,@ProductDescription,@Price,@UserID");
             strSql.Append(") ");
             strSql.Append(";select @@IDENTITY");
             SqlParameter[] parameters = {
@@ -99,7 +99,8 @@ namespace DataAccess.DataLogic
                         new SqlParameter("@ProductProperty", SqlDbType.NVarChar,255) ,            
                         new SqlParameter("@ProductTitle", SqlDbType.NChar,255) ,            
                         new SqlParameter("@ProductDescription", SqlDbType.NChar,255) ,            
-                        new SqlParameter("@Price", SqlDbType.Decimal,9)             
+                        new SqlParameter("@Price", SqlDbType.Decimal,9)      ,
+                        new SqlParameter("@UserID",SqlDbType.Int), 
               
             };
 
@@ -118,6 +119,7 @@ namespace DataAccess.DataLogic
             parameters[12].Value = model.ProductTitle;
             parameters[13].Value = model.ProductDescription;
             parameters[14].Value = model.Price;
+            parameters[15].Value = model.UserID;
 
             object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
             if (obj == null)
@@ -184,6 +186,7 @@ namespace DataAccess.DataLogic
                         infoModel.GameArea = Convert.ToString(dataReader["GameArea"]);
                         infoModel.OrderNo = Convert.ToString(dataReader["OrderNo"]);
                         infoModel.OrderStatus = (OrderStatus) dataReader["OrderStatus"];
+                        infoModel.UserID =Convert.IsDBNull(dataReader["UserID"])?0:Convert.ToInt32(dataReader["UserID"]);
                         modelsList.Add(infoModel);
                     }
                 }
@@ -207,7 +210,7 @@ namespace DataAccess.DataLogic
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID, productImgAUrl, productImgBUrl, ProductImgCUrl, ProductImgDUrl, SubmitTime, OrderStatus, OrderNo, GameName, GameArea, ServerName, AccountInfoID, ProductProperty, ProductTitle, ProductDescription, Price  ");
+            strSql.Append("select ID, productImgAUrl, productImgBUrl, ProductImgCUrl, ProductImgDUrl, SubmitTime, OrderStatus, OrderNo, GameName, GameArea, ServerName, AccountInfoID, ProductProperty, ProductTitle, ProductDescription, Price,UserID  ");
             strSql.Append("  from AccountDescription ");
             strSql.Append(" where ID=@ID");
             SqlParameter[] parameters = {
@@ -252,6 +255,7 @@ namespace DataAccess.DataLogic
                 {
                     model.Price = decimal.Parse(ds.Tables[0].Rows[0]["Price"].ToString());
                 }
+                model.UserID = Convert.IsDBNull(ds.Tables[0].Rows[0]["UserID"]) ? 0 : Convert.ToInt32(ds.Tables[0].Rows[0]["UserID"]);
 
                 return model;
             }
@@ -270,7 +274,7 @@ namespace DataAccess.DataLogic
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID, productImgAUrl, productImgBUrl, ProductImgCUrl, ProductImgDUrl, SubmitTime, OrderStatus, OrderNo, GameName, GameArea, ServerName, AccountInfoID, ProductProperty, ProductTitle, ProductDescription, Price  ");
+            strSql.Append("select ID, productImgAUrl, productImgBUrl, ProductImgCUrl, ProductImgDUrl, SubmitTime, OrderStatus, OrderNo, GameName, GameArea, ServerName, AccountInfoID, ProductProperty, ProductTitle, ProductDescription, Price,UserID  ");
             strSql.Append("  from AccountDescription ");
             strSql.Append(" where AccountInfoID=@ID");
             SqlParameter[] parameters = {
@@ -308,6 +312,7 @@ namespace DataAccess.DataLogic
                 {
                     model.AccountInfoID = int.Parse(ds.Tables[0].Rows[0]["AccountInfoID"].ToString());
                 }
+                model.AccountInfoID = int.Parse(ds.Tables[0].Rows[0]["UserID"].ToString());
                 model.ProductProperty = ds.Tables[0].Rows[0]["ProductProperty"].ToString();
                 model.ProductTitle = ds.Tables[0].Rows[0]["ProductTitle"].ToString();
                 model.ProductDescription = ds.Tables[0].Rows[0]["ProductDescription"].ToString();

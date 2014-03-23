@@ -26,39 +26,10 @@ namespace _77Trade
             #region 页面初次加载
             if (!IsPostBack)
             {
-                int serverId;
-                string serverIdStr = Request.QueryString.Get("serverID");
-                //根据游戏服务器ID拿到所属区服渲染区服信息
-                //:todo 如果区服ID不存在则直接跳转，不允许独立访问此页面
-                if (!int.TryParse(serverIdStr, out serverId))
-                {
-                    labelGameArea.Text = "选择区服";
-                    lableGameServer.Text = "选择服务器";
-                    WhereStr = string.Empty;
-                    CurrentServers = new List<GameServer>();
-                }
-                else
-                {
-                    GameServer gameServer = _gameServerDataAccess.GetModel(serverId);
-                    //根据服务器ID拿到AreaID
-                    GameArea gamesArea = _gameAreaDataAccess.GetModel(gameServer.AreaID);
-                    //把游戏名写入hiddenfield 用于区服查询
-                    hiddenGameName.Value = gameServer.GameName.Trim();
-                    hiddenAreaName.Value = gamesArea.AreaName.Trim();
-                    hiddenServerName.Value = gameServer.ServerName.Trim();
-                    //根据AreaID拿到Area里的所有服务器名，渲染页面
-                    CurrentServers = _gameServerDataAccess.GetGameServerByGameIDandAreaId(gameServer.GameID, gameServer.AreaID);
-                    labelGameArea.Text = gamesArea.AreaName;
-                    lableGameServer.Text = gameServer.ServerName;
-                    //第一次进入页面区服信息为空，则不做筛选
-                    //:todo 区服，时间显示
-                    //处理时间信息
                     string timeSpanWhere = GetTimeSpanStr(hiddenTimeSpan.Value);
                     //订单状态 默认为审核期 值为3
                     hiddenOrderStatus.Value = "3";
-                    WhereStr = "where GameArea ='" + gamesArea.AreaName + "' and ServerName = '" +
-                               gameServer.ServerName.Trim() + "' and OrderStatus = 3";
-                }
+                    WhereStr = "where UserID = "+CurrentUser.ID+" and OrderStatus = 3";
                 //给时间添加一个默认值
                 hiddenTimeSpan.Value = "2012-11-06至2016-11-13";
                 int rowCount = 0, outPageCount = 0;
@@ -72,25 +43,14 @@ namespace _77Trade
             #region 普通页面请求
             else
             {
-                labelGameArea.Text = string.IsNullOrEmpty(hiddenAreaName.Value) ? "选择区服" : hiddenAreaName.Value.Trim();
-                lableGameServer.Text = string.IsNullOrEmpty(hiddenServerName.Value) ? "选择服务器" : hiddenServerName.Value.Trim();
-                CurrentServers = _gameServerDataAccess.GetGameServerByGameNameandAreaName(string.IsNullOrEmpty(hiddenGameName.Value.Trim())?"征途":hiddenGameName.Value.Trim(), hiddenAreaName.Value.Trim());
                 string timeSpanStr = GetTimeSpanStr(hiddenTimeSpan.Value);
                 labelTimeSpan.Text = hiddenTimeSpan.Value;
                 StringBuilder stringBuilder = new StringBuilder();
                 //总有时间这个条件
                 stringBuilder.Append("where SubmitTime "+timeSpanStr);
-                if (!string.IsNullOrEmpty(hiddenAreaName.Value))
-                {
-                   stringBuilder.Append(" and GameArea = '"+hiddenAreaName.Value.Trim()+"'");
-                }
-                if (!string.IsNullOrEmpty(hiddenServerName.Value))
-                {
-                    stringBuilder.Append(" and ServerName = '"+hiddenServerName.Value.Trim()+"'");
-                }
                 if (!string.IsNullOrEmpty(hiddenOrderStatus.Value))
                 {
-                    stringBuilder.Append(" and OrderStatus = " + hiddenOrderStatus.Value.Trim());
+                    stringBuilder.Append(" and OrderStatus = " + hiddenOrderStatus.Value.Trim()+" and UserID = "+CurrentUser.ID);
                 }
                 //在这里填充数据，是因为，用户选择服务器，时间等条件时是客户端触发的表单提交     想其它办法
                 //WhereStr = "where GameArea ='" + hiddenAreaName.Value.Trim() + "' and ServerName = '" + hiddenServerName.Value.Trim() + "' and SubmitTime "+timeSpanStr;
@@ -101,18 +61,9 @@ namespace _77Trade
                 }
                 WhereStr = stringBuilder.ToString();
                 AspNetPager1.GoToPage(currentPageNo);
-                //int rowCount, pageCount;
-                //_accountDescriptionsModels =
-                //_accountDescriptionDataAccess.GetPagedAccountDescriptionsModelsByProc(currentPageNo, 10, WhereStr, hiddenOrderBy.Value.Trim(), out rowCount, out pageCount);
-                //AspNetPager1.RecordCount = rowCount;
             }
             #endregion
         }
-        /// <summary>
-        /// 用于页面服务器筛选列表
-        /// </summary>
-        public List<GameServer> CurrentServers { get; set; }
-
         protected void AspNetPager1_PageChanged(object sender, EventArgs e)
         {
             int rowCount, pageCount;
@@ -132,7 +83,7 @@ namespace _77Trade
                 if (_accountDescriptionsModels == null)
                 {
                     _accountDescriptionsModels = _accountDescriptionDataAccess.GetPagedAccountDescriptionsModelsByProc(
-                        1, 10, "");
+                        1, 10,WhereStr);
                     return _accountDescriptionsModels;
                 }
                 return _accountDescriptionsModels;

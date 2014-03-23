@@ -104,6 +104,7 @@ namespace _77Trade
             string orderNoStr = GeneralOrderNo();
             description.OrderNo = orderNoStr;
             description.OrderStatus = OrderStatus.ShenHe;
+            description.UserID = CurrentUser.ID;
             int res = _accountDescriptionDataAccess.Add(description);
             if (res > 0)
             { 
@@ -112,6 +113,8 @@ namespace _77Trade
                 bool resUpdate = _accountInfoDataAccess.Update(accountinfoModel);
                 if (resUpdate)
                 {
+                    //跳转到订单列表页
+                    Response.Redirect("AccountSaleList.aspx");
                     ClientScript.RegisterClientScriptBlock(this.GetType(), "alert","<script>alert('订单提交成功，进入审核状态！')</script>");
                 }
             }

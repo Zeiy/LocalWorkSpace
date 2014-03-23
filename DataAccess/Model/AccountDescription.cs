@@ -24,6 +24,7 @@ namespace DataAccess.Model
             SubmitTime = DateTime.Now;
             ProductDescription = "";
             Price = 0;
+            UserID = 0;
         }
         public int ID { get; set; }
         /// <summary>
@@ -78,5 +79,7 @@ namespace DataAccess.Model
         /// 生成的订单号
         /// </summary>
         public string OrderNo { get; set; }
+
+        public int UserID { get; set; }
     }
 }

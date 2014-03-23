@@ -41,36 +41,6 @@
                 <ul>
                     <li class="cur tabitem">
                         <div class="cntrl-bar">
-                            <div class="pop-box">
-                                <!--[if lt IE 7 ]><span style="zoom: 1;"></span><![endif]-->
-                                <i></i>
-                                <asp:Label ID="labelGameArea" runat="server" CssClass="name" Text="大区"></asp:Label>
-                                <%--<span class="name">服务区</span>--%>
-                                <div class="inner-pop">
-                                    <a class="cur">网通区</a>
-                                    <a>电信区</a>
-                                    <a>双线区</a>
-                                </div>
-                            </div>
-                            <div class="pop-box">
-                                <!--[if lt IE 7 ]><span style="zoom: 1;"></span><![endif]-->
-                                <i></i>
-                                <asp:Label ID="lableGameServer" runat="server" CssClass="name" Text="游戏区"></asp:Label>
-                                <%--    <span class="name">游戏区</span>--%>
-                                <div class="inner-pop">
-                                    <% foreach (var serverItem in CurrentServers)
-                                       {
-                                           if (serverItem.ServerName.Trim() == lableGameServer.Text.Trim())
-                                           { %>
-                                    <a class="cur"><%= serverItem.ServerName %></a>
-                                    <% }
-                                           else
-                                           {%>
-                                    <a><%=serverItem.ServerName %></a>
-                                    <% }
-                                       } %>
-                                </div>
-                            </div>
                             <div class="pop-box time">
                                 <!--[if lt IE 7 ]><span style="zoom: 1;"></span><![endif]-->
                                 <i></i>
@@ -114,12 +84,9 @@
                     </li>
                 </ul>
             </div>
-            <asp:HiddenField runat="server" ID="hiddenOrderStatus" />
-            <asp:HiddenField runat="server" ID="hiddenAreaName" />
-            <asp:HiddenField runat="server" ID="hiddenGameName" />
-            <asp:HiddenField runat="server" ID="hiddenTimeSpan" />
-            <asp:HiddenField runat="server" ID="hiddenServerName" />
-            <asp:HiddenField runat="server" ID="hiddenOrderBy" />
+            <asp:HiddenField runat="server" ID="hiddenOrderStatus" ClientIDMode="Static" />
+            <asp:HiddenField runat="server" ID="hiddenTimeSpan"  ClientIDMode="Static"/>
+            <asp:HiddenField runat="server" ID="hiddenOrderBy" ClientIDMode="Static"/>
         </form>
     </div>
 </asp:Content>
