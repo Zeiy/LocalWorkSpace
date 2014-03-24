@@ -25,111 +25,147 @@
             <div class="box-content">
                 <form class="form-horizontal" runat="server">
                     <fieldset>
-                        <div class="control-group">
-                            <label class="control-label">游戏名称：</label>
-                            <div class="controls">
-                                <span class="input-xlarge uneditable-input"><%=CurrentAccountInfoModel.GameName %></span>
-                            </div>
-                        </div>
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="control-group">
+                                        <label class="control-label">游戏名称：</label>
+                                        <div class="controls">
+                                            <span class="input-xlarge uneditable-input"><%=CurrentAccountInfoModel.GameName %></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="control-group">
+                                        <label class="control-label">游戏区服：</label>
+                                        <div class="controls">
+                                            <span class="input-xlarge uneditable-input"><%=CurrentAccountInfoModel.GameArea %></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="control-group">
+                                        <label class="control-label">服务器名：</label>
+                                        <div class="controls">
+                                            <span class="input-xlarge uneditable-input"><%=CurrentAccountInfoModel.ServerName %></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="control-group">
+                                        <label class="control-label">联系手机：</label>
+                                        <div class="controls">
+                                            <span class="input-xlarge uneditable-input"><%=CurrentAccountInfoModel.QQMobile %></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="control-group">
+                                        <label class="control-label">Email：</label>
+                                        <div class="controls">
+                                            <span class="input-xlarge uneditable-input"><%=CurrentAccountInfoModel.Email %></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="control-group">
+                                        <label class="control-label">身份证号：</label>
+                                        <div class="controls">
+                                            <span class="input-xlarge uneditable-input"><%=CurrentAccountInfoModel.IdCardNo %></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="control-group">
+                                        <label class="control-label">游戏帐号：</label>
+                                        <div class="controls">
+                                            <span class="input-xlarge uneditable-input"><%=CurrentAccountInfoModel.GameAccount %></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="control-group">
+                                        <label class="control-label">游戏密码：</label>
+                                        <div class="controls">
+                                            <span class="input-xlarge uneditable-input"><%=CurrentAccountInfoModel.GamePassword %></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="control-group">
+                                        <label class="control-label">密保卡序列号：</label>
+                                        <div class="controls">
+                                            <span class="input-xlarge uneditable-input"><%=CurrentAccountInfoModel.SecretCardNo %></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="control-group">
+                                        <label class="control-label">身份证号：</label>
+                                        <div class="controls">
+                                            <span class="input-xlarge uneditable-input"><%=CurrentAccountInfoModel.IdCardNo %></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+
+                                    <div class="control-group">
+                                        <label class="control-label">密保卡图片：</label>
+                                        <div class="controls">
+                                            <% if (CurrentAccountInfoModel.SecretCardBind)
+                                               { %>
+                                            <img src="<%= CurrentAccountInfoModel.SecretCardImgUrl %>" title="密保卡" width="200px" height="200px" alt="密保卡" />
+                                            <% }
+                                               else
+                                               {%>
+                                            <img src="#" title="密保卡" width="200px" height="200px" alt="用户未上传" />
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="control-group">
+                                        <label class="control-label">身份证图片：</label>
+                                        <div class="controls">
+                                            <% if (CurrentAccountInfoModel.IdentityAuth)
+                                               { %>
+                                            <img src="<%= CurrentAccountInfoModel.IdentityCardAUrl %>" title="身份证A" width="200px" height="200px" alt="身份证A" />
+                                            <img src="<%= CurrentAccountInfoModel.IdentityCardBUrl %>" title="身份证B" width="200px" height="200px" />
+                                            <% }
+                                               else
+                                               {%>
+                                            <img src="#" title="mibaoka" width="200px" height="200px" alt="用户未上传" />
+                                            <img src="#" title="mibaoka" width="200px" height="200px" alt="用户未上传" />
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
 
                         <div class="control-group">
-                            <label class="control-label">游戏区服：</label>
+                            <label for="DplOrderStatus" class="control-label">订单状态</label>
                             <div class="controls">
-                                <span class="input-xlarge uneditable-input"><%=CurrentAccountInfoModel.GameArea %></span>
+                                <asp:DropDownList runat="server" ID="DplOrderStatus" />
                             </div>
                         </div>
-                        
-                          <div class="control-group">
-                            <label class="control-label">服务器名：</label>
-                            <div class="controls">
-                                <span class="input-xlarge uneditable-input"><%=CurrentAccountInfoModel.ServerName %></span>
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label">游戏帐号：</label>
-                            <div class="controls">
-                                <span class="input-xlarge uneditable-input"><%=CurrentAccountInfoModel.GameAccount %></span>
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label">游戏密码：</label>
-                            <div class="controls">
-                                <span class="input-xlarge uneditable-input"><%=CurrentAccountInfoModel.GamePassword %></span>
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label">联系手机：</label>
-                            <div class="controls">
-                                <span class="input-xlarge uneditable-input"><%=CurrentAccountInfoModel.QQMobile %></span>
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label">Email：</label>
-                            <div class="controls">
-                                <span class="input-xlarge uneditable-input"><%=CurrentAccountInfoModel.Email %></span>
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label">身份证号：</label>
-                            <div class="controls">
-                                <span class="input-xlarge uneditable-input"><%=CurrentAccountInfoModel.IdCardNo %></span>
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label">密保卡序列号：</label>
-                            <div class="controls">
-                                <span class="input-xlarge uneditable-input"><%=CurrentAccountInfoModel.SecretCardNo %></span>
-                            </div>
-                        </div>
-                        
-                          <div class="control-group">
-                            <label class="control-label">密保卡图片：</label>
-                            <div class="controls">
-                                <% if (CurrentAccountInfoModel.SecretCardBind)
-                                   { %>
-                                        <img src="<%= CurrentAccountInfoModel.SecretCardImgUrl %>" title="密保卡" width="200px" height="200px" alt="密保卡"/>
-                                 <% }
-                                   else
-                                   {%>
-                                      <img src="#" title="密保卡" width="200px" height="200px" alt="用户未上传"/> 
-                                  <% } %>
-                            </div>
-                        </div>
-                        
-                          <div class="control-group">
-                            <label class="control-label">身份证图片：</label>
-                            <div class="controls">
-                                <% if (CurrentAccountInfoModel.IdentityAuth)
-                                   { %>
-                                        <img src="<%= CurrentAccountInfoModel.IdentityCardAUrl %>" title="身份证A" width="200px" height="200px" alt="身份证A"/>   <img src="<%= CurrentAccountInfoModel.IdentityCardBUrl %>" title="身份证B" width="200px" height="200px"/>
-                                   <% }
-                                   else
-                                   {%>
-                                        <img src="#" title="mibaoka" width="200px" height="200px" alt="用户未上传"/>   <img src="#" title="mibaoka" width="200px" height="200px" alt="用户未上传"/>
-                                  <% } %>
-                                  
-                            </div>
-                        </div>
-                        
-                        <div class="control-group">
-								<label for="DplOrderStatus" class="control-label">订单状态</label>
-								<div class="controls">
-								    <asp:DropDownList runat="server" ID="DplOrderStatus" />
-								</div>
-							  </div>
 
                         <div class="form-actions">
-                            <asp:Button runat="server" Text="修改订单状态" CssClass="btn btn-primary" OnClick="Unnamed1_Click"/>
-                            <asp:Button runat="server" Text="返回" CssClass="btn" OnClick="btnSave_Click" ID="btnSave"/>
+                            <asp:Button runat="server" Text="修改订单状态" CssClass="btn btn-primary" OnClick="Unnamed1_Click" />
+                            <asp:Button runat="server" Text="返回" CssClass="btn" OnClick="btnSave_Click" ID="btnSave" />
                         </div>
                     </fieldset>
-                    <asp:HiddenField runat="server" ID="hiddenAccountInfoID"/>
+                    <asp:HiddenField runat="server" ID="hiddenAccountInfoID" />
                 </form>
             </div>
         </div>
