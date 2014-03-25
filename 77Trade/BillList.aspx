@@ -58,7 +58,7 @@
                         <div class="pop-box">
                             <!--[if lt IE 7 ]><span style="zoom: 1;"></span><![endif]-->
                             <i></i>
-                            <asp:Label runat="server" ID="labelGameArea" CssClass="name">服务区</asp:Label>
+                            <asp:Label runat="server" ID="labelGameArea" ClientIDMode="Static" CssClass="name">服务区</asp:Label>
                             <div class="inner-pop">
                                 <a class="cur">网通区</a>
                                 <a>电信区</a>
@@ -68,7 +68,7 @@
                         <div class="pop-box">
                             <!--[if lt IE 7 ]><span style="zoom: 1;"></span><![endif]-->
                             <i></i>
-                            <asp:Label runat="server" ID="lableGameServer" CssClass="name">游戏区</asp:Label>
+                            <asp:Label runat="server" ID="lableGameServer" ClientIDMode="Static" CssClass="name">游戏区</asp:Label>
                             <div class="inner-pop">
                                 <% foreach (var serverItem in CurrentServers)
                                    {
@@ -76,7 +76,7 @@
                                        { %>
                                 <a class="cur"><%= serverItem.ServerName %></a>
                                 <% }
-                                                           else
+                                      else
                                                            {%>
                                 <a><%=serverItem.ServerName %></a>
                                 <% }
@@ -125,12 +125,12 @@
                     </div>
                 </div>
             </div>
-            <asp:HiddenField runat="server" ID="hiddenGameName" />
-            <asp:HiddenField runat="server" ID="hiddenAreaName" />
-            <asp:HiddenField runat="server" ID="hiddenServerName" />
-            <asp:HiddenField runat="server" ID="hiddenTimeSpan" />
-            <asp:HiddenField runat="server" ID="hiddenOrderStatus" />
-            <asp:HiddenField runat="server" ID="hiddenOrderBy" />
+            <asp:HiddenField runat="server" ID="hiddenGameName" ClientIDMode="Static"/>
+            <asp:HiddenField runat="server" ID="hiddenAreaName" ClientIDMode="Static" />
+            <asp:HiddenField runat="server" ID="hiddenServerName" ClientIDMode="Static" />
+            <asp:HiddenField runat="server" ID="hiddenTimeSpan" ClientIDMode="Static"/>
+            <asp:HiddenField runat="server" ID="hiddenOrderStatus" ClientIDMode="Static"/>
+            <asp:HiddenField runat="server" ID="hiddenOrderBy" ClientIDMode="Static"/>
         </form>
     </div>
 </asp:Content>

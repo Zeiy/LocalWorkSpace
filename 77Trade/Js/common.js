@@ -48,14 +48,47 @@ $(document).ready(function() {
         if ($(e.target).closest('.inner-pop').length) return true;
         $(this).toggleClass('extend').siblings('.extend').removeClass('extend');
     });
-    $(".cntrl-bar .inner-pop a").click(function() {
+    //live 在新版本的Jq是失效问题
+    $(".cntrl-bar .inner-pop").delegate("a","click", function () {
         $(this).addClass('cur').siblings('.cur').removeClass('cur');
         $(this).parents(".pop-box").removeClass('extend').find('.name').html($(this).html());
         //把信息放入hiddenfiled 用来做筛选
         $("#hiddenAreaName").val($("#labelGameArea").text());
         $("#hiddenServerName").val($("#lableGameServer").text());
         //手动触发表单
-        $("#mainForm").submit();
+        //如果是用户选择大区，则不触发表单，用Ajax渲染服务器列表，如果是选择服务器才触发表单提交
+        if ($(this).parent().prev().attr("ID") == "lableGameServer") {
+            $("#mainForm").submit();
+        } else {
+            //发送请求更新服务器列表
+            var gameName = $("#hiddenGameName").val();
+            var areaName = $(this).text();
+            var serverContain = $("#lableGameServer").next();
+            $.ajax({
+                url: "/services/GetGameServerList.ashx",
+                data: { gameId: gameName, areaID: areaName,op:"name" },
+                type: "post",
+                dataType: "json",
+                beforeSend: function() {
+                    $("#lableGameServer").text("加载中.......");
+                },
+                success: function (data) {
+                    if (data.status == 1) {
+                        //清空原有数据
+                        serverContain.empty();
+                        $(data.ServerList).each(function (i, e) {
+                            var serverEl = "<a>" + e.ServerName + "</a>";
+                            $(serverEl).appendTo(serverContain);     
+                        }   
+                        );    
+                        $("#lableGameServer").text("请选择服务器");
+                    }
+                },
+                error: function() {
+                    
+                }
+            });
+        }     
     });
 
 	// 时间弹出层

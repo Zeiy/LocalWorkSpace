@@ -18,18 +18,27 @@ namespace _77Trade.services
             context.Response.ContentType = "application/json";
             string gameId = context.Request.Form.Get("gameId");
             string gameArea = context.Request.Form.Get("areaID");
-            int intGameId, intGameArea;
-            if (!int.TryParse(gameId, out intGameId) || !int.TryParse(gameArea, out intGameArea))
+            string getType = context.Request.Form.Get("op");
+            List<GameServer> serverList=new List<GameServer>();
+            if (string.IsNullOrEmpty(getType))
             {
-                object result = new
+                int intGameId, intGameArea;
+                if (!int.TryParse(gameId, out intGameId) || !int.TryParse(gameArea, out intGameArea))
                 {
-                    status = 0,
-                    errorMsg ="用户参数有误！"
-                };
-                context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(result));
-                return;
+                    object result = new
+                    {
+                        status = 0,
+                        errorMsg = "用户参数有误！"
+                    };
+                    context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(result));
+                    return;
+                }
+                serverList = _gameServerDataAccess.GetGameServerByGameIDandAreaId(intGameId, intGameArea);
             }
-            List<GameServer> serverList = _gameServerDataAccess.GetGameServerByGameIDandAreaId(intGameId, intGameArea);
+            if (getType == "name")
+            {
+                serverList = _gameServerDataAccess.GetGameServerByGameNameandAreaName(gameId, gameArea);
+            }
             if (serverList != null && serverList.Count >= 0)
             {
                 object result = new

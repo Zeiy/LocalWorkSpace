@@ -8,7 +8,8 @@
     <title>七七交易网-征途2专区</title>
     <link rel="stylesheet" href="/style/base.css" media="all" />
     <link rel="stylesheet" href="/style/style.css" media="all" />
-    <script src="/js/jquery-2.0.3.min.js"></script>
+<%--    <script src="/js/jquery-2.0.3.min.js"></script>--%>
+        <script src="Js/jquery-1.11.0.min.js"></script>
     <script src="/Js/common.js"></script>
     <script src="/js/plugin/date_input/jquery.date_input.js"></script>
     <link rel="stylesheet" href="/js/plugin/date_input/date_input.css" media="all" />

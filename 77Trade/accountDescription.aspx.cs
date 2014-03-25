@@ -105,6 +105,7 @@ namespace _77Trade
             description.OrderNo = orderNoStr;
             description.OrderStatus = OrderStatus.ShenHe;
             description.UserID = CurrentUser.ID;
+            description.EditDate = DateTime.Now;
             int res = _accountDescriptionDataAccess.Add(description);
             if (res > 0)
             { 
