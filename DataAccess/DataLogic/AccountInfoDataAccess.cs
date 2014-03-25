@@ -273,7 +273,7 @@ namespace DataAccess.DataLogic
             }
         }
 
-        public List<AccountInfoModel> GetPagedAccountInfoModelsByProc(int pageIndex, int pageSize, string whereStr,
+        public List<AccountInfoModel> GetPagedAccountInfoModelsByProc(int pageIndex, int pageSize, string whereStr,string orderBy,
             out int rowCount,
             out int pageCount)
         {
@@ -287,7 +287,7 @@ namespace DataAccess.DataLogic
                 new SqlParameter("@PageIndex", pageIndex),
                 new SqlParameter("@PageSize", pageSize),
                 new SqlParameter("@Where", whereStr),
-                new SqlParameter("@OrderBy", "order by ID"),
+                new SqlParameter("@OrderBy",string.IsNullOrEmpty(orderBy)?"order by ID":orderBy),
                 new SqlParameter("@RowCount",SqlDbType.Int,25),
                 new SqlParameter("@PageCount", SqlDbType.Int,25),
             };
@@ -332,7 +332,7 @@ namespace DataAccess.DataLogic
         {
             int rowCount = 0;
             int pageCount = 0;
-            return GetPagedAccountInfoModelsByProc(pageIndex, pageSize, whereStr, out rowCount, out pageCount);
+            return GetPagedAccountInfoModelsByProc(pageIndex, pageSize, whereStr,"order by SubmitTime", out rowCount, out pageCount);
 
         }
         public bool Exists(int ID)

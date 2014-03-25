@@ -15,6 +15,7 @@ namespace NetBar.OrderManager
         readonly AccountInfoDataAccess _accountInfoDataAccess = new AccountInfoDataAccess();
         private readonly AccountDescriptionDataAccess _accountDescriptionDataAccess = new AccountDescriptionDataAccess();
         private AccountInfoModel _accountInfoModel;
+        private AccountDescription _accountDescription;
         protected void Page_Load(object sender, EventArgs e)
         {
             //通用页面传过来的ID值查到订单信息展示订单，
@@ -34,7 +35,7 @@ namespace NetBar.OrderManager
                 AccountInfoModel infoModel = _accountInfoDataAccess.GetModel(intOrderId);
                 _accountInfoModel = infoModel;
                 //添加选项
-                string[] statusName = Enum.GetNames(typeof(OrderStatus));
+             /*   string[] statusName = Enum.GetNames(typeof(OrderStatus));
                 for (int i = 0; i < statusName.Count(); i++)
                 {
                     ListItem listItem = new ListItem();
@@ -44,7 +45,7 @@ namespace NetBar.OrderManager
                     DplOrderStatus.Items.Add(listItem);
                 }
                 DplOrderStatus.Enabled = false;
-                DplOrderStatus.SelectedIndex = (int) infoModel.OrderStatus;
+                DplOrderStatus.SelectedIndex = (int) infoModel.OrderStatus;*/
                 if (infoModel == null || infoModel.ID <= 0)
                 {
                     ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "<script>alert('订单数据有误，请返回列表页面重试！');window.location.href='/Index.aspx'</script>");
@@ -52,15 +53,16 @@ namespace NetBar.OrderManager
                 }
                 hiddenAccountInfoID.Value = orderId;
             }
+            textAreaProductDes.Text = CurrentAccountDescription.ProductDescription;
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            if (btnSave.Text == "返回")
-            {
-                Response.Redirect("OrderList.aspx");
-                return;
-            }
+           // if (btnSave.Text == "返回")
+          //  {
+          //      Response.Redirect("OrderList.aspx");
+          //      return;
+         //   }
             string infoID = hiddenAccountInfoID.Value;
             //检察ID是否存在    检察Description 是否存在，是否判断前置状态
             int infoIDInt;
@@ -86,32 +88,56 @@ namespace NetBar.OrderManager
             }
             AccountDescription description = _accountDescriptionDataAccess.GetModelByAccountInfoId(accountInfoModel.ID);
             //更改订单状态
-            string newStatus = DplOrderStatus.SelectedValue;
+           // string newStatus = DplOrderStatus.SelectedValue;
             OrderStatus newOrderStatus;
-            if (!Enum.TryParse(newStatus, out newOrderStatus))
+           /* if (!Enum.TryParse(newStatus, out newOrderStatus))
             {
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "<script>alert('订单状态有误，修改订单失败！')</script>");
                 return;
-            }
+            }*/
             List<string> sqList = new List<string>();
-            sqList.Add("update AccountDescription set OrderStatus = " + newStatus + " where ID=" + description.ID);
-            sqList.Add("update AccountInfo set OrderStatus = " + newStatus + " where ID=" + accountInfoModel.ID);
+           // sqList.Add("update AccountDescription set OrderStatus = " + newStatus + " where ID=" + description.ID);
+           // sqList.Add("update AccountInfo set OrderStatus = " + newStatus + " where ID=" + accountInfoModel.ID);
             int res = DbHelperSQL.ExecuteSqlTran(sqList);
             if (res == 2)
             {
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "<script>alert('修改成功！');</script>");
-                DplOrderStatus.Enabled = false;
-                btnSave.Text = "返回";
+               // DplOrderStatus.Enabled = false;
+                //btnSave.Text = "返回";
             }
 
         }
-
-        protected void Unnamed1_Click(object sender, EventArgs e)
+        public string GetOrderStatusStr(OrderStatus orderStatus)
         {
-                DplOrderStatus.Enabled = true;
-                btnSave.Text = "保存";
+            switch (orderStatus)
+            {
+                case OrderStatus.ChuShou:
+                    {
+                        return "出售中";
+                        break;
+                    }
+                case OrderStatus.ShenHe:
+                    {
+                        return "审核中";
+                        break;
+                    }
+                case OrderStatus.GongShi:
+                    {
+                        return "公示";
+                        break;
+                    }
+                case OrderStatus.NotComplete:
+                    {
+                        return "订单未完成";
+                        break;
+                    }
+                default:
+                    {
+                        return "未知状态";
+                        break;
+                    }
+            }
         }
-
         public AccountInfoModel CurrentAccountInfoModel {
             get
             {
@@ -119,7 +145,16 @@ namespace NetBar.OrderManager
                 _accountInfoModel = _accountInfoDataAccess.GetModel(Convert.ToInt32(hiddenAccountInfoID.Value));
                 return _accountInfoModel;
             }
-            set { }
+        }
+
+        public AccountDescription CurrentAccountDescription
+        {
+            get
+            {
+                if (_accountDescription != null) return _accountDescription;
+                _accountDescription = _accountDescriptionDataAccess.GetAccountDescriptionByAccountInfoID(CurrentAccountInfoModel.ID);
+                return _accountDescription;
+            }
         }
     }
 }

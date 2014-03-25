@@ -26,6 +26,10 @@
         /// 订单公示期过后进入出售期
         /// </summary>
         ChuShou = 5,
+        /// <summary>
+        /// 订单审核失败
+        /// </summary>
+        ShenHeFail =6,
     }
 
     public enum UserStatus

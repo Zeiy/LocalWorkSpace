@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace NetBar
 {
-    public partial class Register : System.Web.UI.Page
+    public partial class Register : PageBase
     {
         UserDataAccess userDataAccess = new UserDataAccess();
         protected void Page_Load(object sender, EventArgs e)

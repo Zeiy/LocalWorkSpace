@@ -79,9 +79,9 @@ namespace DataAccess.DataLogic
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into AccountDescription(");
-            strSql.Append("productImgAUrl,productImgBUrl,ProductImgCUrl,ProductImgDUrl,SubmitTime,OrderStatus,OrderNo,GameName,GameArea,ServerName,AccountInfoID,ProductProperty,ProductTitle,ProductDescription,Price,UserID");
+            strSql.Append("productImgAUrl,productImgBUrl,ProductImgCUrl,ProductImgDUrl,SubmitTime,OrderStatus,OrderNo,GameName,GameArea,ServerName,AccountInfoID,ProductProperty,ProductTitle,ProductDescription,Price,UserID,Remark,EditDate");
             strSql.Append(") values (");
-            strSql.Append("@productImgAUrl,@productImgBUrl,@ProductImgCUrl,@ProductImgDUrl,@SubmitTime,@OrderStatus,@OrderNo,@GameName,@GameArea,@ServerName,@AccountInfoID,@ProductProperty,@ProductTitle,@ProductDescription,@Price,@UserID");
+            strSql.Append("@productImgAUrl,@productImgBUrl,@ProductImgCUrl,@ProductImgDUrl,@SubmitTime,@OrderStatus,@OrderNo,@GameName,@GameArea,@ServerName,@AccountInfoID,@ProductProperty,@ProductTitle,@ProductDescription,@Price,@UserID,@Remark,@EditDate");
             strSql.Append(") ");
             strSql.Append(";select @@IDENTITY");
             SqlParameter[] parameters = {
@@ -100,7 +100,9 @@ namespace DataAccess.DataLogic
                         new SqlParameter("@ProductTitle", SqlDbType.NChar,255) ,            
                         new SqlParameter("@ProductDescription", SqlDbType.NChar,255) ,            
                         new SqlParameter("@Price", SqlDbType.Decimal,9)      ,
-                        new SqlParameter("@UserID",SqlDbType.Int), 
+                        new SqlParameter("@UserID",SqlDbType.Int),
+                        new SqlParameter("@Remark",SqlDbType.VarChar,500),
+                        new SqlParameter("@EditDate",SqlDbType.DateTime), 
               
             };
 
@@ -120,6 +122,8 @@ namespace DataAccess.DataLogic
             parameters[13].Value = model.ProductDescription;
             parameters[14].Value = model.Price;
             parameters[15].Value = model.UserID;
+            parameters[16].Value = model.Remark;
+            parameters[17].Value = model.EditDate;
 
             object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
             if (obj == null)
@@ -134,6 +138,90 @@ namespace DataAccess.DataLogic
             }
 
         }
+        /// <summary>
+        /// 更新一条数据
+        /// </summary>
+        public bool Update(AccountDescription model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update AccountDescription set ");
+
+            strSql.Append(" productImgAUrl = @productImgAUrl , ");
+            strSql.Append(" productImgBUrl = @productImgBUrl , ");
+            strSql.Append(" ProductImgCUrl = @ProductImgCUrl , ");
+            strSql.Append(" ProductImgDUrl = @ProductImgDUrl , ");
+            strSql.Append(" SubmitTime = @SubmitTime , ");
+            strSql.Append(" OrderStatus = @OrderStatus , ");
+            strSql.Append(" OrderNo = @OrderNo , ");
+            strSql.Append(" UserID = @UserID , ");
+            strSql.Append(" Remark = @Remark , ");
+            strSql.Append(" EditDate = @EditDate , ");
+            strSql.Append(" GameName = @GameName , ");
+            strSql.Append(" EditUser = @EditUser , ");
+            strSql.Append(" GameArea = @GameArea , ");
+            strSql.Append(" ServerName = @ServerName , ");
+            strSql.Append(" AccountInfoID = @AccountInfoID , ");
+            strSql.Append(" ProductProperty = @ProductProperty , ");
+            strSql.Append(" ProductTitle = @ProductTitle , ");
+            strSql.Append(" ProductDescription = @ProductDescription , ");
+            strSql.Append(" Price = @Price  ");
+            strSql.Append(" where ID=@ID ");
+
+            SqlParameter[] parameters = {
+			            new SqlParameter("@ID", SqlDbType.Int,4) ,            
+                        new SqlParameter("@productImgAUrl", SqlDbType.VarChar,255) ,            
+                        new SqlParameter("@productImgBUrl", SqlDbType.VarChar,255) ,            
+                        new SqlParameter("@ProductImgCUrl", SqlDbType.VarChar,255) ,            
+                        new SqlParameter("@ProductImgDUrl", SqlDbType.VarChar,255) ,            
+                        new SqlParameter("@SubmitTime", SqlDbType.DateTime) ,            
+                        new SqlParameter("@OrderStatus", SqlDbType.Int,4) ,            
+                        new SqlParameter("@OrderNo", SqlDbType.VarChar,255) ,            
+                        new SqlParameter("@UserID", SqlDbType.Int,4) ,            
+                        new SqlParameter("@Remark", SqlDbType.VarChar,500) ,            
+                        new SqlParameter("@EditDate", SqlDbType.DateTime) ,            
+                        new SqlParameter("@GameName", SqlDbType.VarChar,50) ,            
+                        new SqlParameter("@EditUser", SqlDbType.VarChar,50) ,            
+                        new SqlParameter("@GameArea", SqlDbType.VarChar,50) ,            
+                        new SqlParameter("@ServerName", SqlDbType.VarChar,50) ,            
+                        new SqlParameter("@AccountInfoID", SqlDbType.Int,4) ,            
+                        new SqlParameter("@ProductProperty", SqlDbType.VarChar,255) ,            
+                        new SqlParameter("@ProductTitle", SqlDbType.NChar,255) ,            
+                        new SqlParameter("@ProductDescription", SqlDbType.NChar,255) ,            
+                        new SqlParameter("@Price", SqlDbType.Decimal,9)             
+              
+            };
+
+            parameters[0].Value = model.ID;
+            parameters[1].Value = model.ProductImgAUrl;
+            parameters[2].Value = model.ProductImgBUrl;
+            parameters[3].Value = model.ProductImgCUrl;
+            parameters[4].Value = model.ProductImgDUrl;
+            parameters[5].Value = model.SubmitTime;
+            parameters[6].Value = model.OrderStatus;
+            parameters[7].Value = model.OrderNo;
+            parameters[8].Value = model.UserID;
+            parameters[9].Value = model.Remark;
+            parameters[10].Value = model.EditDate;
+            parameters[11].Value = model.GameName;
+            parameters[12].Value = model.EditUser;
+            parameters[13].Value = model.GameArea;
+            parameters[14].Value = model.ServerName;
+            parameters[15].Value = model.AccountInfoID;
+            parameters[16].Value = model.ProductProperty;
+            parameters[17].Value = model.ProductTitle;
+            parameters[18].Value = model.ProductDescription;
+            parameters[19].Value = model.Price;
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public List<AccountDescription> GetPagedAccountDescriptionsModelsByProc(int pageIndex, int pageSize, string whereStr,string orderStr, out int rowCount,
           out int pageCount)
         {
@@ -203,6 +291,65 @@ namespace DataAccess.DataLogic
             int pageCount = 0;
             return GetPagedAccountDescriptionsModelsByProc(pageIndex, pageSize, whereStr,null, out rowCount, out pageCount);
         }
+
+        public AccountDescription GetAccountDescriptionByAccountInfoID(int accountInfoID)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select ID, productImgAUrl, productImgBUrl, ProductImgCUrl, ProductImgDUrl, SubmitTime, OrderStatus, OrderNo, GameName, GameArea, ServerName, AccountInfoID, ProductProperty, ProductTitle, ProductDescription, Price,UserID  ");
+            strSql.Append("  from AccountDescription ");
+            strSql.Append(" where AccountInfoID=@accountInfoID");
+            SqlParameter[] parameters = {
+					new SqlParameter("@AccountInfoID", SqlDbType.Int,4)
+			};
+            parameters[0].Value = accountInfoID;
+
+
+            AccountDescription model = new AccountDescription();
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0]["ID"].ToString() != "")
+                {
+                    model.ID = int.Parse(ds.Tables[0].Rows[0]["ID"].ToString());
+                }
+                model.ProductImgAUrl = ds.Tables[0].Rows[0]["productImgAUrl"].ToString();
+                model.ProductImgBUrl = ds.Tables[0].Rows[0]["productImgBUrl"].ToString();
+                model.ProductImgCUrl = ds.Tables[0].Rows[0]["ProductImgCUrl"].ToString();
+                model.ProductImgDUrl = ds.Tables[0].Rows[0]["ProductImgDUrl"].ToString();
+                if (ds.Tables[0].Rows[0]["SubmitTime"].ToString() != "")
+                {
+                    model.SubmitTime = DateTime.Parse(ds.Tables[0].Rows[0]["SubmitTime"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["OrderStatus"].ToString() != "")
+                {
+                    model.OrderStatus = (OrderStatus)Enum.Parse(typeof(OrderStatus), ds.Tables[0].Rows[0]["OrderStatus"].ToString(), true);
+                }
+                model.OrderNo = ds.Tables[0].Rows[0]["OrderNo"].ToString();
+                model.GameName = ds.Tables[0].Rows[0]["GameName"].ToString();
+                model.GameArea = ds.Tables[0].Rows[0]["GameArea"].ToString();
+                model.ServerName = ds.Tables[0].Rows[0]["ServerName"].ToString();
+                if (ds.Tables[0].Rows[0]["AccountInfoID"].ToString() != "")
+                {
+                    model.AccountInfoID = int.Parse(ds.Tables[0].Rows[0]["AccountInfoID"].ToString());
+                }
+                model.ProductProperty = ds.Tables[0].Rows[0]["ProductProperty"].ToString();
+                model.ProductTitle = ds.Tables[0].Rows[0]["ProductTitle"].ToString();
+                model.ProductDescription = ds.Tables[0].Rows[0]["ProductDescription"].ToString();
+                if (ds.Tables[0].Rows[0]["Price"].ToString() != "")
+                {
+                    model.Price = decimal.Parse(ds.Tables[0].Rows[0]["Price"].ToString());
+                }
+                model.UserID = Convert.IsDBNull(ds.Tables[0].Rows[0]["UserID"]) ? 0 : Convert.ToInt32(ds.Tables[0].Rows[0]["UserID"]);
+
+                return model;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
@@ -210,7 +357,7 @@ namespace DataAccess.DataLogic
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID, productImgAUrl, productImgBUrl, ProductImgCUrl, ProductImgDUrl, SubmitTime, OrderStatus, OrderNo, GameName, GameArea, ServerName, AccountInfoID, ProductProperty, ProductTitle, ProductDescription, Price,UserID  ");
+            strSql.Append("select ID, productImgAUrl, productImgBUrl, ProductImgCUrl, ProductImgDUrl, SubmitTime, OrderStatus, OrderNo, GameName, GameArea, ServerName, AccountInfoID, ProductProperty, ProductTitle, ProductDescription, Price,UserID,Remark,EditDate,EditUser ");
             strSql.Append("  from AccountDescription ");
             strSql.Append(" where ID=@ID");
             SqlParameter[] parameters = {
@@ -256,7 +403,15 @@ namespace DataAccess.DataLogic
                     model.Price = decimal.Parse(ds.Tables[0].Rows[0]["Price"].ToString());
                 }
                 model.UserID = Convert.IsDBNull(ds.Tables[0].Rows[0]["UserID"]) ? 0 : Convert.ToInt32(ds.Tables[0].Rows[0]["UserID"]);
-
+                model.EditDate = Convert.IsDBNull(ds.Tables[0].Rows[0]["EditDate"])
+                    ? DateTime.MinValue
+                    : Convert.ToDateTime(ds.Tables[0].Rows[0]["EditDate"]);
+                model.Remark = Convert.IsDBNull(ds.Tables[0].Rows[0]["Remark"])
+                    ? ""
+                    : Convert.ToString(ds.Tables[0].Rows[0]["Remark"]);
+                model.EditUser = Convert.IsDBNull(ds.Tables[0].Rows[0]["EditUser"])
+                    ? ""
+                    : Convert.ToString(ds.Tables[0].Rows[0]["EditUser"]);
                 return model;
             }
             else
@@ -274,11 +429,11 @@ namespace DataAccess.DataLogic
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID, productImgAUrl, productImgBUrl, ProductImgCUrl, ProductImgDUrl, SubmitTime, OrderStatus, OrderNo, GameName, GameArea, ServerName, AccountInfoID, ProductProperty, ProductTitle, ProductDescription, Price,UserID  ");
+            strSql.Append("select ID, productImgAUrl, productImgBUrl, ProductImgCUrl, ProductImgDUrl, SubmitTime, OrderStatus, OrderNo, GameName, GameArea, ServerName, AccountInfoID, ProductProperty, ProductTitle, ProductDescription, Price,UserID,Remark,EditDate,EditUser ");
             strSql.Append("  from AccountDescription ");
-            strSql.Append(" where AccountInfoID=@ID");
+            strSql.Append(" where AccountInfoID=@AccountInfoID");
             SqlParameter[] parameters = {
-					new SqlParameter("@ID", SqlDbType.Int,4)
+					new SqlParameter("@AccountInfoID", SqlDbType.Int,4)
 			};
             parameters[0].Value = accountInfoId;
 
@@ -312,7 +467,6 @@ namespace DataAccess.DataLogic
                 {
                     model.AccountInfoID = int.Parse(ds.Tables[0].Rows[0]["AccountInfoID"].ToString());
                 }
-                model.AccountInfoID = int.Parse(ds.Tables[0].Rows[0]["UserID"].ToString());
                 model.ProductProperty = ds.Tables[0].Rows[0]["ProductProperty"].ToString();
                 model.ProductTitle = ds.Tables[0].Rows[0]["ProductTitle"].ToString();
                 model.ProductDescription = ds.Tables[0].Rows[0]["ProductDescription"].ToString();
@@ -320,7 +474,18 @@ namespace DataAccess.DataLogic
                 {
                     model.Price = decimal.Parse(ds.Tables[0].Rows[0]["Price"].ToString());
                 }
-
+                if (ds.Tables[0].Rows[0]["Remark"].ToString() != "")
+                {
+                    model.Remark = Convert.ToString(ds.Tables[0].Rows[0]["Remark"]);
+                }
+                if (ds.Tables[0].Rows[0]["EditUser"].ToString() != "")
+                {
+                    model.EditUser = Convert.ToString(ds.Tables[0].Rows[0]["EditUser"]);
+                }
+                if (ds.Tables[0].Rows[0]["EditDate"].ToString() != "")
+                {
+                    model.EditDate = DateTime.Parse(ds.Tables[0].Rows[0]["EditDate"].ToString());
+                }
                 return model;
             }
             else

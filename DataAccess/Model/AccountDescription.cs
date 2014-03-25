@@ -81,5 +81,17 @@ namespace DataAccess.Model
         public string OrderNo { get; set; }
 
         public int UserID { get; set; }
+        /// <summary>
+        /// 帐号备注信息，如果审核不通过，记录审核不通过原因
+        /// </summary>
+        public string Remark { get; set; }
+        /// <summary>
+        /// 订单修改时间
+        /// </summary>
+        public DateTime EditDate { get; set; }
+        /// <summary>
+        /// 操作人
+        /// </summary>
+        public string EditUser { get; set; }
     }
 }

@@ -13,13 +13,23 @@ namespace NetBar.OrderManager
     {
         readonly AccountInfoDataAccess _access = new AccountInfoDataAccess();
         private List<AccountInfoModel> _accountList;
+        private string WhereStr = string.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
+            string orderStatusStr = orderStatus.SelectedValue;
+            if (orderStatusStr == "all")
+            {
+                WhereStr = "";
+            }
+            else
+            {
+                WhereStr = "where OrderStatus = " + orderStatusStr;
+            }
             //:todo 事件混乱会读取两次
             if (!IsPostBack)
             {
                 int recordCount, pageCount;
-                _accountList = _access.GetPagedAccountInfoModelsByProc(AspNetPager1.CurrentPageIndex, 10, "", out recordCount, out pageCount);
+                _accountList = _access.GetPagedAccountInfoModelsByProc(AspNetPager1.CurrentPageIndex, 10,WhereStr,"order by SubmitTime desc", out recordCount, out pageCount);
                 AspNetPager1.RecordCount = recordCount;
             }
         }
@@ -31,7 +41,14 @@ namespace NetBar.OrderManager
         protected void AspNetPager1_PageChanged(object sender, EventArgs e)
         {
             int recordCount, pageCount;
-            _accountList = _access.GetPagedAccountInfoModelsByProc(AspNetPager1.CurrentPageIndex, 10, "", out recordCount, out pageCount);
+            _accountList = _access.GetPagedAccountInfoModelsByProc(AspNetPager1.CurrentPageIndex, 10,WhereStr,"order by SubmitTime desc", out recordCount, out pageCount);
+        }
+
+        protected void orderStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int recordCount, pageCount;
+            _accountList = _access.GetPagedAccountInfoModelsByProc(AspNetPager1.CurrentPageIndex, 10, WhereStr, "order by SubmitTime desc", out recordCount, out pageCount);
+            AspNetPager1.RecordCount = recordCount;
         }
     }
 }

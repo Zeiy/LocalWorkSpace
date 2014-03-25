@@ -288,6 +288,7 @@
     <Content Include="js\jquery.uniform.min.js" />
     <Content Include="js\jquery.uploadify-3.1.min.js" />
     <Content Include="Master\Common.Master" />
+    <Content Include="AjaxServer\AccountShenHe.ashx" />
     <None Include="Properties\PublishProfiles\77TradeBackend.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -297,7 +298,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AccountDetail.aspx" />
     <Content Include="CommonUserControl\LeftNavigation.ascx" />
     <Content Include="images\bg.gif" />
     <Content Include="images\dl.gif" />
@@ -432,12 +432,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountDetail.aspx.cs">
-      <DependentUpon>AccountDetail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AccountDetail.aspx.designer.cs">
-      <DependentUpon>AccountDetail.aspx</DependentUpon>
+    <Compile Include="AjaxServer\AccountShenHe.ashx.cs">
+      <DependentUpon>AccountShenHe.ashx</DependentUpon>
     </Compile>
     <Compile Include="CommonUserControl\LeftNavigation.ascx.cs">
       <DependentUpon>LeftNavigation.ascx</DependentUpon>
