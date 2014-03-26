@@ -31,7 +31,7 @@
 								</div>
 							  </div>
                         <div class="form-actions">
-                             <asp:LinkButton runat="server" CssClass="btn btn-success" Text="添加游戏" OnClick="Unnamed1_Click"><i class="icon icon-color icon-add icon-white"></i>添加新增服务器</asp:LinkButton>
+                             <asp:LinkButton runat="server" CssClass="btn btn-success" Text="添加游戏" OnClick="Unnamed1_Click"><i class="icon icon-color icon-add icon-white"></i>添加新游戏</asp:LinkButton>
                             <a href="/Index.aspx" class="btn btn-info"><i class="icon icon-color icon-undo icon-white"></i> 反回首页</a>
                         </div>
                     </fieldset>

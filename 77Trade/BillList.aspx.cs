@@ -59,8 +59,9 @@ namespace _77Trade
                     string timeSpanWhere = GetTimeSpanStr(hiddenTimeSpan.Value);
                     //订单状态 默认为审核期 值为3
                     hiddenOrderStatus.Value = "3";
+                    //只显示出售期和公示期的订单
                     WhereStr = "where GameArea ='" + gamesArea.AreaName + "' and ServerName = '" +
-                               gameServer.ServerName.Trim()+"'";
+                               gameServer.ServerName.Trim()+"' and OrderStatus in (4,5)";
                 }
                 //给时间添加一个默认值
                 hiddenTimeSpan.Value = "2012-11-06至2016-11-13";
@@ -85,12 +86,13 @@ namespace _77Trade
                 stringBuilder.Append("where SubmitTime " + timeSpanStr);
                 if (!string.IsNullOrEmpty(hiddenAreaName.Value))
                 {
-                    stringBuilder.Append(" and GameArea = '" + hiddenAreaName.Value.Trim() + "'");
+                    stringBuilder.Append(" and GameArea='" + hiddenAreaName.Value.Trim() + "'");
                 }
                 if (!string.IsNullOrEmpty(hiddenServerName.Value))
                 {
-                    stringBuilder.Append(" and ServerName = '" + hiddenServerName.Value.Trim() + "'");
+                    stringBuilder.Append(" and ServerName='" + hiddenServerName.Value.Trim() + "'");
                 }
+                stringBuilder.Append(" and OrderStatus in (4,5)");
                 /*if (!string.IsNullOrEmpty(hiddenOrderStatus.Value))
                 {
                     stringBuilder.Append(" and OrderStatus = " + hiddenOrderStatus.Value.Trim());

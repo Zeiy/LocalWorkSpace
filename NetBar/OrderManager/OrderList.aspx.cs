@@ -19,7 +19,8 @@ namespace NetBar.OrderManager
             string orderStatusStr = orderStatus.SelectedValue;
             if (orderStatusStr == "all")
             {
-                WhereStr = "";
+                //1为用户未完成生成订单
+                WhereStr = "where OrderStatus in (0,2,3,4,5,6)";
             }
             else
             {

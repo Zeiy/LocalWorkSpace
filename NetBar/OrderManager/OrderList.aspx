@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Common.Master" AutoEventWireup="true" CodeBehind="OrderList.aspx.cs" Inherits="NetBar.OrderManager.OrderList" %>
+<%@ Import Namespace="DataAccess.Model" %>
 <%@ Register Assembly="AspNetPager" Namespace="Wuqi.Webdiyer" TagPrefix="webdiyer" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div>
@@ -33,6 +34,7 @@
                                       <asp:ListItem Value="4">公示中订单</asp:ListItem>
                                       <asp:ListItem Value="5">出售中订单</asp:ListItem>
                                       <asp:ListItem Value="0">出售成功订单</asp:ListItem>
+                                       <asp:ListItem Value="6">审核失败</asp:ListItem>
                                       <asp:ListItem></asp:ListItem>
                                 </asp:DropDownList>
 								</label>
@@ -67,16 +69,33 @@
                                 <td class="center"><%=item.AccountRoleName %></td>
                                 <td class="center"><%=item.SubmitTime %></td>
                                 <td class="center">
-                                    <span class="label label-success">Active</span>
+                                    <%
+                                        if (item.OrderStatus == OrderStatus.ChuShou)
+                                        {%>
+                                          <span class="label label-success">出售中</span>   
+                                       <% }
+                                        if (item.OrderStatus == OrderStatus.GongShi)
+                                        {%>
+                                          <span class="label label-info">公示中</span>    
+                                        <%}
+                                        if (item.OrderStatus == OrderStatus.ShenHeFail)
+                                        {%>
+                                           <span class="label label-warning">审核失败</span>  
+                                        <%}
+                                        if (item.OrderStatus == OrderStatus.ShenHe)
+                                        {%>
+                                     <span class="label label-inverse">待审核</span>  
+                                        <%}
+                                        if (item.OrderStatus == OrderStatus.SaleSuccess)
+                                        {%>
+                                     <span class="label label-important">出售成功</span>  
+                                       <% }
+                                        %>
                                 </td>
                                 <td class="center">
                                     <a class="btn btn-success" href="OrderDetail.aspx?InfoID=<%=item.ID %>">
                                         <i class="icon-zoom-in icon-white"></i>
-                                        View                                            
-                                    </a>
-                                    <a class="btn btn-info" href="OrderDetail.aspx?InfoID=<%=item.ID %>">
-                                        <i class="icon-edit icon-white"></i>
-                                        Edit                                            
+                                        查看                                            
                                     </a>
                                     <%--       <a class="btn btn-danger" href="#">
                                     <i class="icon-trash icon-white"></i>

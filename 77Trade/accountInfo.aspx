@@ -1,4 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="accountInfo.aspx.cs" Inherits="_77Trade.accountInfo"  EnableEventValidation="false"%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="accountInfo.aspx.cs" Inherits="_77Trade.accountInfo" EnableEventValidation="false" %>
+
 <%@ Register Src="~/UserControls/NavigateTop.ascx" TagPrefix="uc1" TagName="NavigateTop" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -11,7 +12,7 @@
     <link type="text/css" href="global/css/style.css" rel="stylesheet" />
     <script src="Js/jquery-1.11.0.min.js"></script>
     <script src="Js/fileupload/jquery.ui.widget.js"></script>
-<%--    <script src="Js/fileupload/tmpl.min.js"></script>--%>
+    <%--    <script src="Js/fileupload/tmpl.min.js"></script>--%>
     <script src="Js/fileupload/load-image.min.js"></script>
     <script src="Js/fileupload/canvas-to-blob.min.js"></script>
     <script src="Js/fileupload/bootstrap.min.js"></script>
@@ -21,7 +22,7 @@
     <script src="Js/fileupload/jquery.fileupload-image.js"></script>
     <script src="Js/fileupload/jquery.fileupload-video.js"></script>
     <script src="Js/fileupload/jquery.fileupload-audio.js"></script>
-<%--    <script src="Js/fileupload/jquery.fileupload-ui.js"></script>--%>
+    <%--    <script src="Js/fileupload/jquery.fileupload-ui.js"></script>--%>
     <script src="Js/dataVerify.js"></script>
 </head>
 <body>
@@ -60,12 +61,18 @@
                         <form name="form1" method="post" id="form1" enctype="multipart/form-data" runat="server">
 
                             <table border="0" width="100%" height="100%" style="border-collapse: collapse">
-                                                                <tr>
+                                <tr>
                                     <td width="30%" align="right"><strong>* 游戏选择：</strong></td>
                                     <td width="70%">
-                                        <asp:DropDownList runat="server" ClientIDMode="Static" ID="gameName"><asp:ListItem Text="请选择游戏"></asp:ListItem></asp:DropDownList>
-                                         <asp:DropDownList runat="server" ClientIDMode="Static" ID="gameArea"><asp:ListItem Text="请选择区服"></asp:ListItem></asp:DropDownList>
-                                         <asp:DropDownList runat="server" ClientIDMode="Static" ID="gameServer"><asp:ListItem Text="请选择服务器"></asp:ListItem></asp:DropDownList>
+                                        <asp:DropDownList runat="server" ClientIDMode="Static" ID="gameName">
+                                            <asp:ListItem Text="请选择游戏"></asp:ListItem>
+                                        </asp:DropDownList>
+                                        <asp:DropDownList runat="server" ClientIDMode="Static" ID="gameArea">
+                                            <asp:ListItem Text="请选择区服"></asp:ListItem>
+                                        </asp:DropDownList>
+                                        <asp:DropDownList runat="server" ClientIDMode="Static" ID="gameServer">
+                                            <asp:ListItem Text="请选择服务器"></asp:ListItem>
+                                        </asp:DropDownList>
                                     </td>
                                 </tr>
                                 <tr>
@@ -94,7 +101,7 @@
                                     <td>
                                         <asp:TextBox CssClass="form1 shenfen" ClientIDMode="Static" ID="identityCardID" runat="server"></asp:TextBox></td>
                                 </tr>
-                                    <tr>
+                                <tr>
                                     <td align="right"><strong>* QQ\手机：</strong></td>
                                     <td>
                                         <asp:TextBox CssClass="form1 mobile" ClientIDMode="Static" ID="qqOrMobile" runat="server"></asp:TextBox></td>
@@ -130,22 +137,24 @@
                                                     </table>
                                                 </td>
                                             </tr>
-                                            <tr id="tr1" style="display:none">
+                                            <tr id="tr1" style="display: none">
                                                 <td align="right" width="40%" style="line-height: 24px; font-size: 14px;">密保卡序列号：</td>
                                                 <td width="60%">
                                                     <asp:TextBox runat="server" ID="txtSecretNo" CssClass="form1"></asp:TextBox>
                                                 </td>
                                             </tr>
-                                            <tr id="tr2"  style="display:none">
+                                            <tr id="tr2" style="display: none">
                                                 <td colspan="2" style="line-height: 24px; font-size: 14px;">
-                                                    <img id="Image3" alt="请确保上传的图片清晰完整" src="global/images/nopic.jpg" style="height: 180px; width: 180px; border: 1px solid #001627;" /></td>
+                                                  <img id="Image3" alt="请确保上传的图片清晰完整" src="global/images/nopic.jpg" style="height: 180px; width: 180px; border: 1px solid #001627;" />
+                                                    
+                                                </td>
                                             </tr>
-                                            <tr id="tr3"  style="display:none">
+                                            <tr id="tr3" style="display: none">
                                                 <td colspan="2" style="line-height: 24px; font-size: 14px;">
-                                                    <input type="file" name="FileSecretCard" id="secretCardImgUpload" style="width:65px"/>&nbsp &nbsp<span id="msgSecretCard">选择上传图片</span>&nbsp &nbsp &nbsp
+                                                    <input type="file" name="FileSecretCard" id="secretCardImgUpload" style="width: 65px" />&nbsp &nbsp<span id="msgSecretCard">选择上传图片</span>&nbsp &nbsp &nbsp
                                                     <input type="button" name="Button6" value="上传" id="btnUploadSecretCard" style="height: 22px;" />
                                                     <input type="button" name="Button12" value="删除" onclick="javascript: window.location.reload();" id="Button12" style="height: 22px;" />
-                                                     <asp:HiddenField runat="server" Value="" ID="SecretCardImg" />
+                                                    <asp:HiddenField runat="server" Value="" ID="SecretCardImg" />
                                                     <div style="font-size: 12px; margin: 10px 0; color: #ffe27e;">
                                                         如该游戏帐号已在游戏中绑定过密保卡，请上传密保卡信息。<br />
                                                         请确保上传的图片清晰完整；<br />
@@ -157,9 +166,8 @@
                                             </tr>
                                         </table>
                                     </td>
-
                                 </tr>
-                                <tr id="tr5" style="display:none">
+                                <tr id="tr5" style="display: none">
                                     <td align="right" width="30%" style="line-height: 24px; font-size: 14px;"></td>
                                     <td width="70%"></td>
                                 </tr>
@@ -173,7 +181,7 @@
 							<div style="font-size: 12px; margin: 10px 0; color: #ffe27e;">上传注册该游戏帐号所使用的身份证，提高帐号安全等级，利于出售，交易成功后发至买家。</div>
                                                 </td>
                                             </tr>
-                                            <tr id="tr4" style="display:none">
+                                            <tr id="tr4" style="display: none">
                                                 <td>
                                                     <table>
                                                         <tr>
@@ -188,13 +196,12 @@
                                                             </td>
                                                         </tr>
                                                     </table>
-
                                                     <table>
                                                         <tr>
                                                             <td>
                                                                 <img id="Image2" alt="身份证反面" src="global/images/card2.jpg" style="height: 180px; width: 180px; border: 1px solid #001627;" />
                                                                 <p style="margin-top: 12px;">
-                                                                    <input name="ShenFenB"  type="file" id="fileupload" style="width: 65px; height: 21px"/>&nbsp &nbsp<span id="msg">选择上传图片</span>&nbsp &nbsp &nbsp
+                                                                    <input name="ShenFenB" type="file" id="fileupload" style="width: 65px; height: 21px" />&nbsp &nbsp<span id="msg">选择上传图片</span>&nbsp &nbsp &nbsp
                                                                     <input type="button" name="Button1" value="上传新图片" id="upBegin" style="height: 22px;" />
                                                                     <input type="button" name="Button7" value="删除" id="btnCancleShenB" onclick="javascript: window.location.reload();" style="height: 22px;" />
                                                                     <asp:HiddenField runat="server" Value="" ID="identityImgB" />
@@ -202,7 +209,6 @@
                                                                 <div style="font-size: 12px; margin: 10px 0; color: #ffe27e;">单张图片需小于512KB，建议为400×250像素，支持jpg、gif、bmp、png格式。</div>
                                                             </td>
                                                         </tr>
-
                                                     </table>
                                                 </td>
                                             </tr>
@@ -213,11 +219,12 @@
                                     <td align="right"><strong></strong></td>
                                     <td>
                                         <div>
-                                            <asp:Button runat="server" ID="btnSubmit" Text="下一步，填写帐号信息" CssClass="btn" OnClick="btnSubmit_Click"/>
+                                            <asp:Button runat="server" ID="btnSubmit" Text="下一步，填写帐号信息" CssClass="btn" OnClick="btnSubmit_Click" />
                                         </div>
                                     </td>
                                 </tr>
                             </table>
+                            <asp:HiddenField runat="server" ID="accountInfoID"/>
                         </form>
                     </div>
                 </div>
@@ -240,19 +247,18 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
-            $("body").on("mouseover",".newemail", function () { //鼠标经过提示Email时，高亮该条Email
+            //页面加载时如果用户有未完成订单渲染页面，如果密保卡号不为空，则把
+            $("body").on("mouseover", ".newemail", function () { //鼠标经过提示Email时，高亮该条Email
                 $(".newemail").css("background", "#FFF");
                 $(this).css("background", "#CACACA");
                 $(this).focus();
                 nowid = $(this).index();
-            }).on("click",".newemail", function () { //鼠标点击Email时，文本框内容替换成该条Email，并删除提示层
+            }).on("click", ".newemail", function () { //鼠标点击Email时，文本框内容替换成该条Email，并删除提示层
                 var newhtml = $(this).html();
                 newhtml = newhtml.replace(/<.*?>/g, "");
                 $("#userEmail").val(newhtml);
                 $("#myemail").remove();
             });
-
-
             //验证用户输入
             dataVerify.BeginVerify();
             //是否使用密保卡切换
@@ -295,7 +301,7 @@
                 }
             };
             //密保卡
-           $('#secretCardImgUpload').fileupload({
+            $('#secretCardImgUpload').fileupload({
                 url: "services/fileSave.ashx?date=" + myDate.getMilliseconds(),
                 formData: { sign: "FileSecretCard" },
                 dataType: 'json',
@@ -303,11 +309,11 @@
                 imageMaxHeight: 800,
                 maxFileSize: 512,
                 maxNumberOfFiles: 1,
-               replaceFileInput:true,
+                replaceFileInput: true,
                 imageCrop: true,//强制裁剪图片
                 acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
                 singleFileUploads: false,
-                limitMultiFileUploads:1,
+                limitMultiFileUploads: 1,
                 add: function (e, data) {
                     var checkRes = CheckFile(data.files[0]);
                     if (!checkRes) {
@@ -399,7 +405,7 @@
                 maxFileSize: 512,
                 maxNumberOfFiles: 1,
                 limitConcurrentUploads: true,
-                singleFileUploads:false,
+                singleFileUploads: false,
                 add: function (e, data) {
                     //添加图片时在Data里判断文件信息，是否符合上传要求
                     var msg;
@@ -411,9 +417,9 @@
                         return;
                     }
                     $("#msg").text(data.fileInput[0].value);
-                    data.context =$("#upBegin").click(function() {
-                            $("#msg").text("开始上传。。。");
-                            data.submit();
+                    data.context = $("#upBegin").click(function () {
+                        $("#msg").text("开始上传。。。");
+                        data.submit();
                     });
                     //用户重复选择文件上传问题，选择文件后隐藏input 控件
                     $('#fileupload').hide();
@@ -574,19 +580,19 @@
                             });
                         }
                     },
-                    error: function(data) {
+                    error: function (data) {
                         $(serverSelect).html("<option value=\"error\" selected=\"selected\">" + data.errorMsg + "</option>");
                     }
                 });
             }
             //游戏区服自动填充
-            $("#gameName").change(function() {
+            $("#gameName").change(function () {
                 //用户选择游戏时，根据区服值，更新服务器列表
                 $.ajax({
-                    method:"post",
+                    method: "post",
                     url: "/services/GetGameServerList.ashx",
                     data: { areaID: $("#gameArea").val(), gameId: $(this).val() },
-                    success: function(data) {
+                    success: function (data) {
                         //更新服务器选择框
                         if (data.status == 1) {
                             $(serverSelect).html("");
@@ -607,17 +613,17 @@
                 });
                 $(serverSelect).html("<option value=\"请选择游戏\" selected=\"selected\">读取中...</option>");
             });
-            $("#gameArea").change(function() {
+            $("#gameArea").change(function () {
                 //用户选择区服值时，根据游戏名，更新服务器列表，先检察游戏名是否已选择，如果游戏名未选择提醒用户先选择游戏名
                 if ($("#gameName").val() == "请选择游戏") {
                     alert("请先选择游戏！");
                     return;
                 }
                 $.ajax({
-                    method:"post",
+                    method: "post",
                     url: "/services/GetGameServerList.ashx",
                     data: { areaID: $(this).val(), gameId: $("#gameName").val() },
-                    success: function(data) {
+                    success: function (data) {
                         //更新服务器选择框
                         if (data.status == 1) {
                             $(serverSelect).html("");

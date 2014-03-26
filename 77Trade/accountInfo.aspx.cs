@@ -23,7 +23,7 @@ namespace _77Trade
                 foreach (var item in gameList)
                 {
                     ListItem listItem = new ListItem();
-                    listItem.Text = item.GameName;
+                    listItem.Text = item.GameName.Trim();
                     listItem.Value = Convert.ToString(item.ID);
                     gameName.Items.Add(listItem);
                 }
@@ -34,13 +34,23 @@ namespace _77Trade
                 foreach (var item in areaList)
                 {
                     ListItem listItem = new ListItem();
-                    listItem.Text = item.AreaName;
+                    listItem.Text = item.AreaName.Trim();
                     listItem.Value = Convert.ToString(item.ID);
                     gameArea.Items.Add(listItem);
                 }
+                //检察AccountInfo里是否有未完成订单
+                var accountInfo = _accountInfoDataAccess.GetAccountINfoNotCompleteByUserId(CurrentUser.ID);
+                if (accountInfo != null &&accountInfo.ID > 0)
+                {
+                    //查到订单后渲染页面
+                   DrawPageByAccountInfo(accountInfo);
+                   CurrentAccountInfoModel = accountInfo;
+                   accountInfoID.Value = accountInfo.ID.ToString();
+                }
             }
-            //todo: 查看当前用户有没有未完成的订单，如果有则拿订单渲染面页信息
         }
+
+        public AccountInfoModel CurrentAccountInfoModel { get; set; }
 
         #region 游戏区服选择   改成异步调用
         /// <summary>
@@ -186,14 +196,48 @@ namespace _77Trade
             accountModel.OrderStatus = OrderStatus.NotComplete;
             //指定用户ID为0 后续处理用户登陆问题
             accountModel.UserID = CurrentUser.ID;
-            int res =  _accountInfoDataAccess.Add(accountModel);
-            if (res > 0)
+            bool res=false;
+            if (accountInfoID.Value != "")
             {
-                //用户未生成完成的订单号传递给帐号详细页面
-                Response.Redirect("/accountDescription.aspx?infoId=" + res);
+                accountModel.ID = Convert.ToInt32(accountInfoID.Value);
+                res =  _accountInfoDataAccess.Update(accountModel);
+                if (res)
+                {
+                    //用户未生成完成的订单号传递给帐号详细页面
+                    Response.Redirect("/accountDescription.aspx?infoId=" + accountModel.ID);
+                }
+                else
+                {
+                    ClientScript.RegisterClientScriptBlock(GetType(), "alert", "<script>alert('帐号发布出错，请重试！')</script>");
+                }
             }
-            else {
-                ClientScript.RegisterClientScriptBlock(GetType(), "alert", "<script>alert('帐号发布出错，请重试！')</script>");
+            else
+            {
+               var resInt = _accountInfoDataAccess.Add(accountModel);
+                if (resInt > 0)
+                {
+                    //用户未生成完成的订单号传递给帐号详细页面
+                    Response.Redirect("/accountDescription.aspx?infoId=" + resInt);
+                }
+                else
+                {
+                    ClientScript.RegisterClientScriptBlock(GetType(), "alert", "<script>alert('帐号发布出错，请重试！')</script>");
+                }
+            }
+        }
+
+        protected void DrawPageByAccountInfo(AccountInfoModel accountInfoModel)
+        {
+            gameAccount.Text = accountInfoModel.GameAccount.Trim();
+            gameRoleName.Text = accountInfoModel.AccountRoleName;
+            identityCardID.Text = accountInfoModel.IdCardNo;
+            qqOrMobile.Text = accountInfoModel.QQMobile;
+            userEmail.Text = accountInfoModel.Email;
+            levelTwoPwd.Text = accountInfoModel.LevelTwoPwd;
+            propertyPwd.Text = accountInfoModel.PropertyPwd;
+            if (accountInfoModel.SecretCardBind)
+            {
+                txtSecretNo.Text = accountInfoModel.SecretCardNo;
             }
         }
     }

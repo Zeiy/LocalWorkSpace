@@ -117,6 +117,77 @@ namespace DataAccess.DataLogic
                 return null;
             }
         }
+
+        /// <summary>
+        /// 根据ID拿到订单Model 用户未完成订单 OrderStatus = 1 NoteComplete
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public AccountInfoModel GetAccountINfoNotCompleteByUserId(int userId)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select ID, QQMobile, Email, LevelTwoPwd, PropertyPwd, SecretCardBind, SecretCardNo, SecretCardImgUrl, IdentityAuth, IdentityCardAUrl, IdentityCardBUrl, UserID, OrderStatus, SubmitTime, GameName, GameArea, ServerName, GameAccount, GamePassword, AccountRoleName, IdCardNo  ");
+            strSql.Append("  from AccountInfo ");
+            strSql.Append(" where UserID=@UserID and OrderStatus = 1");
+            SqlParameter[] parameters = {
+					new SqlParameter("@UserID", SqlDbType.Int,4)
+			};
+            parameters[0].Value = userId;
+
+
+            AccountInfoModel model = new AccountInfoModel();
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0]["ID"].ToString() != "")
+                {
+                    model.ID = int.Parse(ds.Tables[0].Rows[0]["ID"].ToString());
+                }
+                model.QQMobile = ds.Tables[0].Rows[0]["QQMobile"].ToString();
+                model.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                model.LevelTwoPwd = ds.Tables[0].Rows[0]["LevelTwoPwd"].ToString();
+                model.PropertyPwd = ds.Tables[0].Rows[0]["PropertyPwd"].ToString();
+                if (ds.Tables[0].Rows[0]["SecretCardBind"].ToString() != "")
+                {
+                    model.SecretCardBind = Convert.ToBoolean(ds.Tables[0].Rows[0]["SecretCardBind"]);
+                }
+                model.SecretCardNo = ds.Tables[0].Rows[0]["SecretCardNo"].ToString();
+                model.SecretCardImgUrl = ds.Tables[0].Rows[0]["SecretCardImgUrl"].ToString();
+                if (ds.Tables[0].Rows[0]["IdentityAuth"].ToString() != "")
+                {
+                    model.IdentityAuth = Convert.ToBoolean(ds.Tables[0].Rows[0]["IdentityAuth"]);
+                }
+                model.IdentityCardAUrl = ds.Tables[0].Rows[0]["IdentityCardAUrl"].ToString();
+                model.IdentityCardBUrl = ds.Tables[0].Rows[0]["IdentityCardBUrl"].ToString();
+                if (ds.Tables[0].Rows[0]["UserID"].ToString() != "")
+                {
+                    model.UserID = int.Parse(ds.Tables[0].Rows[0]["UserID"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["OrderStatus"].ToString() != "")
+                {
+                    model.OrderStatus = (OrderStatus)(int.Parse(ds.Tables[0].Rows[0]["OrderStatus"].ToString()));
+                }
+                if (ds.Tables[0].Rows[0]["SubmitTime"].ToString() != "")
+                {
+                    model.SubmitTime = DateTime.Parse(ds.Tables[0].Rows[0]["SubmitTime"].ToString());
+                }
+                model.GameName = ds.Tables[0].Rows[0]["GameName"].ToString();
+                model.GameArea = ds.Tables[0].Rows[0]["GameArea"].ToString();
+                model.ServerName = ds.Tables[0].Rows[0]["ServerName"].ToString();
+                model.GameAccount = ds.Tables[0].Rows[0]["GameAccount"].ToString();
+                model.GamePassword = ds.Tables[0].Rows[0]["GamePassword"].ToString();
+                model.AccountRoleName = ds.Tables[0].Rows[0]["AccountRoleName"].ToString();
+                model.IdCardNo = ds.Tables[0].Rows[0]["IdCardNo"].ToString();
+
+                return model;
+            }
+            else
+            {
+                return null;
+            }
+        }
         /// <summary>
         /// 更新一条数据
         /// </summary>
@@ -319,6 +390,8 @@ namespace DataAccess.DataLogic
                         infoModel.GameName = Convert.ToString(dataReader["GameName"]);
                         infoModel.ServerName = Convert.ToString(dataReader["ServerName"]);
                         infoModel.AccountRoleName = Convert.ToString(dataReader["AccountRoleName"]);
+                        infoModel.OrderStatus =
+                            (OrderStatus) Enum.Parse(typeof (OrderStatus), Convert.ToString(dataReader["OrderStatus"]));
                         modelsList.Add(infoModel);
                     }
                 }

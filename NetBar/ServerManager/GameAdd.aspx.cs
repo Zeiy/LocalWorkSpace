@@ -29,7 +29,7 @@ namespace NetBar.ServerManager
             if (res > 0)
             {
                 //添加成功后返回列表页
-                Response.Redirect("/GameManager/GameInfoMg.aspx");
+                Response.Redirect("/ServerManager/GameList.aspx");
             }
         }
     }

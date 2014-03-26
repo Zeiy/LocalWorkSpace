@@ -63,7 +63,7 @@ namespace NetBar.ServerManager
         protected void ServerAdd_Click(object sender, EventArgs e)
         {
             string gameId = hidGameID.Value;
-            string areaId = DplAreaSelect.SelectedValue;
+            string areaId = dplArea.SelectedValue;
             GameInfo gameInfo = _gameInfoDataAccess.GetModel(Convert.ToInt32(gameId));
             GameServer newServer = new GameServer
             {
@@ -71,7 +71,7 @@ namespace NetBar.ServerManager
                 GameID = Convert.ToInt32(gameId),
                 ServerName = newServerName.Text.Trim(),
                 GameName = gameInfo.GameName,
-                AreaName = (DplAreaSelect.SelectedItem).Text
+                AreaName = (dplArea.SelectedItem).Text
             };
             //:todo 检查ID是否存在
             //返回新增实体的ID

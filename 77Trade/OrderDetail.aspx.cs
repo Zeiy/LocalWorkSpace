@@ -55,7 +55,7 @@ namespace _77Trade
                     }
                 case OrderStatus.GongShi:
                     {
-                        return "公示";
+                        return "公示期";
                         break;
                     }
                 case OrderStatus.NotComplete:
@@ -78,8 +78,12 @@ namespace _77Trade
             if (Session["UserName"] == null)
             {
                 Response.Redirect("/User/Login.aspx?returnUrl=/OrderDetail.aspx?acDes="+descriptionID.Value.Trim());
+                return;
             }
-            ClientScript.RegisterClientScriptBlock(GetType(), "alert", "<script>alert('生成订单中！！！');</script>");
+            //检察订单是否处于出售状态
+            OrderStatus currentStatus = CurrentAccountDescription.OrderStatus;
+            //生成订单
+            Response.Redirect("/User/Login.aspx?returnUrl=/OrderDetail.aspx?acDes=" + descriptionID.Value.Trim());
         }
     }
 }

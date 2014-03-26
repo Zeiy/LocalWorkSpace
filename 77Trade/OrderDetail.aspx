@@ -65,7 +65,7 @@
                             </tr>
                             <tr>
                                 <td valign="top" width="83" align="right">状<span class="b14"></span>态：</td>
-                                <td valign="top"><%=GetOrderStatusStr(CurrentAccountDescription.OrderStatus) %></td>
+                                <td valign="top"><%=GetOrderStatusStr(CurrentAccountDescription.OrderStatus) %><span style="color: red" id="timeWait">(1天10小时25分56秒后可购买)</span></td>
                             </tr>
                             <tr>
                                 <td valign="top" width="83" align="right">发布时间：</td>
@@ -74,7 +74,7 @@
                             <tr>
                                 <td valign="top" width="83" align="right">&nbsp;</td>
                                 <td valign="top">
-                                    <asp:LinkButton runat="server" Text="购买商品" CssClass="btn1" ID="buyProduct" OnClick="buyProduct_Click"></asp:LinkButton>
+                                    <asp:LinkButton runat="server" Text="购买商品" CssClass="btn1" ID="buyProduct" ClientIDMode="Static" OnClick="buyProduct_Click"></asp:LinkButton>
                                     <asp:LinkButton runat="server" Text="收藏商品" CssClass="btn2" ID="btnShouChang"></asp:LinkButton>
                                 </td>
                             </tr>
@@ -122,7 +122,7 @@
             </div>
             <div class="clear"></div>
         </div>
-        <asp:HiddenField runat="server" ID="descriptionID"/>
+        <asp:HiddenField runat="server" ID="descriptionID" />
     </form>
 
     <!-- main end -->
@@ -181,6 +181,32 @@
             }).bind("touchend", function () {
                 timer = setInterval(function () { $("#btn_next").click(); }, 4000);
             });
+
+            //如果订单处于公示期则添加倒计时
+            var timeContainer = $("#timeWait");
+            var now = new Date(<%=DateTime.Now.Year%>,<%=DateTime.Now.Month%>-1,<%=DateTime.Now.Day%>,<%=DateTime.Now.Hour%>,<%=DateTime.Now.Minute%>,<%=DateTime.Now.Second%>); 
+            var endDate = new Date(<%=CurrentAccountDescription.EditDate.Year%>,<%=CurrentAccountDescription.EditDate.Month%>-1,<%=CurrentAccountDescription.EditDate.Day%>+3,<%=CurrentAccountDescription.EditDate.Hour%>,<%=CurrentAccountDescription.EditDate.Minute%>,<%=CurrentAccountDescription.EditDate.Second%>); 
+            var leftTime=endDate.getTime()-now.getTime();
+            if (leftTime < 0) {
+                timeContainer.hide();
+            } else {
+                $("#buyProduct").click(function() {
+                    alert("进入公示期订单三天以后才可以购买。请耐心等待！");
+                    return false;
+                });
+                setInterval(reNewTime,1000); 
+            }
+
+            function reNewTime() {
+                leftTime = leftTime - 1000;
+                var leftsecond = parseInt(leftTime/1000); 
+                var day1=Math.floor(leftsecond/(60*60*24)); 
+                var hour=Math.floor((leftsecond-day1*24*60*60)/3600); 
+                var minute=Math.floor((leftsecond-day1*24*60*60-hour*3600)/60); 
+                var second=Math.floor(leftsecond-day1*24*60*60-hour*3600-minute*60); 
+                $(timeContainer).text("("+day1 + "天" + hour + "小时" + minute + "分" + second + "秒可购买)");
+                
+            }
         });
     </script>
 </body>

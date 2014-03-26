@@ -35,6 +35,7 @@ namespace DataAccess.DataLogic
                 GameInfo gameInfo = new GameInfo();
                 gameInfo.ID = Convert.ToInt32(row["ID"]);
                 gameInfo.GameName = Convert.ToString(row["GameName"]);
+                gameInfo.AddTime = Convert.ToDateTime(row["AddTime"]);
                 gameList.Add(gameInfo);
             }
             return gameList;
