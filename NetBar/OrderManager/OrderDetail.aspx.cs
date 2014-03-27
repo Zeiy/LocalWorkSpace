@@ -114,27 +114,26 @@ namespace NetBar.OrderManager
                 case OrderStatus.ChuShou:
                     {
                         return "出售中";
-                        break;
                     }
                 case OrderStatus.ShenHe:
                     {
                         return "审核中";
-                        break;
                     }
                 case OrderStatus.GongShi:
                     {
                         return "公示";
-                        break;
                     }
                 case OrderStatus.NotComplete:
                     {
                         return "订单未完成";
-                        break;
                     }
+                case OrderStatus.ShenHeFail:
+                {
+                    return "审核失败";
+                }
                 default:
                     {
                         return "未知状态";
-                        break;
                     }
             }
         }

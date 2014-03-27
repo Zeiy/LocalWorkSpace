@@ -81,6 +81,10 @@ namespace _77Trade
                 return;
             }
             //检察订单是否处于出售状态
+            //检察订单是否过了公示期
+            //可购买的话就锁定订单 直接跳转到付款页面
+            //付款成功修改订单状态
+            //todo:添加订时任务 如果过了十五分钟订单未付款就取消订单锁定状态
             OrderStatus currentStatus = CurrentAccountDescription.OrderStatus;
             //生成订单
             Response.Redirect("/User/Login.aspx?returnUrl=/OrderDetail.aspx?acDes=" + descriptionID.Value.Trim());

@@ -27,9 +27,9 @@ namespace _77Trade
             if (!IsPostBack)
             {
                     string timeSpanWhere = GetTimeSpanStr(hiddenTimeSpan.Value);
-                    //订单状态 默认为审核期 值为3
-                    hiddenOrderStatus.Value = "3";
-                    WhereStr = "where UserID = "+CurrentUser.ID+" and OrderStatus = 3";
+                    //订单状态 默认为审核期 值为3   默认显示审核期跟审核失败的订单
+                    hiddenOrderStatus.Value = "3,6";
+                    WhereStr = "where UserID = "+CurrentUser.ID+" and OrderStatus in (3,6)";
                 //给时间添加一个默认值
                 hiddenTimeSpan.Value = "2012-11-06至2016-11-13";
                 int rowCount = 0, outPageCount = 0;
@@ -50,7 +50,7 @@ namespace _77Trade
                 stringBuilder.Append("where SubmitTime "+timeSpanStr);
                 if (!string.IsNullOrEmpty(hiddenOrderStatus.Value))
                 {
-                    stringBuilder.Append(" and OrderStatus = " + hiddenOrderStatus.Value.Trim()+" and UserID = "+CurrentUser.ID);
+                    stringBuilder.Append(" and OrderStatus in (" + hiddenOrderStatus.Value.Trim()+") and UserID = "+CurrentUser.ID);
                 }
                 //在这里填充数据，是因为，用户选择服务器，时间等条件时是客户端触发的表单提交     想其它办法
                 //WhereStr = "where GameArea ='" + hiddenAreaName.Value.Trim() + "' and ServerName = '" + hiddenServerName.Value.Trim() + "' and SubmitTime "+timeSpanStr;
@@ -122,7 +122,6 @@ namespace _77Trade
             }
             return "between '"+beginTimeStr+"' and '"+endTimeStr+"'";
         }
-
         public string GetAccountPropertyByAccountModel(AccountDescription description)
         {
             StringBuilder stringBuilder = new StringBuilder();

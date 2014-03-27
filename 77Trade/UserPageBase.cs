@@ -31,5 +31,44 @@ namespace _77Trade
                 return _frontUser = _userdatatAccess.GetFrontUserByUserName(Session["UserName"].ToString());
             }
         }
+        public string GetOrderStatusStr(OrderStatus orderStatus)
+        {
+            switch (orderStatus)
+            {
+                case OrderStatus.ChuShou:
+                    {
+                        return "出售中";
+                        break;
+                    }
+                case OrderStatus.ShenHe:
+                    {
+                        return "审核中";
+                        break;
+                    }
+                case OrderStatus.GongShi:
+                    {
+                        return "公示中";
+                        break;
+                    }
+                case OrderStatus.SaleSuccess:
+                    {
+                        return "出售成功";
+                    }
+                case OrderStatus.NotComplete:
+                    {
+                        return "订单未完成";
+                        break;
+                    }
+                case OrderStatus.ShenHeFail:
+                {
+                    return "查看失败原因";
+                }
+                default:
+                    {
+                        return "未知状态";
+                        break;
+                    }
+            }
+        }
     }
 }

@@ -2,6 +2,8 @@
 
 <%@ Register Assembly="AspNetPager" Namespace="Wuqi.Webdiyer" TagPrefix="webdiyer" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="center" runat="server">
+    <link href="Js/JqueryTips/colortip-1.0-jquery.css" rel="stylesheet" />
+    <script src="Js/JqueryTips/colortip-1.0-jquery.js"></script>
     <script>
         $.extend(DateInput.DEFAULT_OPTS, {
             // 时间格式
@@ -32,10 +34,10 @@
         <form method="post" runat="server" id="mainForm">
             <div class="trigger">
                 <a href="accountInfo.aspx">发布帐号</a>
-                <a style="left: -70px; right: 157px;" orderstatus="3">审核期</a>
+                <a style="left: -70px; right: 157px;" orderstatus="3,6" class="cur">审核期</a>
                 <a style="left: -150px;" orderstatus="4">公示期</a>
                 <a style="left: -210px;" orderstatus="5">出售期</a>
-                <a style="left: -290px;" orderstatus="6">出售成功</a>
+                <a style="left: -290px;" orderstatus="0">出售成功</a>
             </div>
             <div class="tab-list">
                 <ul>
@@ -59,17 +61,17 @@
                                     <th><span class="up" id="OrderNo">单号<i></i></span></th>
                                     <th><span id="price">总价（元）<i></i></span></th>
                                     <th><span id="SubmitTime">日期<i></i></span></th>
-                                    <th><span>操作</span></th>
+                                    <th><span>状态</span></th>
                                 </tr>
                                 <% foreach (var infoModels in CurrentPageInfoModels)
                                    {%>
                                 <tr>
                                     <td><%=infoModels.ProductTitle%> </td>
-                                    <td><a title="<%=GetAccountPropertyByAccountModel(infoModels) %>"><%=GetAccountPropertyByAccountModel(infoModels) %></a></td>
+                                    <td><a href="#"><%=GetAccountPropertyByAccountModel(infoModels) %></a></td>
                                     <td><%=infoModels.OrderNo %><i></i></td>
                                     <td><%=infoModels.Price %> <i></i></td>
                                     <td><%=infoModels.SubmitTime %><i></i></td>
-                                    <td><a href="#">查看详情</a><i></i></td>
+                                    <td><a data-model="tips" title="<%=HttpUtility.HtmlDecode(infoModels.Remark) %>"> <%=GetOrderStatusStr(infoModels.OrderStatus) %> </a><i></i></td>
                                 </tr>
                                 <% } %>
                             </table>
@@ -89,4 +91,7 @@
             <asp:HiddenField runat="server" ID="hiddenOrderBy" ClientIDMode="Static"/>
         </form>
     </div>
+    <script type="text/javascript">
+        $('[data-model]').colorTip({ color: 'blue' });
+    </script>
 </asp:Content>

@@ -207,6 +207,10 @@ namespace _77Trade
                     return "公示中";
                     break;
                 }
+                case OrderStatus.SaleSuccess:
+                {
+                    return "出售成功";
+                }
                 case OrderStatus.NotComplete:
                 {
                     return "订单未完成";

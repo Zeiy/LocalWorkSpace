@@ -84,6 +84,8 @@
     <Content Include="Js\fileupload\jquery.min.js" />
     <Content Include="Js\fileupload\load-image.min.js" />
     <Content Include="Js\fileupload\tmpl.min.js" />
+    <Content Include="Js\JqueryTips\colortip-1.0-jquery.css" />
+    <Content Include="Js\JqueryTips\colortip-1.0-jquery.js" />
     <Content Include="OrderDetail.aspx" />
     <Content Include="ServerSelect.aspx" />
     <Content Include="services\FileSave.ashx" />

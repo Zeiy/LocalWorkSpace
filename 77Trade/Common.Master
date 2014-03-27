@@ -28,7 +28,7 @@
             </div>
             <div class="head1_right">
                 <ul>
-                    <% if (!string.IsNullOrEmpty(CurrentUserName))
+                    <% if (CurrentUserName!="游客")
                        {%>
                     <li>
                         <h2>您好，<a href="/User/Index.aspx"><%=CurrentUserName %></a></h2>

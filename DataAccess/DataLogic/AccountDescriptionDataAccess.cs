@@ -275,6 +275,9 @@ namespace DataAccess.DataLogic
                         infoModel.OrderNo = Convert.ToString(dataReader["OrderNo"]);
                         infoModel.OrderStatus = (OrderStatus) dataReader["OrderStatus"];
                         infoModel.UserID =Convert.IsDBNull(dataReader["UserID"])?0:Convert.ToInt32(dataReader["UserID"]);
+                        infoModel.Remark = Convert.IsDBNull(dataReader["Remark"])
+                            ? ""
+                            : Convert.ToString(dataReader["Remark"]);
                         modelsList.Add(infoModel);
                     }
                 }
@@ -470,6 +473,7 @@ namespace DataAccess.DataLogic
                 model.ProductProperty = ds.Tables[0].Rows[0]["ProductProperty"].ToString();
                 model.ProductTitle = ds.Tables[0].Rows[0]["ProductTitle"].ToString();
                 model.ProductDescription = ds.Tables[0].Rows[0]["ProductDescription"].ToString();
+                model.UserID = Convert.IsDBNull(ds.Tables[0].Rows[0]["UserID"]) ? 0 : Convert.ToInt32(ds.Tables[0].Rows[0]["UserID"]);
                 if (ds.Tables[0].Rows[0]["Price"].ToString() != "")
                 {
                     model.Price = decimal.Parse(ds.Tables[0].Rows[0]["Price"].ToString());
