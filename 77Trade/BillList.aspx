@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BillList.aspx.cs" Inherits="_77Trade.BillList" MasterPageFile="/Common.Master" %>
-
 <%@ Register Assembly="AspNetPager" Namespace="Wuqi.Webdiyer" TagPrefix="webdiyer" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="center" runat="server">
     <script>
@@ -35,102 +34,104 @@
         });
     </script>
     <script type="text/javascript">$($.date_input.initialize);</script>
-    <div class="inner nobg clearfix">
-        <div class="con-main-sider">
-            <div class="dropbox extend">
-                <h3>
-                    <!--[if lt IE 7 ]><span style="zoom: 1;"></span><![endif]-->
-                    <i></i>我的账号</h3>
-                <div class="con">
-                    <ul>
-                        <li class="cur">点卡订单</li>
-                    </ul>
+    <div class="con-main-middle">
+        <div class="inner">
+            <div class="con-main-sider">
+                <div class="dropbox extend">
+                    <h3>
+                        <!--[if lt IE 7 ]><span style="zoom: 1;"></span><![endif]-->
+                        <i></i>我的账号</h3>
+                    <div class="con">
+                        <ul>
+                            <li class="cur">点卡订单</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+            <form id="mainForm" runat="server">
+                <div class="con-main-main">
+                    <h3>
+                        <!--[if lt IE 7 ]><span style="zoom: 1;"></span><![endif]-->
+                        <i></i>点卡订单</h3>
+                    <div class="con">
+                        <div class="cntrl-bar">
+                            <div class="pop-box">
+                                <!--[if lt IE 7 ]><span style="zoom: 1;"></span><![endif]-->
+                                <i></i>
+                                <asp:Label runat="server" ID="labelGameArea" ClientIDMode="Static" CssClass="name">服务区</asp:Label>
+                                <div class="inner-pop">
+                                    <a class="cur">网通区</a>
+                                    <a>电信区</a>
+                                    <a>双线区</a>
+                                </div>
+                            </div>
+                            <div class="pop-box">
+                                <!--[if lt IE 7 ]><span style="zoom: 1;"></span><![endif]-->
+                                <i></i>
+                                <asp:Label runat="server" ID="lableGameServer" ClientIDMode="Static" CssClass="name">游戏区</asp:Label>
+                                <div class="inner-pop">
+                                    <% foreach (var serverItem in CurrentServers)
+                                       {
+                                           if (serverItem.ServerName.Trim() == lableGameServer.Text.Trim())
+                                           { %>
+                                    <a class="cur"><%= serverItem.ServerName %></a>
+                                    <% }
+                                           else
+                                           {%>
+                                    <a><%=serverItem.ServerName %></a>
+                                    <% }
+                                       } %>
+                                </div>
+                            </div>
+                            <div class="pop-box time">
+                                <!--[if lt IE 7 ]><span style="zoom: 1;"></span><![endif]-->
+                                <i></i>
+                                <asp:Label runat="server" CssClass="value" ID="labelTimeSpan">2013-11-06至2014-11-13</asp:Label>
+                                <div class="inner-pop">
+                                    <input type="text" class="date_input" hidden>
+                                    <input type="text" class="date_input" hidden>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-box">
+                            <table>
+                                <tr>
+                                    <th>订单号</th>
+                                    <th>区服</th>
+                                    <th>价格<i></i></th>
+                                    <th>订单状态<i></i></th>
+                                    <th>日期<i></i></th>
+                                    <th width="80">操作</th>
+                                </tr>
+                                <% foreach (var infoModels in CurrentPageInfoModels)
+                                   {%>
+                                <tr>
+                                    <td><%=infoModels.OrderNo %></td>
+                                    <td><a title="<%=GetAccountPropertyByAccountModel(infoModels) %>"><%=GetAccountPropertyByAccountModel(infoModels) %></a></td>
+                                    <td><%=infoModels.Price %> <i></i></td>
+                                    <td><%=GetOrderStatusStr(infoModels.OrderStatus) %></td>
+                                    <td><%=infoModels.SubmitTime %><i></i></td>
+                                    <td><a href="OrderDetail.aspx?acDes=<%=infoModels.ID %>">查看详情</a><i></i></td>
+                                </tr>
+                                <% } %>
+                            </table>
+                        </div>
+                        <div class="pagination">
+                            <webdiyer:AspNetPager ID="AspNetPager1" runat="server"
+                                OnPageChanging="AspNetPager1_PageChanging" OnPageChanged="AspNetPager1_PageChanged" CurrentPageButtonPosition="Center"
+                                Width="100%" HorizontalAlign="center" AlwaysShowFirstLastPageNumber="true" PagingButtonSpacing="10" FirstPageText="首页"
+                                LastPageText="尾页" NextPageText="下一页" PrevPageText="上一页" CustomInfoHTML="第%CurrentPageIndex%页，共%PageCount%页，每页%PageSize%条" ShowCustomInfoSection="Left" ShowPageIndexBox="Never" UrlPaging="True">
+                            </webdiyer:AspNetPager>
+                        </div>
+                    </div>
+                </div>
+                <asp:HiddenField runat="server" ID="hiddenGameName" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hiddenAreaName" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hiddenServerName" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hiddenTimeSpan" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hiddenOrderStatus" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hiddenOrderBy" ClientIDMode="Static" />
+            </form>
         </div>
-        <form id="mainForm" runat="server">
-            <div class="con-main-main">
-                <h3>
-                    <!--[if lt IE 7 ]><span style="zoom: 1;"></span><![endif]-->
-                    <i></i>点卡订单</h3>
-                <div class="con">
-                    <div class="cntrl-bar">
-                        <div class="pop-box">
-                            <!--[if lt IE 7 ]><span style="zoom: 1;"></span><![endif]-->
-                            <i></i>
-                            <asp:Label runat="server" ID="labelGameArea" ClientIDMode="Static" CssClass="name">服务区</asp:Label>
-                            <div class="inner-pop">
-                                <a class="cur">网通区</a>
-                                <a>电信区</a>
-                                <a>双线区</a>
-                            </div>
-                        </div>
-                        <div class="pop-box">
-                            <!--[if lt IE 7 ]><span style="zoom: 1;"></span><![endif]-->
-                            <i></i>
-                            <asp:Label runat="server" ID="lableGameServer" ClientIDMode="Static" CssClass="name">游戏区</asp:Label>
-                            <div class="inner-pop">
-                                <% foreach (var serverItem in CurrentServers)
-                                   {
-                                       if (serverItem.ServerName.Trim() == lableGameServer.Text.Trim())
-                                       { %>
-                                <a class="cur"><%= serverItem.ServerName %></a>
-                                <% }
-                                      else
-                                                           {%>
-                                <a><%=serverItem.ServerName %></a>
-                                <% }
-                                                       } %>
-                            </div>
-                        </div>
-                        <div class="pop-box time">
-                            <!--[if lt IE 7 ]><span style="zoom: 1;"></span><![endif]-->
-                            <i></i>
-                            <asp:Label runat="server" CssClass="value" ID="labelTimeSpan">2013-11-06至2014-11-13</asp:Label>
-                            <div class="inner-pop">
-                                <input type="text" class="date_input" hidden>
-                                <input type="text" class="date_input" hidden>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-box">
-                        <table>
-                            <tr>
-                                <th>订单号</th>
-                                <th>区服</th>
-                                <th>价格<i></i></th>
-                                <th>订单状态<i></i></th>
-                                <th>日期<i></i></th>
-                                <th width="80">操作</th>
-                            </tr>
-                            <% foreach (var infoModels in CurrentPageInfoModels)
-                               {%>
-                            <tr>
-                                <td><%=infoModels.OrderNo %></td>
-                                <td><a title="<%=GetAccountPropertyByAccountModel(infoModels) %>"><%=GetAccountPropertyByAccountModel(infoModels) %></a></td>
-                                <td><%=infoModels.Price %> <i></i></td>
-                                <td><%=GetOrderStatusStr(infoModels.OrderStatus) %></td>
-                                <td><%=infoModels.SubmitTime %><i></i></td>
-                                <td><a href="OrderDetail.aspx?acDes=<%=infoModels.ID %>">查看详情</a><i></i></td>
-                            </tr>
-                            <% } %>
-                        </table>
-                    </div>
-                    <div class="pagination">
-                        <webdiyer:AspNetPager ID="AspNetPager1" runat="server"
-                            OnPageChanging="AspNetPager1_PageChanging" OnPageChanged="AspNetPager1_PageChanged" CurrentPageButtonPosition="Center"
-                            Width="100%" HorizontalAlign="center" AlwaysShowFirstLastPageNumber="true" PagingButtonSpacing="10" FirstPageText="首页"
-                            LastPageText="尾页" NextPageText="下一页" PrevPageText="上一页" CustomInfoHTML="第%CurrentPageIndex%页，共%PageCount%页，每页%PageSize%条" ShowCustomInfoSection="Left" ShowPageIndexBox="Never" UrlPaging="True">
-                        </webdiyer:AspNetPager>
-                    </div>
-                </div>
-            </div>
-            <asp:HiddenField runat="server" ID="hiddenGameName" ClientIDMode="Static"/>
-            <asp:HiddenField runat="server" ID="hiddenAreaName" ClientIDMode="Static" />
-            <asp:HiddenField runat="server" ID="hiddenServerName" ClientIDMode="Static" />
-            <asp:HiddenField runat="server" ID="hiddenTimeSpan" ClientIDMode="Static"/>
-            <asp:HiddenField runat="server" ID="hiddenOrderStatus" ClientIDMode="Static"/>
-            <asp:HiddenField runat="server" ID="hiddenOrderBy" ClientIDMode="Static"/>
-        </form>
     </div>
 </asp:Content>

@@ -8,7 +8,7 @@
     <title>七七交易网-征途2专区</title>
     <link rel="stylesheet" href="/style/base.css" media="all" />
     <link rel="stylesheet" href="/style/style.css" media="all" />
-<%--    <script src="/js/jquery-2.0.3.min.js"></script>--%>
+    <%--    <script src="/js/jquery-2.0.3.min.js"></script>--%>
     <script src="/Js/jquery-1.11.0.min.js"></script>
     <script src="/Js/common.js"></script>
     <script src="/js/plugin/date_input/jquery.date_input.js"></script>
@@ -21,14 +21,14 @@
             <div class="head1_left">
                 <ul>
                     <li><a href="Index.aspx">
-                        <img src="/style/images/demo/77.png" alt=""></a></li>
+                        <img src="/style/images/demo/77.png" alt="" /></a></li>
                     <li>电话：010-59792630</li>
                     <li>企业QQ：4002887777</li>
                 </ul>
             </div>
             <div class="head1_right">
                 <ul>
-                    <% if (CurrentUserName!="游客")
+                    <% if (CurrentUserName != "游客")
                        {%>
                     <li>
                         <h2>您好，<a href="/User/Index.aspx"><%=CurrentUserName %></a></h2>
@@ -36,7 +36,7 @@
                     <li>
                         <h2><a href="http://zt2.887777.com/help.html">帮助</a></h2>
                     </li>
-                     <li>
+                    <li>
                         <h2><a href="#">退出</a></h2>
                     </li>
                     <% }
@@ -88,23 +88,16 @@
         </nav>
         <section class="con-main">
             <div class="con-main-top"></div>
-            <div class="con-main-middle">
-                <div class="inner clearfix">
-                    <p class="bcn"></p>
-                    <div class="fill-list fill-list1">
-                        <asp:ContentPlaceHolder runat="server" ID="center"></asp:ContentPlaceHolder>
-                    </div>
-                </div>
-            </div>
+            <asp:ContentPlaceHolder runat="server" ID="center"></asp:ContentPlaceHolder>
             <div class="con-main-bottom"></div>
         </section>
     </section>
     <!-- /content -->
     <!-- footer -->
     <footer>
-        <a href="">
+        <a href="#">
             <img src="/style/images/demo/jr.png" height="43" width="113" alt="" /></a>
-        <a href="">
+        <a href="#">
             <img src="/style/images/demo/77.png" height="30" width="134" alt="" /></a>
         <p>京ICP备10014751号 京网文[2011]0082-031号 京ICP证100162号 电子商务经营者信息公示 Copyright © 2010 北京易网合纵网络科技有限公司 All Rights Reserved 版权所有 不得转载</p>
     </footer>

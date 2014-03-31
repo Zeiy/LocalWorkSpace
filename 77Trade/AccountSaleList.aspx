@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AccountSaleList.aspx.cs" Inherits="_77Trade.AccountSaleList" MasterPageFile="Common.Master" %>
-
 <%@ Register Assembly="AspNetPager" Namespace="Wuqi.Webdiyer" TagPrefix="webdiyer" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="center" runat="server">
     <link href="Js/JqueryTips/colortip-1.0-jquery.css" rel="stylesheet" />
@@ -30,6 +29,8 @@
         });
     </script>
     <script type="text/javascript">$($.date_input.initialize);</script>
+        <div class="con-main-middle">
+        <div class="inner">
     <div class="tab-box tab2">
         <form method="post" runat="server" id="mainForm">
             <div class="trigger">
@@ -91,6 +92,8 @@
             <asp:HiddenField runat="server" ID="hiddenOrderBy" ClientIDMode="Static"/>
         </form>
     </div>
+            </div>
+            </div>
     <script type="text/javascript">
         $('[data-model]').colorTip({ color: 'blue' });
     </script>

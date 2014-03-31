@@ -1,4 +1,5 @@
-﻿using DataAccess.DataLogic;
+﻿using System.Web.UI;
+using DataAccess.DataLogic;
 using DataAccess.Model;
 using System;
 using System.Collections.Generic;
@@ -154,7 +155,7 @@ namespace _77Trade
             ClientScript.RegisterClientScriptBlock(GetType(), "alert", "<script>alert('游戏所属大区选择有误，请重新选择！')</script>");
                 return;
             }
-            if (!int.TryParse(Request.Form.Get("gameServer"), out serverId))
+           if (!int.TryParse(hiddenGameServer.Value, out serverId))
             {
                 
                 ClientScript.RegisterClientScriptBlock(GetType(), "alert", "<script>alert('游戏所在属大区无服务器！')</script>");

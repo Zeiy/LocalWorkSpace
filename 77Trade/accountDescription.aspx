@@ -1,15 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="accountDescription.aspx.cs" Inherits="_77Trade.accountDescription" %>
-
-<%@ Register Src="~/UserControls/NavigateTop.ascx" TagPrefix="uc1" TagName="NavigateTop" %>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>账号信息2</title>
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <link type="text/css" href="global/css/style.css" rel="stylesheet" />
-    <script src="global/js/jquery.min.js" type="text/javascript"></script>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="accountDescription.aspx.cs" Inherits="_77Trade.accountDescription" MasterPageFile="Common.Master" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="center" runat="server">
     <script type="text/javascript">
         function radioShow() {
             var myradio = document.getElementsByName("radio");
@@ -24,21 +14,11 @@
             }
         }
     </script>
-        <script src="Js/fileupload/jquery.ui.widget.js"></script>
+    <script src="Js/fileupload/jquery.ui.widget.js"></script>
     <script src="Js/fileupload/jquery.fileupload.js"></script>
-</head>
-<body>
-    <div class="header bg2 center">
-        <div class="logo">
-            <h1><a href="/" title="巨人网络">巨人网络</a></h1>
-        </div>
-        <div class="clear"></div>
-        <uc1:NavigateTop runat="server" ID="NavigateTop" />
-        <div class="clear"></div>
-    </div>
-    <!-- header end -->
-    <div class="main">
-        <div class="box">
+
+    <div class="con-main-middle" style="padding: 0px">
+        <div class="inner" style="overflow: hidden">
             <div class="page-left">
                 <div class="c1">
                     <h3>交易指南</h3>
@@ -57,7 +37,7 @@
             <!-- left end -->
             <div class="page-right">
                 <h3>添加帐号描述信息</h3>
-                <div class="content">
+                <div class="content" style="padding-top: 0">
                     <div class="tips">请务必正确填写以下信息，否则无法通过信息审核</div>
                     <div class="info2">
                         <form runat="server" method="post" enctype="multipart/form-data">
@@ -111,22 +91,22 @@
                                                 <table width="509" style="border-collapse: collapse">
                                                     <tr>
                                                         <td height="190">
-                                                            <img src="global/images/nopic2.gif" id="imggameImgA"style="height: 180px; width: 180px; border: 1px solid #001627;" /></td>
+                                                            <img src="global/images/nopic2.gif" id="imggameImgA" style="height: 180px; width: 180px; border: 1px solid #001627;" /></td>
                                                         <td>
                                                             <img src="global/images/nopic2.gif" id="imggameImgB" style="height: 180px; width: 180px; border: 1px solid #001627;" /></td>
                                                     </tr>
 
                                                     <tr>
                                                         <td height="35">
-                                                               <input name="gameImg" type="file" id="gameImgA" style="width: 65px; height: 21px" />&nbsp &nbsp<span id="msgImgA">选择上传图片</span>&nbsp &nbsp &nbsp
-                                                               <input type="button" name="Button1" value="上传"  style="height: 22px;display: none" />
-                                                               <input type="button" name="Button7" value="删除"  onclick="javascript: window.location.reload();" style="height: 22px;display: none" />
-                                                               <asp:HiddenField runat="server" Value="" ID="hiddenimggameImgA" />
+                                                            <input name="gameImg" type="file" id="gameImgA" style="width: 65px; height: 21px" />&nbsp &nbsp<span id="msgImgA">选择上传图片</span>&nbsp &nbsp &nbsp
+                                                               <input type="button" name="Button1" value="上传" style="height: 22px; display: none" />
+                                                            <input type="button" name="Button7" value="删除" onclick="javascript: window.location.reload();" style="height: 22px; display: none" />
+                                                            <asp:HiddenField runat="server" Value="" ID="hiddenimggameImgA" />
                                                         </td>
                                                         <td>
                                                             <input name="gameImg" type="file" id="gameImgB" style="width: 65px; height: 21px" />&nbsp &nbsp<span>选择上传图片</span>&nbsp &nbsp &nbsp
-                                                               <input type="button" name="Button1" value="上传" style="height: 22px;display: none" />
-                                                               <input type="button" name="Button7" value="删除" onclick="javascript: window.location.reload();" style="height: 22px;display: none" />
+                                                               <input type="button" name="Button1" value="上传" style="height: 22px; display: none" />
+                                                            <input type="button" name="Button7" value="删除" onclick="javascript: window.location.reload();" style="height: 22px; display: none" />
                                                             <asp:HiddenField runat="server" Value="" ID="hiddenimggameImgB" />
                                                         </td>
                                                     </tr>
@@ -141,14 +121,14 @@
                                                     <tr>
                                                         <td height="35">
                                                             <input name="gameImg" type="file" id="gameImgC" style="width: 65px; height: 21px" />&nbsp &nbsp<span>选择上传图片</span>&nbsp &nbsp &nbsp
-                                                               <input type="button" name="Button1" value="上传" style="height: 22px;display: none" />
-                                                               <input type="button" name="Button7" value="删除" onclick="javascript: window.location.reload();" style="height: 22px;display: none" />
+                                                               <input type="button" name="Button1" value="上传" style="height: 22px; display: none" />
+                                                            <input type="button" name="Button7" value="删除" onclick="javascript: window.location.reload();" style="height: 22px; display: none" />
                                                             <asp:HiddenField runat="server" Value="" ID="hiddenimggameImgC" />
                                                         </td>
                                                         <td>
                                                             <input name="gameImg" type="file" id="gameImgD" style="width: 65px; height: 21px" />&nbsp &nbsp<span>选择上传图片</span>&nbsp &nbsp &nbsp
-                                                               <input type="button" name="Button1" value="上传" style="height: 22px;display: none" />
-                                                               <input type="button" name="Button7" value="删除" onclick="javascript: window.location.reload();" style="height: 22px;display: none" />
+                                                               <input type="button" name="Button1" value="上传" style="height: 22px; display: none" />
+                                                            <input type="button" name="Button7" value="删除" onclick="javascript: window.location.reload();" style="height: 22px; display: none" />
                                                             <asp:HiddenField runat="server" Value="" ID="hiddenimggameImgD" />
                                                         </td>
                                                     </tr>
@@ -178,21 +158,7 @@
         </div>
         <div class="clear"></div>
     </div>
-    <!-- main end -->
-    <div class="footer">
-        <div class="fl">
-            <img src="global/images/foot_logo1.png" width="113" height="43" />
-            <img src="global/images/foot_logo2.png" width="140" height="43" />
-        </div>
-        <div class="fr">
-            <p>
-                京ICP备10014751号 京ICP证100162号&nbsp; 京网文[2011]0082-031号&nbsp; 
-		电子商务经营者信息公示<br />
-                Copyright © 2010 北京易网合纵网络科技有限公司 All Rights Reserved 
-		版权所有 不得转载
-            </p>
-        </div>
-    </div>
+
     <script type="text/javascript">
         //校验文件的错误信息
         var ErrorMsg = "";
@@ -212,10 +178,10 @@
                 return false;
             }
         };
-        $(document).ready(function() {
+        $(document).ready(function () {
             $("#gameImgA,#gameImgB,#gameImgC,#gameImgD").fileupload({
                 url: "services/fileSave.ashx",
-                dataType:"json",
+                dataType: "json",
                 formData: { sign: 'gameImg' },
                 add: function (e, data) {
                     var checkRes = CheckFile(data.files[0]);
@@ -255,5 +221,4 @@
         });
 
     </script>
-</body>
-</html>
+</asp:Content>
