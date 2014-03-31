@@ -38,9 +38,17 @@ namespace _77Trade.User
         protected void Unnamed2_Click(object sender, EventArgs e)
         {
             var res = _userBuyOrderDataAccess.Delete(CurrentUser.ID);
+            string returnUrl = Request.QueryString.Get("returnUrl");
             if (res)
             {
                 //todo:删除成功，如果有 返回地址 提示是否返回商品详情页
+                if (!string.IsNullOrEmpty(returnUrl))
+                {
+
+                    ClientScript.RegisterClientScriptBlock(GetType(), "alert",
+                   "<script>if(confirm('订单处理完成，是否跳转到产品页?'){window.location.href='"+returnUrl+"'}</script>");
+                    return;
+                }
                 ClientScript.RegisterClientScriptBlock(GetType(), "alert",
                      "<script>alert('删除成功！');window.location.href='/User/MyBuyOrder.aspx';</script>");
                 return;

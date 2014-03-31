@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Text;
 using DataAccess.DataLogic;
 using DataAccess.Model;
@@ -84,8 +85,7 @@ namespace _77Trade
                 //订单已过公示期可购买,修改订单状态为出售中
                 _log.Info("订单：" + CurrentAccountDescription.OrderNo + "已过公示时间，状态可购买。公示开始时间：" +
           CurrentAccountDescription.EditDate);
-                var result = _userOrderLogic.ChangeAccountStatus(CurrentAccountDescription.ID,
-                       CurrentAccountDescription.AccountInfoID, OrderStatus.GongShi, OrderStatus.ChuShou);
+                var result = _userOrderLogic.ChangeAccountStatus(CurrentAccountDescription.AccountInfoID,CurrentAccountDescription.ID, OrderStatus.GongShi, OrderStatus.ChuShou);
                 if (!result)
                 {
                     _log.Error("订单：" + CurrentAccountDescription.OrderNo + "已过公示时间，状态可购买。公示开始时间：" +
@@ -103,8 +103,9 @@ CurrentAccountDescription.EditDate + "    修改订单状态失败");
                 {
                     //添加订时事件，15分钟后还原订单状态为出售
                     AddOrderReNewTask(CurrentAccountDescription.OrderNo);
+                    var reqUrl = Request.Url;
                     //ClientScript.RegisterClientScriptBlock(GetType(), "alert", "<script>alert('购买成功，请在15分钟内付款！')</script>");
-                    Response.Redirect("/User/MyBuyOrder.aspx");
+                    Response.Redirect("/User/MyBuyOrder.aspx?returnUrl="+reqUrl.AbsolutePath+reqUrl.Query);
                     return;
                 }
             }
@@ -120,6 +121,12 @@ CurrentAccountDescription.EditDate + "    修改订单状态失败");
         {
             try
             {
+                string orderReNewTime = ConfigurationManager.AppSettings.Get("orderReNewTime");
+                int reNewTime;
+                if (!int.TryParse(orderReNewTime, out reNewTime))
+                {
+                    reNewTime = 15;
+                }
                 ISchedulerFactory sf = new StdSchedulerFactory();
                 var scheduler = sf.GetScheduler();
                 //检察任务是否已存在
@@ -136,7 +143,7 @@ CurrentAccountDescription.EditDate + "    修改订单状态失败");
                     IJobDetail job = JobBuilder.Create<ReNewOrderStatus>()
                         .WithIdentity("reNewOrderStatus:" + CurrentAccountDescription.OrderNo, "reNewOrder")
                         .Build();
-                    DateTimeOffset startTime = DateBuilder.NextGivenSecondDate(null, 15);
+                    DateTimeOffset startTime = DateBuilder.NextGivenMinuteDate(null,reNewTime);
                     ISimpleTrigger trigger = (ISimpleTrigger)TriggerBuilder.Create()
                         .WithIdentity("trigger1", "group1")
                         .StartAt(startTime)
