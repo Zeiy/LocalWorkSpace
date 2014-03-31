@@ -30,6 +30,10 @@
         /// 订单审核失败
         /// </summary>
         ShenHeFail =6,
+        /// <summary>
+        /// 订单待付款
+        /// </summary>
+        DaiFuKuan =7,
     }
 
     public enum UserStatus

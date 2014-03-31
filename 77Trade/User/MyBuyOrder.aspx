@@ -13,7 +13,7 @@
                 });
             });
         </script>
-        <form id="form1" method="post" name="form1">
+        <form id="form1" method="post" runat="server" name="form1">
             <div class="item item1 cur">
                 <h3>
                     <i></i>我购买的订单</h3>
@@ -29,15 +29,25 @@
                                 <th>操作
                                 </th>
                             </tr>
-                            <tr>
-                                <td>ZT234345623245354235</td>
-                                <td>征途电信测试3 </td>
-                                <td>2342.2</td>
+                            <% if (string.IsNullOrEmpty(UserBuyOrderPageModel.OrderNo))
+                               { %>
+                                   <tr>
+                                       <td colspan="4">当前没有未处理订单</td>
+                                   </tr>
+                             <% }
+                               else
+                               {%>
+                                    <tr>
+                                <td><%=UserBuyOrderPageModel.OrderNo %></td>
+                                <td><%=UserBuyOrderPageModel.ProductTitle %></td>
+                                <td><%=UserBuyOrderPageModel.Price %></td>
                                 <td>
-                                    <a href="#">立即付款</a>
-                                     <a href="#">删除订单</a>
+                                    <asp:LinkButton runat="server" Text="立即付款"></asp:LinkButton>
+                                     <asp:LinkButton runat="server" Text="删除订单" OnClick="Unnamed2_Click"></asp:LinkButton>
                                 </td>
                             </tr>
+                               <%} %>
+                           
                         </table>
                     </div>
                     <script>
