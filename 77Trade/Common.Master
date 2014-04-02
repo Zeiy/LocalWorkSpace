@@ -78,7 +78,7 @@
                         <i class="icon5"></i>点卡详情</span>
                 </li>
                 <li>
-                    <a href="6 tradeInfo.html"><i class="icon6"></i>我的七七交易</a>
+                    <a href="/User/Index.aspx"><i class="icon6"></i>我的七七交易</a>
                 </li>
                 <li class="last-child">
                     <a href="7 help.html"><i class="icon7"></i>交易指南</a>

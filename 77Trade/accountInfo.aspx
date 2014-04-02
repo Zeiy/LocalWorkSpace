@@ -135,7 +135,7 @@
                                                             <input type="file" name="FileSecretCard" id="secretCardImgUpload" style="width: 65px" />&nbsp &nbsp<span id="msgSecretCard">选择上传图片</span>&nbsp &nbsp &nbsp
                                                     <input type="button" name="Button6" value="上传" id="btnUploadSecretCard" style="height: 22px;" />
                                                             <input type="button" name="Button12" value="删除" onclick="javascript: window.location.reload();" id="Button12" style="height: 22px;" />
-                                                            <asp:HiddenField runat="server" Value="" ID="SecretCardImg" />
+                                                            <asp:HiddenField runat="server" Value="" ID="SecretCardImg"  ClientIDMode="Static"/>
                                                             <div style="font-size: 12px; margin: 10px 0; color: #ffe27e;">
                                                                 如该游戏帐号已在游戏中绑定过密保卡，请上传密保卡信息。<br />
                                                                 请确保上传的图片清晰完整；<br />
@@ -172,7 +172,7 @@
                                                                             <input name="ShenFenA" type="file" id="fileuploadIdentityA" style="width: 65px; height: 21px" />&nbsp &nbsp<span id="msgIdentityA">选择上传图片</span>&nbsp &nbsp &nbsp
                                                                     <input type="button" name="Button1" value="上传新图片" id="btnIdentityAUpload" style="height: 22px;" />
                                                                             <input type="button" name="Button7" value="删除" id="Button7" onclick="javascript: window.location.reload();" style="height: 22px;" />
-                                                                            <asp:HiddenField runat="server" Value="" ID="identityImgA" />
+                                                                            <asp:HiddenField runat="server" Value="" ID="identityImgA"  ClientIDMode="Static"/>
                                                                         </p>
                                                                     </td>
                                                                 </tr>
@@ -185,7 +185,7 @@
                                                                             <input name="ShenFenB" type="file" id="fileupload" style="width: 65px; height: 21px" />&nbsp &nbsp<span id="msg">选择上传图片</span>&nbsp &nbsp &nbsp
                                                                     <input type="button" name="Button1" value="上传新图片" id="upBegin" style="height: 22px;" />
                                                                             <input type="button" name="Button7" value="删除" id="btnCancleShenB" onclick="javascript: window.location.reload();" style="height: 22px;" />
-                                                                            <asp:HiddenField runat="server" Value="" ID="identityImgB" />
+                                                                            <asp:HiddenField runat="server" Value="" ID="identityImgB" ClientIDMode="Static"/>
                                                                         </p>
                                                                         <div style="font-size: 12px; margin: 10px 0; color: #ffe27e;">单张图片需小于512KB，建议为400×250像素，支持jpg、gif、bmp、png格式。</div>
                                                                     </td>

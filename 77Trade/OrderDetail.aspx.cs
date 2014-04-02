@@ -93,7 +93,7 @@ CurrentAccountDescription.EditDate + "    修改订单状态失败");
                     ClientScript.RegisterClientScriptBlock(GetType(), "alert", "<script>alert('更新订单状态失败，请重试！')</script>");
                     return;
                 }
-                
+                CurrentAccountDescription.OrderStatus = OrderStatus.ChuShou;
             }
             //订单本身处于出售期
             if (CurrentAccountDescription.OrderStatus == OrderStatus.ChuShou)

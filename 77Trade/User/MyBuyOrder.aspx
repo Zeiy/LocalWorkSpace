@@ -1,7 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Common.Master" AutoEventWireup="true" CodeBehind="MyBuyOrder.aspx.cs" Inherits="_77Trade.User.MyBuyOrder" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="center" runat="server">
     <%@ Register Src="~/UserControls/UserCenterLeftNav.ascx" TagPrefix="uc1" TagName="UserCenterLeftNav" %>
+        <div class="con-main-middle">
+        <div class="inner" style="overflow: hidden">
     <uc1:UserCenterLeftNav runat="server" ID="UserCenterLeftNav" />
     <div class="con-main-main">
         <script>
@@ -62,4 +63,6 @@
             </div>
         </form>
     </div>
+            </div>
+            </div>
 </asp:Content>

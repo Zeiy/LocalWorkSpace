@@ -101,13 +101,13 @@
                                                             <input name="gameImg" type="file" id="gameImgA" style="width: 65px; height: 21px" />&nbsp &nbsp<span id="msgImgA">选择上传图片</span>&nbsp &nbsp &nbsp
                                                                <input type="button" name="Button1" value="上传" style="height: 22px; display: none" />
                                                             <input type="button" name="Button7" value="删除" onclick="javascript: window.location.reload();" style="height: 22px; display: none" />
-                                                            <asp:HiddenField runat="server" Value="" ID="hiddenimggameImgA" />
+                                                            <asp:HiddenField runat="server" Value="" ID="hiddenimggameImgA" ClientIDMode="Static"/>
                                                         </td>
                                                         <td>
                                                             <input name="gameImg" type="file" id="gameImgB" style="width: 65px; height: 21px" />&nbsp &nbsp<span>选择上传图片</span>&nbsp &nbsp &nbsp
                                                                <input type="button" name="Button1" value="上传" style="height: 22px; display: none" />
                                                             <input type="button" name="Button7" value="删除" onclick="javascript: window.location.reload();" style="height: 22px; display: none" />
-                                                            <asp:HiddenField runat="server" Value="" ID="hiddenimggameImgB" />
+                                                            <asp:HiddenField runat="server" Value="" ID="hiddenimggameImgB" ClientIDMode="Static"/>
                                                         </td>
                                                     </tr>
 
@@ -123,13 +123,13 @@
                                                             <input name="gameImg" type="file" id="gameImgC" style="width: 65px; height: 21px" />&nbsp &nbsp<span>选择上传图片</span>&nbsp &nbsp &nbsp
                                                                <input type="button" name="Button1" value="上传" style="height: 22px; display: none" />
                                                             <input type="button" name="Button7" value="删除" onclick="javascript: window.location.reload();" style="height: 22px; display: none" />
-                                                            <asp:HiddenField runat="server" Value="" ID="hiddenimggameImgC" />
+                                                            <asp:HiddenField runat="server" Value="" ID="hiddenimggameImgC" ClientIDMode="Static"/>
                                                         </td>
                                                         <td>
                                                             <input name="gameImg" type="file" id="gameImgD" style="width: 65px; height: 21px" />&nbsp &nbsp<span>选择上传图片</span>&nbsp &nbsp &nbsp
                                                                <input type="button" name="Button1" value="上传" style="height: 22px; display: none" />
                                                             <input type="button" name="Button7" value="删除" onclick="javascript: window.location.reload();" style="height: 22px; display: none" />
-                                                            <asp:HiddenField runat="server" Value="" ID="hiddenimggameImgD" />
+                                                            <asp:HiddenField runat="server" Value="" ID="hiddenimggameImgD" ClientIDMode="Static" />
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -150,7 +150,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <asp:HiddenField ID="accountInfoID" runat="server" />
+                            <asp:HiddenField ID="accountInfoID" runat="server" ClientIDMode="Static"/>
                         </form>
                     </div>
                 </div>
