@@ -34,7 +34,8 @@
                                       <asp:ListItem Value="4">公示中订单</asp:ListItem>
                                       <asp:ListItem Value="5">出售中订单</asp:ListItem>
                                       <asp:ListItem Value="0">出售成功订单</asp:ListItem>
-                                       <asp:ListItem Value="6">审核失败</asp:ListItem>
+                                       <asp:ListItem Value="6">审核失败</asp:ListItem> 
+                                      <asp:ListItem Value="7">待付款</asp:ListItem>
                                       <asp:ListItem></asp:ListItem>
                                 </asp:DropDownList>
 								</label>
@@ -119,5 +120,5 @@
         <!--/span-->
 
     </div>
-    <!--/row-->
+
 </asp:Content>

@@ -143,9 +143,11 @@ CurrentAccountDescription.EditDate + "    修改订单状态失败");
                     IJobDetail job = JobBuilder.Create<ReNewOrderStatus>()
                         .WithIdentity("reNewOrderStatus:" + CurrentAccountDescription.OrderNo, "reNewOrder")
                         .Build();
-                    DateTimeOffset startTime = DateBuilder.NextGivenMinuteDate(null,reNewTime);
+                    DateTimeOffset startTime = DateBuilder.FutureDate(reNewTime,IntervalUnit.Minute);
+                    _log.Info(reNewTime);
+                    _log.Info(startTime.DateTime);
                     ISimpleTrigger trigger = (ISimpleTrigger)TriggerBuilder.Create()
-                        .WithIdentity("trigger1", "group1")
+                        .WithIdentity("trigger1" + CurrentAccountDescription.OrderNo, "group1")
                         .StartAt(startTime)
                         .Build();
                     //把订单号，InfoID号写入DataMap 执行任务时修改订单状态
