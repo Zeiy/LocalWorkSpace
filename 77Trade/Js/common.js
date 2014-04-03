@@ -1,16 +1,54 @@
-$(document).ready(function() {
+$(document).ready(function () {
+    //用户退出
+    $("#logOut").click(function() {
+     /*    $.getJSON("/services/UserLogOut.ashx", function(data) {
+             alert(data);
+             alert("asdf");
+         });    */
+        $.ajax({
+            url: '/services/UserLogOut.ashx',
+            type: "post",
+            dataType:"json",
+            success: function(data) {
+                if (data.Status == 1) {
+                    window.location.href="/User/Login.aspx";
+                }
+            },
+            error: function() {
+                alert("Success");
+            }
+        });
+    });
+   
+
+
+
+
+
+    //页面加载时根据url渲染主导航
+    var currentPageUrl = window.location.toString().split("/")[3];
+    //根据Url拿到须要渲染的Li元素
+    var elementLi = $(".menu a[href=\"/" + currentPageUrl + "\"]").parent();
+    if (elementLi.length == 0) {
+        if (window.location.toString().split("/")[3] == "User") {
+            elementLi = $(".menu li").eq(5);
+        }
+    }
+    elementLi.addClass("cur").siblings().removeClass("cur");
+    //重写Li中的元素
 	// menu 切换
 	positionMenuBg($(".menu .cur"));
-	$(".menu li").hover(function() {
-		positionMenuBg($(this));
-	}, function() {
-		positionMenuBg($(".menu .cur"));
-	})
+    $(".menu li").hover(function() {
+        positionMenuBg($(this));
+    }, function() {
+        positionMenuBg($(".menu .cur"));
+    });
 	if ("transform" in document.createElement("div").style || "-webkit-transform" in document.createElement("div").style) {
 	    $(".menu .cur").addClass('scaletoorignal');
 	}
 	function positionMenuBg($self) {
-		var lcw =  $self.width();
+	    var lcw = $self.width();
+        //如果是第一个或是最后一个则添加圆角边框
 			if ($self.is(":first-child")) {
 				$(".menu .bg").css('border-radius', '3px 0 0 3px');
 			}else if ($self.is(":last-child")) {

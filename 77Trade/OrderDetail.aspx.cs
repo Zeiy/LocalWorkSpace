@@ -105,7 +105,7 @@ CurrentAccountDescription.EditDate + "    修改订单状态失败");
                     AddOrderReNewTask(CurrentAccountDescription.OrderNo);
                     var reqUrl = Request.Url;
                     //ClientScript.RegisterClientScriptBlock(GetType(), "alert", "<script>alert('购买成功，请在15分钟内付款！')</script>");
-                    Response.Redirect("/User/MyBuyOrder.aspx?returnUrl="+reqUrl.AbsolutePath+reqUrl.Query);
+                    Response.Redirect("/UserBuyOrder/chargeInfo.aspx");
                     return;
                 }
             }

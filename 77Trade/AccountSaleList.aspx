@@ -35,7 +35,7 @@
         <form method="post" runat="server" id="mainForm">
             <div class="trigger">
                 <a href="accountInfo.aspx">发布帐号</a>
-                <a style="left: -70px; right: 157px;" orderstatus="3,6" class="cur">审核期</a>
+                <a style="left: -70px; right: 157px;" orderstatus="3" class="cur">审核期</a>
                 <a style="left: -150px;" orderstatus="4">公示期</a>
                 <a style="left: -210px;" orderstatus="5">出售期</a>
                 <a style="left: -290px;" orderstatus="0">出售成功</a>

@@ -34,6 +34,14 @@
         /// 订单待付款
         /// </summary>
         DaiFuKuan =7,
+        /// <summary>
+        /// 用户付款完成，待提交过户资料
+        /// </summary>
+        DaiWanShangZhiLiao=8,
+        /// <summary>
+        /// 提交完过户资料后等待过户
+        /// </summary>
+        GuoHuZhong = 9,
     }
 
     public enum UserStatus

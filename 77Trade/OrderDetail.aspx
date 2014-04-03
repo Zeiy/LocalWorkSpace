@@ -140,6 +140,7 @@
             });
 
             //如果订单处于公示期则添加倒计时
+            //:todo 只有公示期订单才显示倒计时
             var timeContainer = $("#timeWait");
             var now = new Date(<%=DateTime.Now.Year%>,<%=DateTime.Now.Month%>-1,<%=DateTime.Now.Day%>,<%=DateTime.Now.Hour%>,<%=DateTime.Now.Minute%>,<%=DateTime.Now.Second%>); 
             var endDate = new Date(<%=CurrentAccountDescription.EditDate.Year%>,<%=CurrentAccountDescription.EditDate.Month%>-1,<%=CurrentAccountDescription.EditDate.Day%>+3,<%=CurrentAccountDescription.EditDate.Hour%>,<%=CurrentAccountDescription.EditDate.Minute%>,<%=CurrentAccountDescription.EditDate.Second%>); 

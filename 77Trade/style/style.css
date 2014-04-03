@@ -172,6 +172,9 @@ header {
 	vertical-align: middle;
 	width: 25px;
 }
+.menu .icon1 {
+	background-image: url(images/main-icon1.png);
+}
 .menu .icon2 {
 	background-image: url(images/main-icon2.png);
 }

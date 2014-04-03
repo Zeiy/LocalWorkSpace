@@ -63,6 +63,18 @@ namespace _77Trade
                 {
                     return "查看失败原因";
                 }
+                case OrderStatus.DaiFuKuan:
+                {
+                    return "待付款";
+                }
+                    case OrderStatus.DaiWanShangZhiLiao:
+                {
+                    return "待完善资料";
+                }
+                    case OrderStatus.GuoHuZhong:
+                {
+                    return "过户中";
+                }
                 default:
                     {
                         return "未知状态";

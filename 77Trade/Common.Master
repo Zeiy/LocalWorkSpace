@@ -37,7 +37,7 @@
                         <h2><a href="http://zt2.887777.com/help.html">帮助</a></h2>
                     </li>
                     <li>
-                        <h2><a href="#">退出</a></h2>
+                        <h2><a href="#" id="logOut">退出</a></h2>
                     </li>
                     <% }
                        else
@@ -60,22 +60,20 @@
     <section class="content grid1">
         <nav class="menu">
             <ul>
-                <li>
-                    <a href="/Index.aspx"><i class="icon1"></i>专区首页</a>
+                <li class="cur">
+                     <a href="/Index.aspx"><i class="icon1"></i>专区首页</a>
                 </li>
                 <li>
                     <a href="2 buyInfo.html"><i class="icon2"></i>求购详情</a>
                 </li>
                 <li>
-                    <a href="3 sellInfo.html"><i class="icon3"></i>出售详情</a>
+                      <a href="/BillList.aspx"><i class="icon2"></i>出售详情</a>
                 </li>
                 <li>
                     <a href="/accountInfo.aspx"><i class="icon4"></i>发布帐号</a>
                 </li>
-                <li class="cur">
-                    <span>
-                        <!--[if lt IE 7 ]><em style="zoom: 1;"></em><![endif]-->
-                        <i class="icon5"></i>点卡详情</span>
+                <li>
+                    <a href="2 buyInfo.html"><i class="icon2"></i>优惠点卡</a>
                 </li>
                 <li>
                     <a href="/User/Index.aspx"><i class="icon6"></i>我的七七交易</a>

@@ -63,6 +63,7 @@ namespace _77Trade
                     WhereStr = "where GameArea ='" + gamesArea.AreaName + "' and ServerName = '" +
                                gameServer.ServerName.Trim()+"' and OrderStatus in (4,5)";
                 }
+                WhereStr = "where OrderStatus in (4,5)";
                 //给时间添加一个默认值
                 hiddenTimeSpan.Value = "2012-11-06至2016-11-13";
                 int rowCount = 0, outPageCount = 0;

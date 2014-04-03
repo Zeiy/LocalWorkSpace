@@ -49,7 +49,7 @@
                 </div>
             </div>
             <form id="mainForm" runat="server">
-                <div class="con-main-main">
+                <div class="con-main-main" style="height:550px">
                     <h3>
                         <!--[if lt IE 7 ]><span style="zoom: 1;"></span><![endif]-->
                         <i></i>点卡订单</h3>
@@ -125,7 +125,7 @@
                         </div>
                     </div>
                 </div>
-                <asp:HiddenField runat="server" ID="hiddenGameName" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hiddenGameName" ClientIDMode="Static" Value="征途"/>
                 <asp:HiddenField runat="server" ID="hiddenAreaName" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hiddenServerName" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hiddenTimeSpan" ClientIDMode="Static" />

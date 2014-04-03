@@ -65,6 +65,50 @@ namespace DataAccess.Model
         }
 
         public OrderStatus OrderStatus { get; set; }
-
+        /// <summary>
+        /// UserName
+        /// </summary>		
+        private string _username;
+        public string UserName
+        {
+            get { return _username; }
+            set { _username = value; }
+        }
+        /// <summary>
+        /// Mobile
+        /// </summary>		
+        private string _mobile;
+        public string Mobile
+        {
+            get { return _mobile; }
+            set { _mobile = value; }
+        }
+        /// <summary>
+        /// Address
+        /// </summary>		
+        private string _address;
+        public string Address
+        {
+            get { return _address; }
+            set { _address = value; }
+        }
+        /// <summary>
+        /// Email
+        /// </summary>		
+        private string _email;
+        public string Email
+        {
+            get { return _email; }
+            set { _email = value; }
+        }
+        /// <summary>
+        /// ShenFenID
+        /// </summary>		
+        private string _shenfenid;
+        public string ShenFenID
+        {
+            get { return _shenfenid; }
+            set { _shenfenid = value; }
+        }
     }
 }

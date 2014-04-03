@@ -101,11 +101,14 @@
     <Content Include="ServerSelect.aspx" />
     <Content Include="services\FileSave.ashx" />
     <Content Include="SQL\pagerProc.sql" />
+    <Content Include="UserBuyOrder\chargeInfo.aspx" />
+    <Content Include="UserBuyOrder\CompleteBuyInfo.aspx" />
     <Content Include="UserControls\NavigateTop.ascx" />
     <Content Include="Common.Master" />
     <None Include="Properties\PublishProfiles\FTPFrontPublish.pubxml" />
     <None Include="Properties\PublishProfiles\testEnvironment.pubxml" />
     <Content Include="services\GetGameServerList.ashx" />
+    <Content Include="services\UserLogOut.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -292,6 +295,23 @@
     </Compile>
     <Compile Include="services\GetGameServerList.ashx.cs">
       <DependentUpon>GetGameServerList.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="services\UserLogOut.ashx.cs">
+      <DependentUpon>UserLogOut.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="UserBuyOrder\chargeInfo.aspx.cs">
+      <DependentUpon>chargeInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserBuyOrder\chargeInfo.aspx.designer.cs">
+      <DependentUpon>chargeInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserBuyOrder\CompleteBuyInfo.aspx.cs">
+      <DependentUpon>CompleteBuyInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserBuyOrder\CompleteBuyInfo.aspx.designer.cs">
+      <DependentUpon>CompleteBuyInfo.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\NavigateTop.ascx.cs">
       <DependentUpon>NavigateTop.ascx</DependentUpon>

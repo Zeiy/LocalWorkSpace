@@ -23,8 +23,9 @@ namespace _77Trade.Logic
         {
             //同时修改两个表的OrderStatuso 为7 待付款   写入订单表
             var str1 = "update AccountInfo set OrderStatus = 7 where OrderStatus =5 and ID =" + accountInfoId;
-            var str2 = "update AccountDescription set OrderStatus = 7 where OrderStatus =5 and OrderNo = '"+productOrderNo+"'";
-            var str3 = "insert into UserBuyOrder (OrderNo,UserID,CreateDate,EditDate) values ('"+productOrderNo+"',"+userId+",'"+DateTime.Now.ToString()+"','"+DateTime.Now.ToString()+"') ;select @@IDENTITY;";
+            //更新修改订单的时间，在订单列表页判断订单是否过期
+            var str2 = "update AccountDescription set OrderStatus = 7, EditDate='" + DateTime.Now.ToString() + "' where OrderStatus =5 and OrderNo = '" + productOrderNo + "'";
+            var str3 = "insert into UserBuyOrder (OrderNo,UserID,CreateDate,EditDate,OrderStatus) values ('"+productOrderNo+"',"+userId+",'"+DateTime.Now.ToString()+"','"+DateTime.Now.ToString()+"',7) ;select @@IDENTITY;";
             using (SqlConnection connection=new SqlConnection(DbHelperSQL.connectionString))
             {
                 connection.Open();
@@ -83,7 +84,7 @@ namespace _77Trade.Logic
             {
                 return true;
             }
-            return true;
+            return false;
         }
     }
 }
