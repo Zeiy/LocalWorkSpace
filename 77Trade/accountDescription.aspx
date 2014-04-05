@@ -16,6 +16,7 @@
     </script>
     <script src="Js/fileupload/jquery.ui.widget.js"></script>
     <script src="Js/fileupload/jquery.fileupload.js"></script>
+        <script src="Js/fileupload/load-image.min.js"></script>
 
     <div class="con-main-middle" style="padding: 0px">
         <div class="inner" style="overflow: hidden">
@@ -75,7 +76,7 @@
                                     <tr>
                                         <td align="right" width="20%" valign="top" style="line-height: 24px; font-size: 14px;"></td>
                                         <td width="80%">
-                                            <asp:TextBox runat="server" CssClass="form2" Rows="2" Columns="20" ID="pdDescription" TextMode="MultiLine"></asp:TextBox>
+                                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form2" Rows="2" Columns="20" ID="pdDescription" TextMode="MultiLine"></asp:TextBox>
                                     </tr>
                                     <tr>
                                         <td align="right" width="20%" style="line-height: 24px; font-size: 14px;">商品图片：</td>
@@ -145,7 +146,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2" align="center">
-                                            <asp:Button Text="确认，提交审核" ID="btnSubmit" runat="server" CssClass="btn" OnClick="btnSubmit_Click" />
+                                            <asp:Button Text="确认，提交审核" ID="btnSubmit" runat="server" ClientIDMode="Static" CssClass="btn" OnClick="btnSubmit_Click" />
                                         </td>
                                     </tr>
                                 </tbody>
@@ -178,11 +179,13 @@
                 return false;
             }
         };
+
         $(document).ready(function () {
+            var randomCode = $("#hiddenRandCode").val();
             $("#gameImgA,#gameImgB,#gameImgC,#gameImgD").fileupload({
                 url: "services/fileSave.ashx",
                 dataType: "json",
-                formData: { sign: 'gameImg' },
+                formData: {sign:"gameImg",RandCode: randomCode },
                 add: function (e, data) {
                     var checkRes = CheckFile(data.files[0]);
                     if (!checkRes) {
@@ -212,11 +215,41 @@
                         $("#" + imgID).attr("src", "/uploadfile/gameImg/" + fileName);
                         //把图片地址写入hidden field
                         $("#" + hiddenID).val("/uploadfile/gameImg/" + fileName);
+                    } else {
+                        alert("用户登陆超时，请刷新页面重试！");
                     }
                 },
                 error: function (xhr, txt, error) {
                     $(this).next("span").text(xhr.responseText);
                 },
+            });
+
+
+            $("#btnSubmit").click(function() {
+                if ($("#productProperty").val() == "") {
+                    $("#productProperty").focus();
+                    alert("商品属性名不能为空！");
+                    return false;
+                }
+                if ($("productTitle").val() == "") {
+                    $("productTitle").focus();
+                    alert("商品标题不能为空！");
+                    return false;
+                }
+                if ($("#productPrice").val() == "") {
+                    $("#productPrice").focus();
+                    alert("商品价格不能为空！");
+                    return false;
+                }
+                if (!dataVerify.decimalPrice.test($("#productPrice").val())) {
+                    alert("价格输入错误，请重新输入！");
+                    $("#productPrice").focus();
+                    return false;
+                }
+                if ($("#pdDescription").val() == "") {
+                    alert("商品描述不能为空！");
+                    return false;
+                }
             });
         });
 

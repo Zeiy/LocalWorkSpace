@@ -100,6 +100,7 @@
         <p>京ICP备10014751号 京网文[2011]0082-031号 京ICP证100162号 电子商务经营者信息公示 Copyright © 2010 北京易网合纵网络科技有限公司 All Rights Reserved 版权所有 不得转载</p>
     </footer>
     <!-- /footer -->
+    <input type="hidden" id="hiddenRandCode" value="<%=RandomCode %>"/>
 </body>
 </html>
 

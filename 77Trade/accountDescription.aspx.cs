@@ -1,4 +1,5 @@
-﻿using DataAccess.DataLogic;
+﻿using System.Web;
+using DataAccess.DataLogic;
 using DataAccess.Model;
 using System;
 
@@ -46,7 +47,7 @@ namespace _77Trade
             //价格
             string productPriceStr = productPrice.Text;
             //产品描述
-            string pdDescriptionStr = pdDescription.Text;
+            string pdDescriptionStr =HttpUtility.HtmlEncode(pdDescription.Text);
             //四人图片地址
             decimal decPrice;
             #region 数据校验

@@ -1,6 +1,7 @@
 ﻿var dataVerify = {
     //字母开头， 8-20位
     secretReg: /^[A-Z][a-z\d\_]{7,19}$/i,
+    decimalPrice: /^\d{0,8}\.{0,2}(\d{1,2})?$/,
     //    JQuery
     //手机号码
     regexMobli: /^[1][358][0-9]{9}$/,

@@ -84,6 +84,7 @@
     <Content Include="BillList.aspx" />
     <Content Include="global\images\Thumbs.db" />
     <Content Include="Index.aspx" />
+    <Content Include="Js\AccountInfoPageJS.js" />
     <Content Include="Js\dataVerify.js" />
     <Content Include="Js\fileupload\bootstrap.min.js" />
     <Content Include="Js\fileupload\canvas-to-blob.min.js" />

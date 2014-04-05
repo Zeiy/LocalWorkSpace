@@ -19,10 +19,17 @@ namespace _77Trade
             scheduler.Start();
         }
 
-        protected void Application_end(object sender, EventArgs e)
+        protected void Application_End(object sender, EventArgs e)
         {
             var scheduler = sf.GetScheduler();
             scheduler.Shutdown(true);
+        }
+
+        protected void Session_Start(object sender, EventArgs e)
+        {
+            //添加页面随机值阻止 CSRF 
+            string guidStr = Guid.NewGuid().ToString();
+            Session["RandomCode"] = guidStr;
         }
     }
 }

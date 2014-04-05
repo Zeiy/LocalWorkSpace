@@ -15,6 +15,14 @@ namespace _77Trade
 
         }
 
+        public string RandomCode
+        {
+            get
+            {
+                return Session["RandomCode"].ToString();
+            }
+        }
+
         public string CurrentUserName {
             get
             {

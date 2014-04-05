@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Web;
+using System.Web.SessionState;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Bson;
 
@@ -10,11 +11,24 @@ namespace _77Trade.services
     /// <summary>
     /// fileSave 的摘要说明
     /// </summary>
-    public class FileSave : IHttpHandler
+    public class FileSave : IHttpHandler,IRequiresSessionState
     {
 
         public void ProcessRequest(HttpContext context)
         {
+            /*
+             确保服务器存的每张图片都是有效图片
+             * 在把图片地址保存到数据库的时候修改文件名字
+             */
+            string randCode = context.Session["RandomCode"].ToString();
+            string clientRandomCode = context.Request.Form["RandCode"];
+            if (randCode != clientRandomCode)
+            {
+                context.Response.ContentType = "application/json";
+                context.Response.Charset = "utf-8";
+                context.Response.Write("非法访问");
+                return;
+            }
             //用户选择多次上传图片时，上传时会提交所有上传文件
             string imgType = context.Request.Form["Sign"];
             string uploadPath = HttpContext.Current.Server.MapPath("\\Uploadfile\\");
@@ -53,6 +67,14 @@ namespace _77Trade.services
             //限制同一用户上传图片个数，一个用户只能上传四张图片
             if (file != null)
             {
+                //文件大小
+                if (file.ContentLength > 500000)
+                {
+                    context.Response.ContentType = "application/json";
+                    context.Response.Charset = "utf-8";
+                    context.Response.Write("文件大小有误");
+                    return;
+                }
                 //判断文件类型 gif|jpe?g|png
                 string extension = Path.GetExtension(file.FileName);
                 if (extension != ".gif" && extension != ".jpeg" && extension != ".jpg" && extension != ".png") {
