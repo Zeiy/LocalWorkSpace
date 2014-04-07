@@ -82,7 +82,6 @@
     <Content Include="accountDescription.aspx" />
     <Content Include="AccountSaleList.aspx" />
     <Content Include="BillList.aspx" />
-    <Content Include="global\images\Thumbs.db" />
     <Content Include="Index.aspx" />
     <Content Include="Js\AccountInfoPageJS.js" />
     <Content Include="Js\dataVerify.js" />
@@ -102,6 +101,46 @@
     <Content Include="ServerSelect.aspx" />
     <Content Include="services\FileSave.ashx" />
     <Content Include="SQL\pagerProc.sql" />
+    <Content Include="style\other\ie\DD_belatedPNG_0.0.8a-min.js" />
+    <Content Include="style\other\ie\html5.js" />
+    <Content Include="style\other\ie\ie.css" />
+    <Content Include="style\other\ie\images\btn1_1.png" />
+    <Content Include="style\other\ie\images\btn1_2.png" />
+    <Content Include="style\other\ie\images\btn1_3.png" />
+    <Content Include="style\other\ie\images\btn1_4.png" />
+    <Content Include="style\other\ie\images\btn2_1.png" />
+    <Content Include="style\other\ie\images\btn2_2.png" />
+    <Content Include="style\other\ie\images\btn2_3.png" />
+    <Content Include="style\other\ie\images\hd-bg1.png" />
+    <Content Include="style\other\ie\images\hd-bg2.png" />
+    <Content Include="style\other\ie\images\icon1-1.png" />
+    <Content Include="style\other\ie\images\icon1-2.png" />
+    <Content Include="style\other\ie\images\icon2-1.png" />
+    <Content Include="style\other\ie\images\icon2-2.png" />
+    <Content Include="style\other\ie\images\icon3.png" />
+    <Content Include="style\other\ie\images\icon3_2.png" />
+    <Content Include="style\other\ie\images\lineargradient1.png" />
+    <Content Include="style\other\ie\images\main-icon2.png" />
+    <Content Include="style\other\ie\images\main-icon3.png" />
+    <Content Include="style\other\ie\images\main-icon4.png" />
+    <Content Include="style\other\ie\images\main-icon5.png" />
+    <Content Include="style\other\ie\images\main-icon7.png" />
+    <Content Include="style\other\ie\images\menu-bg.png" />
+    <Content Include="style\other\ie\images\menufirstbg.png" />
+    <Content Include="style\other\ie\images\menulastbg.png" />
+    <Content Include="style\other\ie\images\rgba1.png" />
+    <Content Include="style\other\ie\images\rgba1_2.png" />
+    <Content Include="style\other\ie\images\rgba2.png" />
+    <Content Include="style\other\ie\images\rgba2_2.png" />
+    <Content Include="style\other\ie\images\rgba3.png" />
+    <Content Include="style\other\ie\images\rgba3_2.png" />
+    <Content Include="style\other\ie\images\rgba4.png" />
+    <Content Include="style\other\ie\images\tab1-bg.png" />
+    <Content Include="style\other\ie\images\tab1cur-bg.png" />
+    <Content Include="style\other\ie\images\tab2-bg.png" />
+    <Content Include="style\other\ie\images\tab2cur-bg.png" />
+    <Content Include="style\other\ie\jquery-1.10.2.min.js" />
+    <Content Include="TaskManager.aspx" />
     <Content Include="UserBuyOrder\chargeInfo.aspx" />
     <Content Include="UserBuyOrder\CompleteBuyInfo.aspx" />
     <Content Include="UserControls\NavigateTop.ascx" />
@@ -299,6 +338,13 @@
     </Compile>
     <Compile Include="services\UserLogOut.ashx.cs">
       <DependentUpon>UserLogOut.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="TaskManager.aspx.cs">
+      <DependentUpon>TaskManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TaskManager.aspx.designer.cs">
+      <DependentUpon>TaskManager.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserBuyOrder\chargeInfo.aspx.cs">
       <DependentUpon>chargeInfo.aspx</DependentUpon>

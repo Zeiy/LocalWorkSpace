@@ -13,7 +13,7 @@
                             <img src="<%=CurrentAccountDescription.ProductImgAUrl %>" style="border: 1px solid #001627; padding: 1px;" align="right" width="200px" height="300px" />
                         </div>
                         <div style="margin-left: 200px">
-                            <table width="815" height="300" style="border-collapse: collapse">
+                            <table width="615" height="300" style="border-collapse: collapse">
                                 <tr>
 
                                     <td valign="top" width="83" align="right" style="padding: 10px 0;">

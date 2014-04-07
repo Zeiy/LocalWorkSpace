@@ -1,0 +1,329 @@
+/*------------------------------------------------
+	ie.css
+	Version： 1.0.4
+	Author： zsytssk
+	Description: this is a extra css file for Ugly IE
+	Latest updates: 2013/11/06 09:56
+------------------------------------------------*/
+
+/* icon */
+*html .table-box th span i,
+*html .icon-close,
+*html .icon-caret-down,
+*html .icon-caret-left,
+*html .icon-caret-right,
+*html .icon-caret-up {
+	display: inline;
+	font-size: 0;
+	line-height: 0;
+	zoom: 1;
+}
+*html .icon-caret-down,
+*html .icon-caret-left,
+*html .icon-caret-right,
+*html .icon-caret-up {
+	border-style: solid;
+	height: 0;
+	width: 0;
+	zoom: 1;
+}
+/* IE6 hver */
+
+/* radius */
+
+/* opacity */
+
+/*rgba */
+.overlay {
+	background: transparent url(../images/blank.png) 0 0 repeat;
+}
+.tab-box .tab-list,
+.con-main-sider .con,
+.con-main-main .con {
+	background: transparent url(images/rgba1.png) 0 0 repeat;
+	_background: transparent url(images/rgba1_2.png) 0 0 repeat;
+}
+
+.fill-list3 .payStyle .ps-item,
+.fill-list3 .payStyle .drop-box,
+.table-box th,
+input[type="text"],
+input[type="password"],
+select {
+	background: transparent url(images/rgba2.png) 0 0 repeat;
+}
+
+.con-main-main .cntrl-bar,
+.con-main-sider .con  li,
+.table-box td {
+	background: transparent url(images/rgba3.png) 0 0 repeat;
+	_background: transparent url(images/rgba3_2.png) 0 0 repeat;
+}
+.table-box td {
+	border-bottom: 1px solid #2977b4;
+}
+
+/* ie8 m-a  */
+
+/* float */
+*html .post-box,
+*html .fl,
+*html .fr {
+	display: inline;
+}
+
+/* after float*/
+.afterFloat {
+	*display: inline;
+	*margin-left: 0px;
+	*zoom: 1;
+	*vertical-align: top;
+}
+
+.con-main,
+.con-main-middle,
+.con-main-bottom {
+	*zoom: 1;
+	/*display: inline;*/
+}
+
+/*1* inline block */
+.btn1-1,
+.btn1-2,
+.btn1-3,
+.btn1-4,
+.btn2-1,
+.btn2-2,
+.menu .cur img,
+footer a,
+footer p,
+.tab-box .trigger a,
+.tab1 .tab-list a
+.cntrl-bar i,
+.table-box th span i,
+.pagination ul .num a,
+.con-main-sider h3 i,
+.fill-list3 .payStyle .ps-item,
+.fill-list3 .bank-list a,
+.d-ib {
+	*display: inline;
+	*zoom: 1;
+}
+
+/*1* 3px */
+
+/* PNG */
+.menu li a, .menu li span {
+	_overflow: hidden;
+}
+.menu .icon2 {
+	_background-image: url(images/main-icon2.png);
+}
+.menu .icon3 {
+	_background-image: url(images/main-icon3.png);
+}
+.menu .icon4 {
+	_background-image: url(images/main-icon4.png);
+}
+.menu .icon5 {
+	_background-image: url(images/main-icon5.png);
+}
+.menu .icon7 {
+	_background-image: url(images/main-icon7.png);
+}
+.con-main-sider h3 {
+	_background: transparent url(images/hd-bg1.png) 0 0 no-repeat;
+}
+.con-main-main h3 {
+	_background: transparent url(images/hd-bg2.png) 0 0 no-repeat;
+}
+.tab1 .trigger a {
+	_background: transparent url(images/tab1-bg.png) 0 0 no-repeat;
+}
+.tab1 .trigger .cur {
+	_background-image: url(images/tab1cur-bg.png);
+}
+.tab2 .trigger a {
+	_background: transparent url(images/tab2-bg.png) 0 0 no-repeat;
+}
+.tab2 .trigger .cur {
+	_background-image: url(images/tab2cur-bg.png);
+}
+.btn1-1 {
+	_background: transparent url(images/btn1_1.png) 0 0 no-repeat;
+}
+.btn1-2 {
+	_background: transparent url(images/btn1_2.png) 0 0 no-repeat;
+}
+.btn1-4 {
+	_background: transparent url(images/btn1_4.png) 0 0 no-repeat;
+}
+.btn2-1 {
+	_background: transparent url(images/btn2_1.png) 0 0 no-repeat;
+}
+.btn2-2 {
+	_background: transparent url(images/btn2_2.png) 0 0 no-repeat;
+}
+.con-main-sider h3 i {
+	_background: transparent url(images/icon2-1.png) 0 0 no-repeat;
+}
+.extend h3 i {
+	_background-image: url(images/icon2-2.png);
+}
+.cntrl-bar i {
+	_background: transparent url(images/icon1-2.png) 0 0 no-repeat;
+}
+.cntrl-bar .extend i {
+	_background: transparent url(images/icon1-1.png) 0 0 no-repeat;
+}
+.table-box th span i {
+	_border-color: #000 #01355c #01355c #01355c;
+}
+.table-box th .up i {
+	_border-color: #01355c #01355c #ffffff #01355c;
+}
+.fill-list3 .payStyle .ps-item,
+.fill-list3 .payStyle .drop-box,
+.table-box th  {
+	_background: transparent url(images/rgba2_2.png) 0 0 repeat;
+}
+.menu {
+	background: transparent url(images/menu-bg.png) 0 0 no-repeat;
+}
+.fill-list3 .payStyle .ps-item i {
+	_background: transparent url(images/icon3.png) 0 0 no-repeat;
+}
+.fill-list3 .bank-list i {
+	_background: transparent url(images/icon3_2.png) 0 0 no-repeat;
+}
+.tab1 .tab-list a {
+	_background: transparent url(images/btn2_3.png) 0 0 no-repeat;
+}
+.tab1 .tab-list li .cur {
+	_background-image: url(images/btn1_3.png);
+}
+/* size */
+*html .menu {
+	width: 930px;
+}
+*html .tab1 .tab-list li {
+	width: 883px;
+}
+*html .menu li a, .menu li span {
+	display: inline-block;
+	zoom: 1;
+}
+*html .menu li a:hover {
+	text-decoration: none;
+	color: #ffe27e;
+}
+/* pos-f */
+*html .pos-r {
+	height: 1%;
+}
+*html .pos-f {
+	position: absolute;
+}
+
+/* other */
+a:hover {
+	_color: #ffe27e;
+}
+.clearfix {
+	*zoom: 1;
+}
+em {
+	font-style: normal;
+}
+input[type="text"],
+select {
+	line-height: 25px;
+}
+*html .menu li img {
+	vertical-align: text-bottom;
+}
+*html .tab1 .tab-list .cur {
+	display: inline;
+	zoom: 1;
+}
+.pagination span {
+	*float: left;
+}
+.pagination .disabled {
+	display: none;
+}
+.table-box th span i {
+	*vertical-align: middle;
+}
+.pagination ul .num a {
+	_margin-top: 13px;
+}
+.con-main-main {
+	_margin-left: 235px;
+}
+.fill-list2 .c-main {
+	*position: relative;
+}
+.fill-list2 .c-main a {
+	*position: absolute;
+	*right: 0;
+	*top: 0;
+}
+.fill-list3 .payStyle .ps-item {
+	*margin-right: 3px;
+}
+.fill-list .btn2-1 {
+	*vertical-align: middle;
+}
+.menu li a{
+	*border-right: 1px solid #226895;
+}
+.menu .last-child a {
+	*border-right: 0;
+}
+.fill-list3 .payStyle .drop-box {
+	_padding: 8px;
+}
+.con-main-main .item1 p.last-child {
+	margin-top: 60px;
+}
+.con-main-main .item1 p.last-child a {
+	color: #ff8f17;
+	font-size: 16px;
+	font-weight: bold;
+	margin-right: 50px;
+}
+.con-main-main .item1 p.last-child a:hover {
+	color: #ff8f17;
+}
+.con-main-main .item1 p.last-child img {
+	vertical-align: middle;
+}
+.menu .cur,
+.menu li:hover {
+	*left: 1px;
+}
+.menu li:hover a {
+	*color: #ffe27e;
+}
+.menu .cur span {
+	*border: 1px solid #844700;
+	*left: -1px;
+	*line-height: 50px;
+	*top: -2px;
+	*padding: 0 29px 0 30px;
+	*background: transparent url(images/lineargradient1.png) 0 0 repeat;
+}
+.menu .last-child:hover a, .menu .last-child span {
+	*padding: 0 18px 0 26px;
+}
+.con-main .inner {
+	zoom: 1;
+}
+/*IE 下导航条的动态效果*/
+.menu UL {
+    width: auto;
+}
+.menu LI {
+
+}

@@ -91,18 +91,19 @@
             }
             //添加图片时在Data里判断文件信息，是否符合上传要求
             $("#msgSecretCard").text(data.fileInput[0].value);
+            //在添加绑定之前删除其它绑定
+            $("#btnUploadSecretCard").unbind();
             data.context = $("#btnUploadSecretCard").click(function () {
+                e.preventDefault();
                 $("#msgSecretCard").text("开始上传。。。");
                 data.submit();
-                $(this).hide();
+                //$(this).hide();
             });
-            //临时解决用户重复选择文件上传问题，选择文件后隐藏input 控件
-            $('#secretCardImgUpload').hide();
+            //todo:尝试显示缩略图
+            $("#Image3").attr("src",data.preview);
         },
         done: function (e, data) {
             if (data.result.Status == 1) {
-                //上传成功隐藏上传按钮
-                $("#btnUploadSecretCard").hide();
                 $("#msgSecretCard").text("上传完成。。。");
                 var fileName = data.result.FileName;
                 $("#Image3").attr("src", "/uploadfile/MiBaoKa/" + fileName);
@@ -111,8 +112,6 @@
             }
         },
         error: function (xhr, txt, error) {
-            $("#secretCardImgUpload").show();
-            $("#btnUploadSecretCard").show();
             $("#msgSecretCard").text(xhr.responseText);
             alert(xhr.responseText + "Tset");
         },
@@ -141,18 +140,16 @@
             }
             //添加图片时在Data里判断文件信息，是否符合上传要求
             $("#msgIdentityA").text(data.fileInput[0].value);
+            //在添加绑定之前删除其它绑定
+            $("#btnIdentityAUpload").unbind();
             data.context = $("#btnIdentityAUpload").click(function () {
                 $("#msgIdentityA").text("开始上传。。。");
                 data.submit();
             });
-            //用户重复选择文件上传问题，选择文件后隐藏input 控件
-            $('#fileuploadIdentityA').hide();
         },
         done: function (e, data) {
             if (data.result.Status == 1) {
                 $("#msgIdentityA").text("上传完成。。。");
-                //防止用户重复上传，隐藏上传按钮
-                $("#btnIdentityAUpload").hide();
                 var fileName = data.result.FileName;
                 $("#Image1").attr("src", "/uploadfile/ShenFenZheng/" + fileName);
                 //把图片地址写入隐藏域
@@ -177,7 +174,6 @@
         singleFileUploads: false,
         add: function (e, data) {
             //添加图片时在Data里判断文件信息，是否符合上传要求
-            var msg;
             var checkRes = checkFile(data.files[0]);
             if (!checkRes) {
                 $("#msg").text("文件出错！");
@@ -186,17 +182,16 @@
                 return;
             }
             $("#msg").text(data.fileInput[0].value);
+            //在添加绑定之前删除其它绑定
+            $("#upBegin").unbind();
             data.context = $("#upBegin").click(function () {
                 $("#msg").text("开始上传。。。");
                 data.submit();
             });
-            //用户重复选择文件上传问题，选择文件后隐藏input 控件
-            $('#fileupload').hide();
         },
         done: function (e, data) {
             if (data.result.Status == 1) {
                 var fileName = data.result.FileName;
-                $("#upBegin").hide();
                 $("#msg").text("上传完成。。。");
                 $("#Image2").attr("src", "/uploadfile/ShenFenZheng/" + fileName);
                 //把图片地址写入隐藏域

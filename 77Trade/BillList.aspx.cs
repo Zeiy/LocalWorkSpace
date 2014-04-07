@@ -196,17 +196,14 @@ namespace _77Trade
                 case OrderStatus.ChuShou:
                 {
                     return "出售中";
-                    break;
                 }
                     case OrderStatus.ShenHe:
                 {
                     return "审核中";
-                    break;
                 }
                 case  OrderStatus.GongShi:
                 {
                     return "公示中";
-                    break;
                 }
                 case OrderStatus.SaleSuccess:
                 {
@@ -215,12 +212,10 @@ namespace _77Trade
                 case OrderStatus.NotComplete:
                 {
                     return "订单未完成";
-                    break;
                 }
                 default:
                 {
                     return "未知状态";
-                    break;
                 }
             }
         }

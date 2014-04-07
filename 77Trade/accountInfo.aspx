@@ -6,6 +6,7 @@
     <script src="Js/fileupload/bootstrap.min.js"></script>
     <script src="Js/fileupload/jquery.blueimp-gallery.min.js"></script>
     <script src="Js/fileupload/jquery.fileupload.js"></script>
+    <script src="Js/fileupload/load-image.min.js"></script>
     <script src="Js/dataVerify.js"></script>
     <!-- header end -->
     <div class="con-main-middle" style="padding:0px">
