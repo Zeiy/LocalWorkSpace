@@ -12,7 +12,18 @@
     var propertyPwd = $("#propertyPwd");
     var isBindSecretCard = $("#isBindSecretCard");
     var bindIdentityCard = $("#bindIdentityCard");
-    //页面加载时如果用户有未完成订单渲染页面，如果密保卡号不为空，则把
+    //是否使用密保卡切换
+    var isNotBindSecretCard = $("#isNotBindSecretCard");
+    var imgMibaokaContainer = $("#Image3");
+    var imgShenFenZhengContainerA = $("#Image1");
+    var imgShenFenZhengContainerB = $("#Image2");
+    var btnMiBaoKaUpload = $("#btnUploadSecretCard");
+    var btnShenFenZhengAUpload = $("#btnIdentityAUpload");
+    var btnShenFenZhengBUpload = $("#upBegin");
+    var btnDelMiBaoKa = $("#btnSecretCardDelete");
+    var btnDelShenFenA = $("#Button7");
+    var btnDelShenFenB = $("#btnCancleShenB");
+    var hiddenRandomCode = $("#hiddenRandCode").val();
     $("body").on("mouseover", ".newemail", function () { //鼠标经过提示Email时，高亮该条Email
         $(".newemail").css("background", "#FFF");
         $(this).css("background", "#CACACA");
@@ -26,8 +37,6 @@
     });
     //验证用户输入
     dataVerify.BeginVerify();
-    //是否使用密保卡切换
-    var isNotBindSecretCard = $("#isNotBindSecretCard");
     isNotBindSecretCard.change(function () {
         $("#tr1").hide();
         $("#tr2").hide();
@@ -64,24 +73,16 @@
             return false;
         }
     };
-
-    var hiddenRandomCode = $("#hiddenRandCode").val();
     //密保卡
     $('#secretCardImgUpload').fileupload({
         url: "services/fileSave.ashx?date=" + myDate.getMilliseconds(),
         formData: { sign: "FileSecretCard", RandCode: hiddenRandomCode },
         dataType: 'json',
-        imageMaxWidth: 800,
-        imageMaxHeight: 800,
-        limitMultiFileUploadSize: 512,
-        maxFileSize: 512,
-        maxNumberOfFiles: 1,
-        singleFileUploads: true,
-        replaceFileInput: true,
-        imageCrop: true,//强制裁剪图片
-        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-        limitMultiFileUploads: 1,
         add: function (e, data) {
+            if (imgMibaokaContainer.attr("src") != "global/images/nopic.jpg") {
+                alert("请先删除已上传的图片");
+                return;
+            }
             var checkRes = checkFile(data.files[0]);
             if (!checkRes) {
                 $("#msgSecretCard").text("文件出错！");
@@ -89,48 +90,69 @@
                 data.files = null;
                 return;
             }
-            //添加图片时在Data里判断文件信息，是否符合上传要求
             $("#msgSecretCard").text(data.fileInput[0].value);
             //在添加绑定之前删除其它绑定
-            $("#btnUploadSecretCard").unbind();
-            data.context = $("#btnUploadSecretCard").click(function () {
+           btnMiBaoKaUpload.unbind();
+            data.context = btnMiBaoKaUpload.click(function () {
                 e.preventDefault();
                 $("#msgSecretCard").text("开始上传。。。");
                 data.submit();
-                //$(this).hide();
             });
-            //todo:尝试显示缩略图
-            $("#Image3").attr("src",data.preview);
         },
         done: function (e, data) {
             if (data.result.Status == 1) {
                 $("#msgSecretCard").text("上传完成。。。");
                 var fileName = data.result.FileName;
-                $("#Image3").attr("src", "/uploadfile/MiBaoKa/" + fileName);
-                //把图片地址写入隐藏域
+                imgMibaokaContainer.attr("src", "/uploadfile/MiBaoKa/" + fileName);
                 $("#SecretCardImg").val("/uploadfile/MiBaoKa/" + fileName);
+                //上传完成后解绑事件
+                btnMiBaoKaUpload.unbind();
             }
         },
-        error: function (xhr, txt, error) {
+        error: function (xhr) {
             $("#msgSecretCard").text(xhr.responseText);
-            alert(xhr.responseText + "Tset");
-        },
-        //complete: function () { alert("上传成功")}
+            alert(xhr.responseText);
+        }
     });
 
+    //密保卡删除操作
+    btnDelMiBaoKa.click(function () {
+        var orginSrc = "global/images/nopic.jpg";
+        var fileUrl = $("#Image3").attr("src");
+        if (orginSrc == fileUrl) {
+            alert("未上传图片");
+            return;
+        }
+        var uploadFileName = fileUrl.split("/")[3];
+        if (uploadFileName == "") {
+            alert("没有找到用户上传的图片，请重试！");
+        }
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            url: "/services/filedelete.ashx",
+            data: { FilleName: uploadFileName, FileType: "FileSecretCard" },
+            success: function(data) {
+                if (data.Status == 1) {
+                    $("#Image3").attr("src", orginSrc);
+                    $("#msgSecretCard").text("删除成功！");
+                } else {
+                    alert("删除文件失败，请刷新页面重试！");
+                }
+            }
+        });
+
+    });
     //身份证A
-    $('#fileuploadIdentityA').fileupload({
+    $("#fileuploadIdentityA").fileupload({
         url: "services/fileSave.ashx",
         dataType: 'json',
         formData: { sign: "ShenFenA", RandCode: hiddenRandomCode },
-        imageMaxWidth: 800,
-        imageMaxHeight: 800,
-        maxFileSize: 512,
-        maxNumberOfFiles: 1,
-        imageCrop: true,//强制裁剪图片
-        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-        limitMultiFileUploads: 1,
         add: function (e, data) {
+            if (imgShenFenZhengContainerA.attr("src") != "global/images/card1.jpg") {
+                alert("请先处理已上传的图片！");
+                return;
+            }
             var checkRes = checkFile(data.files[0]);
             if (!checkRes) {
                 $("#msgIdentityA").text("文件出错！");
@@ -141,8 +163,8 @@
             //添加图片时在Data里判断文件信息，是否符合上传要求
             $("#msgIdentityA").text(data.fileInput[0].value);
             //在添加绑定之前删除其它绑定
-            $("#btnIdentityAUpload").unbind();
-            data.context = $("#btnIdentityAUpload").click(function () {
+            btnShenFenZhengAUpload.unbind();
+            data.context = btnShenFenZhengAUpload.click(function () {
                 $("#msgIdentityA").text("开始上传。。。");
                 data.submit();
             });
@@ -151,29 +173,56 @@
             if (data.result.Status == 1) {
                 $("#msgIdentityA").text("上传完成。。。");
                 var fileName = data.result.FileName;
-                $("#Image1").attr("src", "/uploadfile/ShenFenZheng/" + fileName);
+                imgShenFenZhengContainerA.attr("src", "/uploadfile/ShenFenZheng/" + fileName);
                 //把图片地址写入隐藏域
                 $("#identityImgA").val("/uploadfile/ShenFenZheng/" + fileName);
+                btnShenFenZhengAUpload.unbind();
             }
         },
-        error: function (xhr, txt, error) {
+        error: function (xhr) {
             $("#msgIdentityA").text(xhr.responseText);
             alert(xhr.responseText);
-        },
-        //complete: function () { alert("上传成功")}
+        }
     });
+    //身份证A删除操作
+    btnDelShenFenA.click(function () {
+        var orginSrc = "global/images/card1.jpg";
+        var fileUrl = imgShenFenZhengContainerA.attr("src");
+        if (orginSrc == fileUrl) {
+            alert("未上传图片");
+            return;
+        }
+        var uploadFileName = fileUrl.split("/")[3];
+        if (uploadFileName == "") {
+            alert("没有找到用户上传的图片，请重试！");
+        }
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            url: "/services/filedelete.ashx",
+            data: { FilleName: uploadFileName, FileType: "ShenFenA" },
+            success: function (data) {
+                if (data.Status == 1) {
+                   imgShenFenZhengContainerA.attr("src", orginSrc);
+                    $("#msgIdentityA").text("删除成功！");
+                } else {
+                    alert("删除文件失败，请刷新页面重试！");
+                }
+            }
+        });
 
+    });
     //身份证B
     $('#fileupload').fileupload({
         url: "services/fileSave.ashx",
         dataType: 'json',
         formData: { sign: "ShenFenB", RandCode: hiddenRandomCode },
-        maxFileSize: 512,
-        maxNumberOfFiles: 1,
-        limitConcurrentUploads: true,
-        singleFileUploads: false,
         add: function (e, data) {
             //添加图片时在Data里判断文件信息，是否符合上传要求
+            if (imgShenFenZhengContainerB.attr("src") != "global/images/card2.jpg") {
+                alert("请先删除已上传的图片！");
+                return;
+            }
             var checkRes = checkFile(data.files[0]);
             if (!checkRes) {
                 $("#msg").text("文件出错！");
@@ -183,8 +232,8 @@
             }
             $("#msg").text(data.fileInput[0].value);
             //在添加绑定之前删除其它绑定
-            $("#upBegin").unbind();
-            data.context = $("#upBegin").click(function () {
+            btnShenFenZhengBUpload.unbind();
+            data.context = btnShenFenZhengBUpload.click(function () {
                 $("#msg").text("开始上传。。。");
                 data.submit();
             });
@@ -196,13 +245,42 @@
                 $("#Image2").attr("src", "/uploadfile/ShenFenZheng/" + fileName);
                 //把图片地址写入隐藏域
                 $("#identityImgB").val("/uploadfile/ShenFenZheng/" + fileName);
+                btnShenFenZhengBUpload.unbind();
             }
         },
-        error: function (xhr, txt, error) {
+        error: function (xhr) {
             $("#msg").text(xhr.responseText);
             alert(xhr.responseText);
         }
-        //complete: function () { alert("上传成功")}
+    });
+
+    //身份证B删除操作
+    btnDelShenFenB.click(function () {
+        var orginSrc = "global/images/card2.jpg";
+        var fileUrl = imgShenFenZhengContainerB.attr("src");
+        if (orginSrc == fileUrl) {
+            alert("未上传图片");
+            return;
+        }
+        var uploadFileName = fileUrl.split("/")[3];
+        if (uploadFileName == "") {
+            alert("没有找到用户上传的图片，请重试！");
+        }
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            url: "/services/filedelete.ashx",
+            data: { FilleName: uploadFileName, FileType: "ShenFenB" },
+            success: function (data) {
+                if (data.Status == 1) {
+                    imgShenFenZhengContainerB.attr("src", orginSrc);
+                    $("#msg").text("删除成功！");
+                } else {
+                    alert("删除文件失败，请刷新页面重试！");
+                }
+            }
+        });
+
     });
 
     //Email AutoComplete

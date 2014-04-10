@@ -58,7 +58,7 @@ namespace _77Trade
             }
 
             //todo:检察用户订单表中是否已有未付款订单，如果有提示用户是否删除订单
-            bool existOrder = _userBuyOrderDataAccess.ExistsByUserId(user.ID);
+            bool existOrder = _userBuyOrderDataAccess.ExistsByUserIdAndOrderStatus(user.ID,OrderStatus.DaiFuKuan);
             if (existOrder)
             {
                 ClientScript.RegisterClientScriptBlock(GetType(), "alert",

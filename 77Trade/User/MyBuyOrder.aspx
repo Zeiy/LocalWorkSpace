@@ -34,7 +34,9 @@
                                         <th>操作
                                         </th>
                                     </tr>
-                                    <% if (string.IsNullOrEmpty(UserBuyOrderPageModel.OrderNo))
+                                    <% foreach (var userBuyOrderPageModel in UserBuyOrderPageModel)
+                                       {
+                                           if (string.IsNullOrEmpty(userBuyOrderPageModel.OrderNo))
                                        { %>
                                     <tr>
                                         <td colspan="4">当前没有未处理订单</td>
@@ -43,30 +45,31 @@
                                        else
                                        {%>
                                     <tr>
-                                        <td><%=UserBuyOrderPageModel.OrderNo %></td>
-                                        <td><%=UserBuyOrderPageModel.ProductTitle %></td>
-                                        <td><%=UserBuyOrderPageModel.Price %></td>
-                                        <td><%=GetOrderStatusStr(UserBuyOrderPageModel.OrderStatus) %></td>
+                                        <td><%=userBuyOrderPageModel.OrderNo %></td>
+                                        <td><%=userBuyOrderPageModel.ProductTitle %></td>
+                                        <td><%=userBuyOrderPageModel.Price %></td>
+                                        <td><%=GetOrderStatusStr(userBuyOrderPageModel.OrderStatus) %></td>
                                         <td>
-                                            <% if (UserBuyOrderPageModel.OrderStatus == OrderStatus.DaiFuKuan)
+                                            <% if (userBuyOrderPageModel.OrderStatus == OrderStatus.DaiFuKuan)
                                                {%>
                                                  <a href="/UserBuyOrder/chargeInfo.aspx">立即付款</a>  
                                              <asp:LinkButton runat="server" Text="删除订单" OnClick="Unnamed2_Click"></asp:LinkButton>
                                              <%  }
-                                               if (UserBuyOrderPageModel.OrderStatus == OrderStatus.DaiWanShangZhiLiao)
+                                           if (userBuyOrderPageModel.OrderStatus == OrderStatus.DaiWanShangZhiLiao)
                                                { %>
                                                     <a href="/UserBuyOrder/CompleteBuyInfo.aspx">立即完善过户资料</a>  
                                              <asp:LinkButton runat="server" Text="申请退款"></asp:LinkButton>
                                               <% }
-                                               if (UserBuyOrderPageModel.OrderStatus == OrderStatus.GuoHuZhong)
+                                           if (userBuyOrderPageModel.OrderStatus == OrderStatus.GuoHuZhong)
                                                   {%>
                                                      
-                                             <asp:LinkButton runat="server" Text="申请退款"></asp:LinkButton>
+                                             <asp:LinkButton runat="server" Text="请耐心等待"></asp:LinkButton>
                                                  <% }
                                              %>
                                         </td>
                                     </tr>
-                                    <%} %>
+                                    <%} 
+                                       } %>
                                 </table>
                             </div>
                             <script>

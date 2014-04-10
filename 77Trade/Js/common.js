@@ -48,8 +48,12 @@ $(document).ready(function () {
 	}
 	function positionMenuBg($self) {
 	    var lcw = $self.width();
+        //如果是IE
+	    if (!$.support.leadingWhitespace) {
+	        lcw -= 2;}
         //如果是第一个或是最后一个则添加圆角边框
-			if ($self.is(":first-child")) {
+	    if ($self.is(":first-child")) {
+	        lcw = $self.is(".cur") ? 156 : 114;
 				$(".menu .bg").css('border-radius', '3px 0 0 3px');
 			}else if ($self.is(":last-child")) {
 				lcw = $self.is(".cur") ? 146:114;

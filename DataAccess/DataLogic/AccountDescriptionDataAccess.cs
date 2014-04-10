@@ -24,6 +24,7 @@ namespace DataAccess.DataLogic
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
         }
 
+
         /// <summary>
         /// 检察订单是否存在
         /// </summary>
@@ -67,6 +68,7 @@ namespace DataAccess.DataLogic
             {
                 AccountDescription accountdescription = new AccountDescription();
                 accountdescription.ID = Convert.ToInt32(dataRow["ID"]);
+                accountdescription.OrderNo = Convert.ToString(dataRow["OrderNo"]);
                 list.Add(accountdescription);
             }
             return list;

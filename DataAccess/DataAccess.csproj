@@ -64,6 +64,7 @@
     <Compile Include="Model\GameInfo.cs" />
     <Compile Include="Model\GameServer.cs" />
     <Compile Include="Model\FrontUser.cs" />
+    <Compile Include="Model\JsonResult.cs" />
     <Compile Include="Model\UserBuyOrder.cs" />
     <Compile Include="Model\UserBuyOrderPageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

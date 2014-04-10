@@ -20,6 +20,7 @@ namespace _77Trade.services
              确保服务器存的每张图片都是有效图片
              * 在把图片地址保存到数据库的时候修改文件名字
              */
+            ImgSaveResult imgSaveResult = new ImgSaveResult();
             string randCode = context.Session["RandomCode"].ToString();
             string clientRandomCode = context.Request.Form["RandCode"];
             if (randCode != clientRandomCode)
@@ -31,6 +32,7 @@ namespace _77Trade.services
             }
             //用户选择多次上传图片时，上传时会提交所有上传文件
             string imgType = context.Request.Form["Sign"];
+            string fileType = context.Request.Form["fileType"];
             string uploadPath = HttpContext.Current.Server.MapPath("\\Uploadfile\\");
             //如果上传文件分类为空直接返回
             if (string.IsNullOrEmpty(imgType)) {
@@ -57,6 +59,14 @@ namespace _77Trade.services
                 }
                 case "gameImg":
                 {
+                    //参数传递
+                    switch (fileType)
+                    {
+                        case "gameImgA":
+                        {
+                            break;
+                        }
+                    }
                     file = context.Request.Files["gameImg"];
                     uploadPath += "gameImg\\";
                     break;
@@ -72,7 +82,11 @@ namespace _77Trade.services
                 {
                     context.Response.ContentType = "application/json";
                     context.Response.Charset = "utf-8";
-                    context.Response.Write("文件大小有误");
+
+                    imgSaveResult.Status = 2;
+                    imgSaveResult.ErrorMsg = "文件大小有误";
+                    string jsonRes = JsonConvert.SerializeObject(imgSaveResult);
+                    context.Response.Write(jsonRes);
                     return;
                 }
                 //判断文件类型 gif|jpe?g|png
@@ -97,7 +111,6 @@ namespace _77Trade.services
                 }
                 //图片名称由用户ID+图片名称（密保卡、身份证a,身份证b）
                 file.SaveAs(uploadPath + md5Name + extension);
-                ImgSaveResult imgSaveResult = new ImgSaveResult();
                 imgSaveResult.Status = 1;
                 imgSaveResult.FileName = md5Name + extension;
                 string jsonStr = JsonConvert.SerializeObject(imgSaveResult);
@@ -120,6 +133,7 @@ namespace _77Trade.services
         {
             public string FileName { get; set; }
             public int Status { get; set; }
+            public string ErrorMsg { get; set; }
         }
     }
 }

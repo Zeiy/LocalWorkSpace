@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.SessionState;
+using DataAccess.Model;
 using Newtonsoft.Json;
 
 namespace _77Trade.services
@@ -32,11 +33,5 @@ namespace _77Trade.services
                 return false;
             }
         }
-    }
-
-    public class JsonResult
-    {
-        public int Status { get; set; }
-        public string Url { get; set; }
     }
 }

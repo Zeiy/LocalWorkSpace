@@ -100,6 +100,7 @@
     <Content Include="OrderDetail.aspx" />
     <Content Include="ServerSelect.aspx" />
     <Content Include="services\FileSave.ashx" />
+    <Content Include="SQL\sp_CheckOrderStatus.sql" />
     <Content Include="SQL\pagerProc.sql" />
     <Content Include="style\other\ie\DD_belatedPNG_0.0.8a-min.js" />
     <Content Include="style\other\ie\html5.js" />
@@ -149,6 +150,7 @@
     <None Include="Properties\PublishProfiles\testEnvironment.pubxml" />
     <Content Include="services\GetGameServerList.ashx" />
     <Content Include="services\UserLogOut.ashx" />
+    <Content Include="services\FileDelete.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -322,6 +324,7 @@
       <DependentUpon>OrderDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuartzManager\CheckOrderJob.cs" />
     <Compile Include="QuartzManager\ReNewOrderStatus.cs" />
     <Compile Include="ServerSelect.aspx.cs">
       <DependentUpon>ServerSelect.aspx</DependentUpon>
@@ -329,6 +332,9 @@
     </Compile>
     <Compile Include="ServerSelect.aspx.designer.cs">
       <DependentUpon>ServerSelect.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="services\FileDelete.ashx.cs">
+      <DependentUpon>FileDelete.ashx</DependentUpon>
     </Compile>
     <Compile Include="services\FileSave.ashx.cs">
       <DependentUpon>FileSave.ashx</DependentUpon>
@@ -444,6 +450,8 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\SSDT\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="'$(VisualStudioVersion)' == ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="'$(VisualStudioVersion)' != ''" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -24,6 +24,30 @@ namespace DataAccess.DataLogic
             return DbHelperSQL.Query(strSql.ToString());
         }
         /// <summary>
+        /// 根据条件查到AccountInfoModels;
+        /// </summary>
+        /// <param name="strWhere"></param>
+        /// <returns></returns>
+        public List<AccountInfoModel> GetAccountInfoModelsList(string strWhere)
+        {
+            List<AccountInfoModel> accountInfoModels = new List<AccountInfoModel>();
+            DataSet ds = GetList(strWhere);
+            DataTable dt = ds.Tables[0];
+            foreach (DataRow dr in dt.Rows)
+            {
+                AccountInfoModel accountInfoModel = new AccountInfoModel();
+                accountInfoModel.ID = Convert.ToInt32(dr["ID"]);
+                //accountInfoModel.GameName = Convert.ToString(dr["GameName"]).Trim();
+                accountInfoModel.GameArea = Convert.ToString(dr["GameArea"]).Trim();
+                accountInfoModel.GameAccount = Convert.ToString(dr["GameAccount"]).Trim();
+                accountInfoModel.ServerName = Convert.ToString(dr["ServerName"]).Trim();
+                accountInfoModel.GamePassword = Convert.ToString(dr["GamePassword"]).Trim();
+                accountInfoModels.Add(accountInfoModel);
+            }
+            return accountInfoModels;
+        }
+
+        /// <summary>
         /// 拿到所有数据
         /// </summary>
         /// <returns></returns>

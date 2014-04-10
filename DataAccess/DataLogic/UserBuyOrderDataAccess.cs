@@ -41,6 +41,26 @@ namespace DataAccess.DataLogic
 
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
         }
+        /// <summary>
+        /// 检察用户是否存在相应状态的订单
+        /// </summary>
+        /// <param name="userId">用户ID</param>
+        /// <param name="orderStatus">订单状态</param>
+        /// <returns></returns>
+        public bool ExistsByUserIdAndOrderStatus(int userId, OrderStatus orderStatus)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) from UserBuyOrder");
+            strSql.Append(" where ");
+            strSql.Append(" UserID = @UserID and OrderStatus = @OrderStatus ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@UserID", SqlDbType.Int,4),
+                    new SqlParameter("@OrderStatus",SqlDbType.Int), 
+			};
+            parameters[0].Value = userId;
+            parameters[1].Value = Convert.ToInt32(orderStatus);
+            return DbHelperSQL.Exists(strSql.ToString(), parameters);
+        }
 
         /// <summary>
         /// 检察用户是否有符合状态的ID
@@ -48,12 +68,12 @@ namespace DataAccess.DataLogic
         /// <param name="userId"></param>
         /// <param name="orderStatus"></param>
         /// <returns></returns>
-        public bool ExistsByUserIdAndStatus(int userId,OrderStatus orderStatus)
+        public bool ExistsByUserIdAndStatus(int userId, OrderStatus orderStatus)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select count(1) from UserBuyOrder");
             strSql.Append(" where ");
-            strSql.Append(" UserID = @UserID and OrderStatus = "+Convert.ToInt32(orderStatus));
+            strSql.Append(" UserID = @UserID and OrderStatus = " + Convert.ToInt32(orderStatus));
             SqlParameter[] parameters = {
 					new SqlParameter("@UserID", SqlDbType.Int,4),
 			};
@@ -103,7 +123,7 @@ namespace DataAccess.DataLogic
                 }
                 if (ds.Tables[0].Rows[0]["OrderStatus"].ToString() != "")
                 {
-                    model.OrderStatus = (OrderStatus)Enum.Parse(typeof(OrderStatus),ds.Tables[0].Rows[0]["OrderStatus"].ToString());
+                    model.OrderStatus = (OrderStatus)Enum.Parse(typeof(OrderStatus), ds.Tables[0].Rows[0]["OrderStatus"].ToString());
                 }
                 model.UserName = ds.Tables[0].Rows[0]["UserName"].ToString();
                 model.Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
@@ -159,7 +179,7 @@ namespace DataAccess.DataLogic
             parameters[4].Value = model.UserID;
             parameters[5].Value = model.CreateDate;
             parameters[6].Value = DateTime.Now;
-            parameters[7].Value =(int)model.OrderStatus;
+            parameters[7].Value = (int)model.OrderStatus;
             parameters[8].Value = model.UserName;
             parameters[9].Value = model.Mobile;
             parameters[10].Value = model.Address;
@@ -262,74 +282,91 @@ namespace DataAccess.DataLogic
                 {
                     model.OrderStatus =
                         (OrderStatus)
-                            Enum.Parse(typeof (OrderStatus), ds.Tables[0].Rows[0]["OrderStatus"].ToString(), false);
+                            Enum.Parse(typeof(OrderStatus), ds.Tables[0].Rows[0]["OrderStatus"].ToString(), false);
                 }
                 userBuyOrders.Add(model);
             }
             return userBuyOrders;
         }
 
-        public UserBuyOrderPageModel GetBuyOrderPageModel(int userId)
+        public List<UserBuyOrderPageModel> GetBuyOrderPageModel(int userId, OrderStatus? orderStatus)
         {
-            string sql = "select u.OrderNo,u.UserID,a.ProductTitle,a.Price,a.productImgAUrl,a.ID,a.AccountInfoID,u.OrderStatus,a.EditDate from UserBuyORder u right join AccountDescription a on u.OrderNo=a.OrderNo where u.UserID = @UserID";
-            DataSet ds = DbHelperSQL.Query(sql, new SqlParameter[]
+            string sql;
+            DataSet ds;
+            if (orderStatus != null)
+            {
+                sql =
+                    "select u.OrderNo,u.UserID,a.ProductTitle,a.Price,a.productImgAUrl,a.ID,a.AccountInfoID,u.OrderStatus,a.EditDate from UserBuyORder u right join AccountDescription a on u.OrderNo=a.OrderNo where u.UserID = @UserID and u.OrderStatus=@OrderStatus";
+             ds = DbHelperSQL.Query(sql, new SqlParameter[]
+            {
+                new SqlParameter("@UserID",userId), new SqlParameter("@OrderStatus",Convert.ToInt32(orderStatus)), 
+            });
+            }
+            else
+            {
+                sql = "select u.OrderNo,u.UserID,a.ProductTitle,a.Price,a.productImgAUrl,a.ID,a.AccountInfoID,u.OrderStatus,a.EditDate from UserBuyORder u right join AccountDescription a on u.OrderNo=a.OrderNo where u.UserID = @UserID";
+             ds = DbHelperSQL.Query(sql, new SqlParameter[]
             {
                 new SqlParameter("@UserID",userId), 
             });
-            UserBuyOrderPageModel userBuyOrderPageModel = new UserBuyOrderPageModel();
-            if (ds.Tables[0].Rows.Count <= 0)
-            {
-                return userBuyOrderPageModel;
             }
-            if (ds.Tables[0].Rows[0]["OrderNo"].ToString() != "")
+            List<UserBuyOrderPageModel> userBuyOrderPageModelList =new List<UserBuyOrderPageModel>();
+            foreach (DataRow dataRow in ds.Tables[0].Rows)
             {
-                userBuyOrderPageModel.OrderNo = Convert.ToString(ds.Tables[0].Rows[0]["OrderNo"]);
+                UserBuyOrderPageModel userBuyOrderPageModel = new UserBuyOrderPageModel();
+                if (dataRow["OrderNo"].ToString() != "")
+                {
+                    userBuyOrderPageModel.OrderNo = Convert.ToString(dataRow["OrderNo"]);
+                }
+                if (ds.Tables[0].Rows[0]["Price"].ToString() != "")
+                {
+                    userBuyOrderPageModel.Price = Convert.ToDecimal(dataRow["Price"]);
+                }
+                if (dataRow["ProductTitle"].ToString() != "")
+                {
+                    userBuyOrderPageModel.ProductTitle = Convert.ToString(dataRow["ProductTitle"]);
+                }
+                if (dataRow["productImgAUrl"].ToString() != "")
+                {
+                    userBuyOrderPageModel.ProductImgAUrl = Convert.ToString(dataRow["productImgAUrl"]);
+                }
+                if (dataRow["ID"].ToString() != "")
+                {
+                    userBuyOrderPageModel.AccountDescriptionID = Convert.ToInt32(dataRow["ID"]);
+                }
+                if (dataRow["AccountInfoID"].ToString() != "")
+                {
+                    userBuyOrderPageModel.AccountInfoID = Convert.ToInt32(dataRow["AccountInfoID"]);
+                }
+                if (dataRow["OrderStatus"].ToString() != "")
+                {
+                    userBuyOrderPageModel.OrderStatus = (OrderStatus)Convert.ToInt32(dataRow["OrderStatus"]);
+                }
+                if (dataRow["EditDate"].ToString() != "")
+                {
+                    userBuyOrderPageModel.EditDate = Convert.ToDateTime(dataRow["EditDate"]);
+                }
+                userBuyOrderPageModelList.Add(userBuyOrderPageModel);
             }
-            if (ds.Tables[0].Rows[0]["Price"].ToString() != "")
-            {
-                userBuyOrderPageModel.Price = Convert.ToDecimal(ds.Tables[0].Rows[0]["Price"]);
-            }
-            if (ds.Tables[0].Rows[0]["ProductTitle"].ToString() != "")
-            {
-                userBuyOrderPageModel.ProductTitle = Convert.ToString(ds.Tables[0].Rows[0]["ProductTitle"]);
-            }
-            if (ds.Tables[0].Rows[0]["productImgAUrl"].ToString() != "")
-            {
-                userBuyOrderPageModel.ProductImgAUrl = Convert.ToString(ds.Tables[0].Rows[0]["productImgAUrl"]);
-            }
-            if (ds.Tables[0].Rows[0]["ID"].ToString() != "")
-            {
-                userBuyOrderPageModel.AccountDescriptionID = Convert.ToInt32(ds.Tables[0].Rows[0]["ID"]);
-            }
-            if (ds.Tables[0].Rows[0]["AccountInfoID"].ToString() != "")
-            {
-                userBuyOrderPageModel.AccountInfoID = Convert.ToInt32(ds.Tables[0].Rows[0]["AccountInfoID"]);
-            }
-            if (ds.Tables[0].Rows[0]["OrderStatus"].ToString() != "")
-            {
-                userBuyOrderPageModel.OrderStatus = (OrderStatus)Convert.ToInt32(ds.Tables[0].Rows[0]["OrderStatus"]);
-            }
-            if (ds.Tables[0].Rows[0]["EditDate"].ToString() != "")
-            {
-                userBuyOrderPageModel.EditDate = Convert.ToDateTime(ds.Tables[0].Rows[0]["EditDate"]);
-            }
-            return userBuyOrderPageModel;
+           
+            return userBuyOrderPageModelList;
         }
 
         /// <summary>
         /// 根据用户ID删除一条数据
         /// </summary>
-        public bool Delete(int userId)
+        public bool Delete(int userId,OrderStatus orderStatus)
         {
 
             StringBuilder strSql = new StringBuilder();
             strSql.Append("delete from UserBuyOrder ");
-            strSql.Append(" where UserID=@UserID");
+            strSql.Append(" where UserID=@UserID and OrderStatus=@OrderStatus");
             SqlParameter[] parameters = {
-					new SqlParameter("@UserID", SqlDbType.Int,4)
+					new SqlParameter("@UserID", SqlDbType.Int,4),
+                    new SqlParameter("@OrderStatus",SqlDbType.Int), 
 			};
             parameters[0].Value = userId;
-
+            parameters[1].Value = Convert.ToInt32(orderStatus);
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)

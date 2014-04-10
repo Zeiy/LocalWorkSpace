@@ -12,21 +12,21 @@ namespace _77Trade.User
     public partial class MyBuyOrder : UserPageBase
     {
         private readonly UserBuyOrderDataAccess _userBuyOrderDataAccess = new UserBuyOrderDataAccess();
-        private UserBuyOrderPageModel _userBuyOrderPageModel;
+        private List<UserBuyOrderPageModel> _userBuyOrderPageModel;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                _userBuyOrderPageModel = _userBuyOrderDataAccess.GetBuyOrderPageModel(CurrentUser.ID);
+                _userBuyOrderPageModel = _userBuyOrderDataAccess.GetBuyOrderPageModel(CurrentUser.ID,null);
             }
         }
 
-        public UserBuyOrderPageModel UserBuyOrderPageModel
+        public List<UserBuyOrderPageModel> UserBuyOrderPageModel
         {
             get
             {
                 if (_userBuyOrderPageModel != null) return _userBuyOrderPageModel;
-                return _userBuyOrderPageModel = _userBuyOrderDataAccess.GetBuyOrderPageModel(CurrentUser.ID);
+                return _userBuyOrderPageModel = _userBuyOrderDataAccess.GetBuyOrderPageModel(CurrentUser.ID,null);
             }
         }
         /// <summary>
@@ -37,7 +37,7 @@ namespace _77Trade.User
 
         protected void Unnamed2_Click(object sender, EventArgs e)
         {
-            var res = _userBuyOrderDataAccess.Delete(CurrentUser.ID);
+            var res = _userBuyOrderDataAccess.Delete(CurrentUser.ID,OrderStatus.DaiFuKuan);
             string returnUrl = Request.QueryString.Get("returnUrl");
             if (res)
             {

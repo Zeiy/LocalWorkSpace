@@ -100,13 +100,13 @@
                                                     <tr>
                                                         <td height="35">
                                                             <input name="gameImg" type="file" id="gameImgA" style="width: 65px; height: 21px" />&nbsp &nbsp<span id="msgImgA">选择上传图片</span>&nbsp &nbsp &nbsp
-                                                               <input type="button" name="Button1" value="上传" style="height: 22px; display: none" />
+                                                               <input type="button" name="Button1" value="上传" style="height: 22px;" />
                                                             <input type="button" name="Button7" value="删除" onclick="javascript: window.location.reload();" style="height: 22px; display: none" />
                                                             <asp:HiddenField runat="server" Value="" ID="hiddenimggameImgA" ClientIDMode="Static"/>
                                                         </td>
                                                         <td>
                                                             <input name="gameImg" type="file" id="gameImgB" style="width: 65px; height: 21px" />&nbsp &nbsp<span>选择上传图片</span>&nbsp &nbsp &nbsp
-                                                               <input type="button" name="Button1" value="上传" style="height: 22px; display: none" />
+                                                               <input type="button" name="Button1" value="上传" style="height: 22px;" />
                                                             <input type="button" name="Button7" value="删除" onclick="javascript: window.location.reload();" style="height: 22px; display: none" />
                                                             <asp:HiddenField runat="server" Value="" ID="hiddenimggameImgB" ClientIDMode="Static"/>
                                                         </td>
@@ -122,13 +122,13 @@
                                                     <tr>
                                                         <td height="35">
                                                             <input name="gameImg" type="file" id="gameImgC" style="width: 65px; height: 21px" />&nbsp &nbsp<span>选择上传图片</span>&nbsp &nbsp &nbsp
-                                                               <input type="button" name="Button1" value="上传" style="height: 22px; display: none" />
+                                                               <input type="button" name="Button1" value="上传" style="height: 22px;" />
                                                             <input type="button" name="Button7" value="删除" onclick="javascript: window.location.reload();" style="height: 22px; display: none" />
                                                             <asp:HiddenField runat="server" Value="" ID="hiddenimggameImgC" ClientIDMode="Static"/>
                                                         </td>
                                                         <td>
                                                             <input name="gameImg" type="file" id="gameImgD" style="width: 65px; height: 21px" />&nbsp &nbsp<span>选择上传图片</span>&nbsp &nbsp &nbsp
-                                                               <input type="button" name="Button1" value="上传" style="height: 22px; display: none" />
+                                                               <input type="button" name="Button1" value="上传" style="height: 22px;" />
                                                             <input type="button" name="Button7" value="删除" onclick="javascript: window.location.reload();" style="height: 22px; display: none" />
                                                             <asp:HiddenField runat="server" Value="" ID="hiddenimggameImgD" ClientIDMode="Static" />
                                                         </td>
@@ -152,6 +152,7 @@
                                 </tbody>
                             </table>
                             <asp:HiddenField ID="accountInfoID" runat="server" ClientIDMode="Static"/>
+                            <input type="hidden" id="currentUploadFileName"/>
                         </form>
                     </div>
                 </div>
@@ -161,7 +162,7 @@
     </div>
 
     <script type="text/javascript">
-        //校验文件的错误信息
+        //  
         var ErrorMsg = "";
         var myDate = new Date();
         //检察文件是否允许上传
@@ -169,7 +170,7 @@
             var filtType = fileData.type;
             var fileSize = fileData.size;
             if (filtType == "image/png" || filtType == "image/jpeg" || filtType == "image/bmp" || filtType == "image/png" || filtType == "image/jpg") {
-                if (fileSize > 600000) {
+                if (fileSize > 500000) {
                     ErrorMsg = "文件大小 不符合要求超过512K";
                     return false;
                 }
@@ -182,25 +183,27 @@
 
         $(document).ready(function () {
             var randomCode = $("#hiddenRandCode").val();
+            //:todo 标识每一个文件，便于Server端做检察 删除文件  动态参数传递出现问题，想办法在前端处理
+            var currentFileType = $("#currentUploadFileName").val();
             $("#gameImgA,#gameImgB,#gameImgC,#gameImgD").fileupload({
                 url: "services/fileSave.ashx",
                 dataType: "json",
-                formData: {sign:"gameImg",RandCode: randomCode },
+                formData: { sign: "gameImg", RandCode: randomCode, fileType: currentFileType },
                 add: function (e, data) {
                     var checkRes = CheckFile(data.files[0]);
                     if (!checkRes) {
                         $(this).next("span").text("文件出错！");
+                        alert("请检察文件类型跟文件大小是否符合要求！");
                         return;
                     }
-                    //添加图片时在Data里判断文件信息，是否符合上传要求
                     $(this).next("span").text(data.fileInput[0].value);
+                    //把当前不传文件名写入隐藏域
+                    $("#currentUploadFileName").val($(this).attr("id"));
+                    $(this).next().next().unbind();
                     data.context = $(this).next().next().click(function () {
                         $(this).prev("span").text("开始上传。。。");
                         data.submit();
                     });
-                    //临时解决用户重复选择文件上传问题，选择文件后隐藏input 控件
-                    $(this).hide();
-                    $(this).next().next().show();
                 },
                 done: function (e, data) {
                     if (data.result.Status == 1) {
@@ -208,18 +211,17 @@
                         $(this).next().next().hide();
                         $(this).next("span").text("上传完成。。。");
                         var fileName = data.result.FileName;
-                        var imgID = "img" + $(this).attr("id");
-                        var hiddenID = "hidden" + imgID;
-                        //显示删除按钮
-                        $(this).next().next().next().show();
-                        $("#" + imgID).attr("src", "/uploadfile/gameImg/" + fileName);
+                        var imgId = "img" + $(this).attr("id");
+                        var hiddenId = "hidden" + imgId;
+                        $("#" + imgId).attr("src", "/uploadfile/gameImg/" + fileName);
                         //把图片地址写入hidden field
-                        $("#" + hiddenID).val("/uploadfile/gameImg/" + fileName);
-                    } else {
-                        alert("用户登陆超时，请刷新页面重试！");
+                        $("#" + hiddenId).val("/uploadfile/gameImg/" + fileName);
+                    } else if (data.result.Status == 2) {
+                        $(this).next("span").text("请重试！");
+                        alert("文件大小超出限制，请调整文件大小后重试！");
                     }
                 },
-                error: function (xhr, txt, error) {
+                error: function (xhr) {
                     $(this).next("span").text(xhr.responseText);
                 },
             });
